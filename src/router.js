@@ -4,10 +4,11 @@ import Home from './views/Home.vue'
 import Contact from './views/Contact.vue'
 import Classification from './views/Classification.vue'
 import Register from './views/Register.vue'
-
+import Login from './views/Login.vue'
 Vue.use(Router)
 
 export default new Router({
+
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -38,6 +39,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
 
   ]

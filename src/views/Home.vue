@@ -3,6 +3,7 @@
     <HeaderComponent/>
     <v-carousel hide-controls>
       <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
+      <marque>123</marque>
     </v-carousel>
     <v-layout row wrap>
       <v-flex flex>
@@ -26,6 +27,7 @@ export default {
   components: {
     HeaderComponent,
     BottomNav
+
   },
   data() {
     return {
