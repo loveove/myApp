@@ -1,23 +1,21 @@
-
 <template>
-<div>
-  <LiveGame/>
-  <BottomNav/>
-</div>
+  <div>
+    <LiveGame/>
+    <!-- <Electronic/> -->
+  </div>
 </template>
 <script>
 import LiveGame from "../components/LiveGame.vue";
-import BottomNav from "../components/BottomNav.vue";
+// import Electronic from "../components/Electronic.vue";
+
 export default {
   name: "Classification",
   components: {
-      LiveGame,
-      BottomNav
+    LiveGame,
+    // Electronic
   },
   data() {
-    return {
-      
-    };
+    return {};
   }
 };
 </script>
