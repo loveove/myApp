@@ -84,7 +84,7 @@ h2 {
   font-weight: bold;
 }
 .radius {
-  border-radius: 10%;
+  border-radius: 5%;
 }
 .textsize{
   font-weight: bold;

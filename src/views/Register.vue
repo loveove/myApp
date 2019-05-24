@@ -9,10 +9,10 @@
           <v-btn icon dark @click="close">
             <v-icon>close</v-icon>
           </v-btn>
-          <v-toolbar-title>Settings</v-toolbar-title>
+          <v-toolbar-title class="fontsize">快速注册</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
-        <v-form ref="form" class=" pa-2">
+        <v-form ref="form" class="pa-2">
           <v-text-field :counter="10" label="用户名" prepend-icon="person" required></v-text-field>
           <v-text-field :counter="10" label="用户名" prepend-icon="person" required></v-text-field>
           <v-text-field :counter="12" label="密码" prepend-icon="lock" required></v-text-field>
@@ -31,9 +31,9 @@
             type="number"
             required
           >
-            <img slot="append" alt="Code">
+            <!-- <img slot="append" alt="Code"> -->
           </v-text-field>
-          <v-btn color="yellow darken-4" block>立即注册</v-btn>
+          <v-btn color="yellow darken-4 white--text" block>下一步</v-btn>
         </v-form>
       </v-card>
     </v-dialog>
@@ -52,8 +52,13 @@ export default {
   methods: {
     close() {
       this.$router.push("/");
-      this.dialog=false
+      this.dialog = false;
     }
   }
 };
 </script>
+<style scoped>
+.fontsize{
+  font-weight: bold;
+}
+</style>
