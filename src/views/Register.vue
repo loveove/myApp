@@ -13,7 +13,7 @@
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-form ref="form" class="pa-2">
-          <v-text-field :counter="10" label="用户名" prepend-icon="person" required></v-text-field>
+          <!-- <v-text-field :counter="10" label="用户名" prepend-icon="person" required></v-text-field> -->
           <v-text-field :counter="10" label="用户名" prepend-icon="person" required></v-text-field>
           <v-text-field :counter="12" label="密码" prepend-icon="lock" required></v-text-field>
           <v-text-field label="邮箱" prepend-icon="email" required></v-text-field>
