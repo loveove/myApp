@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Contact from './views/Contact.vue'
-import Classification from './views/Classification.vue'
-import Register from './views/Register.vue'
-import Login from './views/Login.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -28,22 +24,26 @@ export default new Router({
     {
       path: '/livegame',
       name: 'classification',
-      component: Classification
+      component: () => import(/* webpackChunkName: "about" */ './views/Classification.vue')
+
     },
     {
       path: '/contact',
       name: 'contact',
-      component: Contact
+      component: () => import(/* webpackChunkName: "about" */ './views/Contact.vue')
+
     },
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: () => import(/* webpackChunkName: "about" */ './views/Register.vue')
+
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')
+
     }
 
   ]
