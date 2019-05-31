@@ -1,10 +1,9 @@
 <template>
   <div>
-    <v-card >
-      <div>
-      </div>
+    <v-card>
+      <div></div>
       <v-bottom-nav :active.sync="bottomNav" :value="true" app color="red darken-4">
-        <v-btn color="#FFB300" flat value="recent" to="/">
+        <v-btn color="#FFB300" flat value="recent" to="/" class="pl-4">
           <span>首页</span>
           <v-icon>home</v-icon>
         </v-btn>
@@ -21,9 +20,13 @@
           <span>客服</span>
           <v-icon>settings_phone</v-icon>
         </v-btn>
-        <v-btn color="#FFB300" flat to="/login">
+        <v-btn color="#FFB300" flat to="/login" v-show="$store.state.token==null">
           <span>登录</span>
           <v-icon>account_circle</v-icon>
+        </v-btn>
+        <v-btn color="#FFB300" flat to="/membercenter" v-show="$store.state.token!=null" class="pr-4">
+          <span>会员中心</span>
+          <v-icon>person</v-icon>
         </v-btn>
       </v-bottom-nav>
     </v-card>
@@ -35,13 +38,17 @@ export default {
   components: {},
   data() {
     return {
-      bottomNav: "home"
+      bottomNav: "home",
+     
     };
+  },
+  methods: {
+   
   }
 };
 </script>
 <style scoped>
-.fa-id-badge{
-  font-size: 30px
+.fa-id-badge {
+  font-size: 30px;
 }
 </style>

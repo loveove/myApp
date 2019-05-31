@@ -17,9 +17,7 @@
             <span>精彩荟萃,激情无限</span>
           </v-flex>
           <v-flex xs2>
-            <span @click="linktolivegame">
-            更多
-            </span>
+            <span @click="linktolivegame">更多</span>
             <i class="fas fa-chevron-right"></i>
           </v-flex>
         </v-layout>
@@ -108,6 +106,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import HeaderComponent from "../components/HeaderComponent.vue";
 export default {
   name: "Home",
@@ -147,7 +146,17 @@ export default {
       this.$router.push("/livegame");
       this.dialog = false;
     }
-  }
+  },
+  // mounted() {
+  //   if (localStorage.getItem("token") != null) {
+  //     if (localStorage.getItem("token").length > 10) {
+  //       this.$store.dispatch("setToken", localStorage.getItem("token"));
+  //       //check login status api should be applied here
+  //       apiMethods.checkToken();
+  //       console.log(token)
+  //     }
+  //   }
+  // }
 };
 </script>
 

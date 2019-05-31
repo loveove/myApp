@@ -44,6 +44,12 @@ export default new Router({
       name: 'login',
       component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')
 
+    },
+    {
+      path: '/membercenter',
+      name: 'membercenter',
+      component: () => import(/* webpackChunkName: "about" */ './views/MemberCenter.vue')
+
     }
 
   ]

@@ -1,5 +1,5 @@
 <template>
-  <v-card height="100" class="grey darken-4">
+  <v-card height="100" class="red darken-4">
   </v-card>
 </template>
 
