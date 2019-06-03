@@ -107,6 +107,14 @@ export default {
         { image: require("../assets/3.jpg"), gameName: "HABA电子" },
         { image: require("../assets/3.jpg"), gameName: "MG电子" },
         { image: require("../assets/3.jpg"), gameName: "PT电子" },
+        { image: require("../assets/3.jpg"), gameName: "SW电子" },
+        { image: require("../assets/3.jpg"), gameName: "HABA电子" },
+        { image: require("../assets/3.jpg"), gameName: "MG电子" },
+        { image: require("../assets/3.jpg"), gameName: "PT电子" },
+        { image: require("../assets/3.jpg"), gameName: "SW电子" },
+        { image: require("../assets/3.jpg"), gameName: "HABA电子" },
+        { image: require("../assets/3.jpg"), gameName: "MG电子" },
+        { image: require("../assets/3.jpg"), gameName: "PT电子" },
         { image: require("../assets/3.jpg"), gameName: "SW电子" }
       ],
       chess: [

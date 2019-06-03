@@ -2,7 +2,7 @@
   <div>
     <ConfirmationDialog @comfirm="logout">
       <div class="pl-3">
-      <i class="fas fa-power-off custo-size8"></i>
+      <i class="fas fa-power-off custo-size9"></i>
       </div>
       <div>退出账户</div>
     </ConfirmationDialog>

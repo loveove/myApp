@@ -50,6 +50,42 @@ export default new Router({
       name: 'membercenter',
       component: () => import(/* webpackChunkName: "about" */ './views/MemberCenter.vue')
 
+    },
+    {
+      path: '/querybalance',
+      name: 'querybalance',
+      component: () => import(/* webpackChunkName: "about" */ './components/QueryBalance.vue')
+
+    },
+    {
+      path: '/withdrawarea',
+      name: 'withdrawarea',
+      component: () => import(/* webpackChunkName: "about" */ './components/WithdrawArea.vue')
+
+    },
+    {
+      path: '/platformtransfer',
+      name: 'platformtransfer',
+      component: () => import(/* webpackChunkName: "about" */ './components/PlatformTransfer.vue')
+
+    },
+    // {
+    //   path: '/depositearea',
+    //   name: 'depositearea',
+    //   component: () => import(/* webpackChunkName: "about" */ './components/DepositeArea.vue')
+
+    // }
+    {
+      path: '/userinfo',
+      name: 'userinfo',
+      component: () => import(/* webpackChunkName: "about" */ './components/UserInfo.vue')
+
+    },
+    {
+      path: '/historyrecord',
+      name: 'historyrecord',
+      component: () => import(/* webpackChunkName: "about" */ './components/HistoryRecord.vue')
+
     }
 
   ]

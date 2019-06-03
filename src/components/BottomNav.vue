@@ -12,16 +12,22 @@
           <v-icon>select_all</v-icon>
         </v-btn>
 
-        <v-btn color="#FFB300" flat value="nearby" to="/register">
+        <v-btn color="#FFB300" flat value="nearby" to="/register" v-show="$store.state.token==null">
           <span>注册</span>
           <v-icon>waves</v-icon>
         </v-btn>
+          <v-btn color="#FFB300" flat to="/membercenter" v-show="$store.state.token!=null" class="pr-4">
+          <span>存款</span>
+          <v-icon>attach_money</v-icon>
+          <!-- <i class="fas fa-donate"></i> -->
+        </v-btn>
+
         <v-btn color="#FFB300" flat to="/contact">
           <span>客服</span>
           <v-icon>settings_phone</v-icon>
         </v-btn>
         <v-btn color="#FFB300" flat to="/login" v-show="$store.state.token==null">
-          <span>登录</span>
+          <span>登录</span>                           
           <v-icon>account_circle</v-icon>
         </v-btn>
         <v-btn color="#FFB300" flat to="/membercenter" v-show="$store.state.token!=null" class="pr-4">
