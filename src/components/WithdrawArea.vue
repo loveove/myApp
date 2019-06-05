@@ -7,12 +7,13 @@
         </template>
         <v-card color="yellow darken-4">
           <v-toolbar color="yellow darken-4">
-            <v-btn icon dark @click="link_membercenter" class="font-custo">
+            <v-btn icon dark @click="link_membercenter">
               <i class="fas fa-arrow-left"></i>
             </v-btn>
+            <v-toolbar-title class="color_custo">提款专区</v-toolbar-title>
           </v-toolbar>
 
-          <v-card class="border_rounded mt-3" color="orange lighten-4">
+          <v-card class="border_rounded mt-3">
             <v-form ref="form" class="px-4">
               <v-flex>
                 <v-select
@@ -22,7 +23,7 @@
                   label="收款银行卡"
                   required
                 ></v-select>
-                <v-btn color="success">
+                <v-btn color="red darken-4 white--text" @click="link_addbankcardlist">
                   <i class="fas fa-plus"></i>添加银行卡
                 </v-btn>
               </v-flex>
@@ -33,7 +34,7 @@
               <v-container fluid>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-btn color="success" block>立即提交</v-btn>
+                    <v-btn color="red darken-4 white--text" block>立即提交</v-btn>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -58,17 +59,20 @@ export default {
   methods: {
     link_membercenter() {
       this.$router.push("/membercenter");
+    },
+    link_addbankcardlist(){
+       this.$router.push("/addbankcardlist");
     }
   }
 };
 </script>
 <style>
-.font-custo {
-  font-size: 20px;
+.border_rounded {
+  /* border-radius: 10px; */
+  margin: 15px;
 }
-/* .border-rounded {
-  border-radius: 5px;
-  margin: 10px;
-} */
+.color_custo{
+  color: white;
+}
 </style>
 

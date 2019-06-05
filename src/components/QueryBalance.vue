@@ -7,20 +7,20 @@
         </template>
         <v-card color="yellow darken-4">
           <v-toolbar dark color="yellow darken-4">
-            <v-btn icon dark @click="link_membercenter" class="font-custo">
+            <v-btn icon dark @click="link_membercenter">
               <i class="fas fa-arrow-left"></i>
             </v-btn>
-            <!-- <v-toolbar-title>Settings</v-toolbar-title> -->
+            <v-toolbar-title>资产总览</v-toolbar-title>
           </v-toolbar>
 
-          <v-card color="orange lighten-4" class="mt-3">
+          <v-card color class="mt-3 border_rounded">
             <v-layout xs12 row class="pt-3">
               <v-flex xs6>
                 <h3 class="pl-2">我的资产</h3>
               </v-flex>
               <v-flex xs6>
                 同步时间: 23/5/9999 12:30
-                <v-btn color="warning">刷新</v-btn>
+                <v-btn color="red darken-4 white--text">刷新</v-btn>
               </v-flex>
             </v-layout>
             <v-layout xs12 row>
@@ -55,14 +55,15 @@
             </v-layout>
             <v-layout xs12 row>
               <v-flex xs6>
-                <v-btn color="warning" @click.native="bb">存款</v-btn>
+                <v-btn color="red darken-4 white--text">存款</v-btn>
               </v-flex>
               <v-flex xs6>
-                <v-btn color="warning" @click.native="aa">提款</v-btn>
+                <v-btn color="red darken-4 white--text">提款</v-btn>
               </v-flex>
             </v-layout>
           </v-card>
-          <v-card class="mt-3" height="300px" color="orange lighten-4">
+
+          <v-card class="mt-3 pb-3 border_rounded">
             <h3 class="pt-2 pl-2">资产分布</h3>
             <v-layout xs12 row class="pt-5">
               <v-flex xs3 class="d-flex">
@@ -125,11 +126,7 @@ export default {
 };
 </script>
 <style scoped>
-.font-custo {
-  font-size: 20px;
-}
-/* .border-rounded {
-  border-radius: 5px;
+.border_rounded {
   margin: 10px;
-} */
+}
 </style>

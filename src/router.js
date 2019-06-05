@@ -69,12 +69,12 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './components/PlatformTransfer.vue')
 
     },
-    // {
-    //   path: '/depositearea',
-    //   name: 'depositearea',
-    //   component: () => import(/* webpackChunkName: "about" */ './components/DepositeArea.vue')
+    {
+      path: '/depositarea',
+      name: 'depositarea',
+      component: () => import(/* webpackChunkName: "about" */ './components/DepositArea.vue')
 
-    // }
+    },
     {
       path: '/userinfo',
       name: 'userinfo',
@@ -85,6 +85,30 @@ export default new Router({
       path: '/historyrecord',
       name: 'historyrecord',
       component: () => import(/* webpackChunkName: "about" */ './components/HistoryRecord.vue')
+
+    },
+    {
+      path: '/myagent',
+      name: 'myagent',
+      component: () => import(/* webpackChunkName: "about" */ './components/MyAgent.vue')
+
+    },
+    {
+      path: '/autorefresh',
+      name: 'autorefresh',
+      component: () => import(/* webpackChunkName: "about" */ './components/AutoRefresh.vue')
+
+    },
+    {
+      path: '/autorefresh',
+      name: 'autorefresh',
+      component: () => import(/* webpackChunkName: "about" */ './components/AutoRefresh.vue')
+
+    },
+    {
+      path: '/addbankcardlist',
+      name: 'addbankcardlist',
+      component: () => import(/* webpackChunkName: "about" */ './components/AddBankCardList.vue')
 
     }
 

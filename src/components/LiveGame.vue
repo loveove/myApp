@@ -44,7 +44,7 @@
           </v-layout>
         </v-layout>
         <!-- three -->
-           <v-layout row wrap v-if="current=='真人'">
+        <v-layout row wrap v-if="current=='真人'">
           <v-layout v-for="item in casino" :key="item.gameName">
             <v-flex xs6>
               <img :src="item.image" height="80" width="120">
@@ -56,7 +56,7 @@
           </v-layout>
         </v-layout>
         <!-- four -->
-           <v-layout row wrap v-if="current=='电竞'">
+        <v-layout row wrap v-if="current=='电竞'">
           <v-layout v-for="item in game" :key="item.gameName">
             <v-flex xs6>
               <img :src="item.image" height="80" width="120">
@@ -68,7 +68,7 @@
           </v-layout>
         </v-layout>
         <!-- five -->
-           <v-layout row wrap v-if="current=='体育'">
+        <v-layout row wrap v-if="current=='体育'">
           <v-layout v-for="item in sport" :key="item.gameName">
             <v-flex xs6>
               <img :src="item.image" height="80" width="120">
@@ -79,7 +79,6 @@
             </v-flex>
           </v-layout>
         </v-layout>
-
       </v-flex>
     </v-layout>
   </div>
@@ -108,14 +107,7 @@ export default {
         { image: require("../assets/3.jpg"), gameName: "MG电子" },
         { image: require("../assets/3.jpg"), gameName: "PT电子" },
         { image: require("../assets/3.jpg"), gameName: "SW电子" },
-        { image: require("../assets/3.jpg"), gameName: "HABA电子" },
-        { image: require("../assets/3.jpg"), gameName: "MG电子" },
-        { image: require("../assets/3.jpg"), gameName: "PT电子" },
-        { image: require("../assets/3.jpg"), gameName: "SW电子" },
-        { image: require("../assets/3.jpg"), gameName: "HABA电子" },
-        { image: require("../assets/3.jpg"), gameName: "MG电子" },
-        { image: require("../assets/3.jpg"), gameName: "PT电子" },
-        { image: require("../assets/3.jpg"), gameName: "SW电子" }
+     
       ],
       chess: [
         { image: require("../assets/4.jpg"), gameName: "HABA电子" },
@@ -123,13 +115,13 @@ export default {
         { image: require("../assets/4.jpg"), gameName: "PT电子" },
         { image: require("../assets/4.jpg"), gameName: "SW电子" }
       ],
-       casino: [
+      casino: [
         { image: require("../assets/5.jpg"), gameName: "HABA电子" },
         { image: require("../assets/5.jpg"), gameName: "MG电子" },
         { image: require("../assets/5.jpg"), gameName: "PT电子" },
         { image: require("../assets/5.jpg"), gameName: "SW电子" }
       ],
-       game: [
+      game: [
         { image: require("../assets/2.jpg"), gameName: "HABA电子" },
         { image: require("../assets/2.jpg"), gameName: "MG电子" },
         { image: require("../assets/2.jpg"), gameName: "PT电子" },

@@ -7,16 +7,13 @@
         </template>
         <v-card color="yellow darken-4">
           <v-toolbar dark color="yellow darken-4">
-            <v-btn icon dark @click="link_membercenter" class="font-custo">
+            <v-btn icon dark @click="link_membercenter">
               <i class="fas fa-arrow-left"></i>
             </v-btn>
+            <v-toolbar-title>历史记录</v-toolbar-title>
           </v-toolbar>
-          <v-tabs v-model="active" color="red darken-4" dark slider-color="yellow">
-            <v-layout xs12 row>
-              <v-flex xs2>
-            <v-tab v-for="item in items" :key="item.content" ripple>{{item.name}}</v-tab>
-              </v-flex>
-            </v-layout>
+          <v-tabs v-model="active" color="red darken-4" dark slider-color="yellow" grow>
+            <v-tab v-for="item in items" :key="item.content" ripple class="custo_font">{{item.name}}</v-tab>
             <v-tab-item v-for="item in items" :key="item.content">
               <div :is="item.content"></div>
             </v-tab-item>
@@ -34,7 +31,7 @@ import BetHistory from "./BetHistory";
 import FundHistory from "./FundHistory";
 
 export default {
-  name:"HistoryRecord",
+  name: "HistoryRecord",
   components: {
     DepositHistory,
     FundHistory,
@@ -86,3 +83,5 @@ export default {
   }
 };
 </script>
+<style scope>
+</style>

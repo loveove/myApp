@@ -4,7 +4,7 @@
     <v-container fluid class="red darken-4 pa-0">
       <v-layout wrap>
         <v-flex class="red darken-4" xs12 style="height:100px">
-          <img src="@/assets/xjj.png" class="customize mt-4 pa-1">
+          <img src="@/assets/xjj.png" class="customize_img mt-4 pa-1">
         </v-flex>
         <v-flex class="pa-0 mx-4 d-flex" xs12 style="height:100px">
           <div class="white top-rounded">
@@ -66,13 +66,13 @@
         <!-- two -->
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex xs-6 class="pl-4">
-            <div class="pl-3">
+            <div class="pl-3" @click="link_myagent">
               <i class="fas fa-users custo-size5"></i>
             </div>
             <div>我的代理</div>
           </v-flex>
           <v-flex xs-6>
-            <div class="pl-3">
+            <div class="pl-3" @click="link_autorefresh">
               <i class="fas fa-sync custo-size6"></i>
             </div>
             <div>自助洗码</div>
@@ -95,7 +95,13 @@
         </v-layout>
         <!-- four -->
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
-          <v-flex xs-6 class="pl-4">
+          <v-flex sx6 class="pl-4">
+            <div class="pl-3">
+              <i class="far fa-hand-point-right custo-size10"></i>
+            </div>
+            <div>代理加盟</div>
+          </v-flex>
+          <v-flex xs-6 class="pl-3">
             <Logout/>
           </v-flex>
         </v-layout>
@@ -125,16 +131,21 @@ export default {
     link_platformtransfer() {
       this.$router.push("/platformtransfer");
     },
-      link_deposit() {
+    link_deposit() {
       this.$router.push("/depositarea");
     },
-      link_userinfo() {
+    link_userinfo() {
       this.$router.push("/userinfo");
     },
-       link_historyrecord() {
+    link_historyrecord() {
       this.$router.push("/historyrecord");
-    }
-    
+    },
+    link_myagent() {
+      this.$router.push("/myagent");
+    },
+    link_autorefresh() {
+      this.$router.push("/autorefresh");
+    },
   }
 };
 </script>
@@ -185,7 +196,11 @@ export default {
   font-size: 20px;
   color: brown;
 }
-.customize {
+.custo-size10 {
+  font-size: 20px;
+  color: darkblue;
+}
+.customize_img {
   width: 50px;
   height: 50px;
   border-radius: 100%;

@@ -7,11 +7,12 @@
         </template>
         <v-card color="yellow darken-4">
           <v-toolbar dark color="yellow darken-4">
-            <v-btn icon dark @click="link_membercenter" class="font-custo">
+            <v-btn icon dark @click="link_membercenter">
               <i class="fas fa-arrow-left"></i>
             </v-btn>
+            <v-toolbar-title>个人资料</v-toolbar-title>
           </v-toolbar>
-          <v-tabs v-model="active" color="red darken-4" dark slider-color="yellow">
+          <v-tabs v-model="active" color="red darken-4" dark slider-color="yellow" grow>
             <v-tab v-for="tab in tabs" :key="tab.content" ripple>{{tab.name}}</v-tab>
             <v-tab-item v-for="tab in tabs" :key="tab.content">
               <div :is="tab.content"></div>

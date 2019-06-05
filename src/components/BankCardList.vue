@@ -1,6 +1,11 @@
 <template>
-  <!-- <v-container fluid > -->
-    <v-flex xs12 sm6 md4 lg3>
+  <div>
+    <v-flex xs12>
+      <v-btn color="red darken-4 white--text" @click="link_addbankcardlist">
+        <i class="fas fa-plus"></i>添加银行卡
+      </v-btn>
+    </v-flex>
+    <v-flex xs12>
       <v-card>
         <v-card-title>
           <h4>银行:</h4>
@@ -28,11 +33,16 @@
         </v-list>
       </v-card>
     </v-flex>
-  <!-- </v-container> -->
+  </div>
 </template>
 <script>
 export default {
   name: "BankCardList",
-  data: () => ({})
+  data: () => ({}),
+  methods:{
+    link_addbankcardlist(){
+        this.$router.push("/addbankcardlist");
+    }
+  }
 };
 </script>

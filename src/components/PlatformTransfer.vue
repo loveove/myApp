@@ -7,11 +7,12 @@
         </template>
         <v-card color="yellow darken-4">
           <v-toolbar dark color="yellow darken-4">
-            <v-btn icon dark @click="link_membercenter" class="font-custo">
+            <v-btn icon dark @click="link_membercenter">
               <i class="fas fa-arrow-left"></i>
             </v-btn>
+            <v-toolbar-title>平台互转</v-toolbar-title>
           </v-toolbar>
-          <v-card>
+          <v-card class="custo_border">
             <v-form ref="form" class="px-4">
               <v-flex>
                 <v-select prepend-icon="account_circle" :items="outgoingItems" label="转出" required></v-select>
@@ -19,13 +20,11 @@
               <v-flex>
                 <v-select prepend-icon="account_circle" label="转入" required:items="items"></v-select>
               </v-flex>
-
               <v-text-field label="金额 " prepend-icon="fas fa-coins" type="number" required></v-text-field>
-
               <v-container fluid>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-btn color="red darken-4" block>确定转账</v-btn>
+                    <v-btn color="red darken-4 white--text" block>确定转账</v-btn>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -55,6 +54,9 @@ export default {
   }
 };
 </script>
-<style>
+<style scope>
+.custo_border {
+  margin: 10px;
+}
 </style>
 

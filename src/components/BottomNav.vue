@@ -16,10 +16,15 @@
           <span>注册</span>
           <v-icon>waves</v-icon>
         </v-btn>
-          <v-btn color="#FFB300" flat to="/membercenter" v-show="$store.state.token!=null" class="pr-4">
+        <v-btn
+          color="#FFB300"
+          flat
+          to="/depositarea"
+          v-show="$store.state.token!=null"
+          class="pr-4"
+        >
           <span>存款</span>
           <v-icon>attach_money</v-icon>
-          <!-- <i class="fas fa-donate"></i> -->
         </v-btn>
 
         <v-btn color="#FFB300" flat to="/contact">
@@ -27,10 +32,17 @@
           <v-icon>settings_phone</v-icon>
         </v-btn>
         <v-btn color="#FFB300" flat to="/login" v-show="$store.state.token==null">
-          <span>登录</span>                           
+          <span>登录</span>
           <v-icon>account_circle</v-icon>
         </v-btn>
-        <v-btn color="#FFB300" flat to="/membercenter" v-show="$store.state.token!=null" class="pr-4">
+
+        <v-btn
+          color="#FFB300"
+          flat
+          to="/membercenter"
+          v-show="$store.state.token!=null"
+          class="pr-4"
+        >
           <span>会员中心</span>
           <v-icon>person</v-icon>
         </v-btn>
@@ -44,13 +56,10 @@ export default {
   components: {},
   data() {
     return {
-      bottomNav: "home",
-     
+      bottomNav: "home"
     };
   },
-  methods: {
-   
-  }
+  methods: {}
 };
 </script>
 <style scoped>
