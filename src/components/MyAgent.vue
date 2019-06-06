@@ -32,14 +32,7 @@
             </v-form>
           </v-card>
 
-          <!-- <v-flex xs12>
-            <v-text-field v-model="name" :counter="20" label="用户名" prepend-icon="person"></v-text-field>
-          </v-flex>
-          <v-flex xs12>
-            <v-text-field type="date" v-model="startDate"></v-text-field>
-          </v-flex>-->
-
-          <v-tabs v-model="active" color="red darken-4" dark slider-color="yellow" grow>
+          <v-tabs v-model="active" color="green darken-1" dark slider-color="white" grow>
             <v-tab v-for="item in items" :key="item.content" ripple d-flex>{{item.name}}</v-tab>
             <v-tab-item v-for="item in items" :key="item.content">
               <div :is="item.content"></div>

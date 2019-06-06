@@ -22,7 +22,6 @@ export default {
   methods: {
     logout() {
       axios.post(`${this.$store.state.apiUrl}/logout`).then(response => {
-        console.log(response);
         this.$store.dispatch("removeToken");
         this.$router.push("/");
       });

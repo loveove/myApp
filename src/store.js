@@ -23,7 +23,7 @@ export default new Vuex.Store({
     setToken: (context, payload) => {
       context.commit('setToken', payload)
     },
-    removeToken: (context) => { 
+    removeToken: (context) => {
       context.commit('removeToken')
     }
   }

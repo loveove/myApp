@@ -100,12 +100,6 @@ export default new Router({
 
     },
     {
-      path: '/autorefresh',
-      name: 'autorefresh',
-      component: () => import(/* webpackChunkName: "about" */ './components/AutoRefresh.vue')
-
-    },
-    {
       path: '/addbankcardlist',
       name: 'addbankcardlist',
       component: () => import(/* webpackChunkName: "about" */ './components/AddBankCardList.vue')

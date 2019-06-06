@@ -7,7 +7,7 @@
         </template>
         <v-card color="yellow darken-4">
           <v-toolbar dark color="yellow darken-4">
-            <v-btn icon dark @click="link_membercenter">
+            <v-btn icon dark @click="link_membercenter" class="font-custo">
               <i class="fas fa-arrow-left"></i>
             </v-btn>
             <v-toolbar-title>历史记录</v-toolbar-title>
@@ -84,4 +84,7 @@ export default {
 };
 </script>
 <style scope>
+.custo_font {
+  font-size: 13px;
+}
 </style>

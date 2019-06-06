@@ -10,6 +10,7 @@
           <v-btn color="red darken-4 white--text" block @click="displayRuleTwo">代理协议</v-btn>
         </v-flex>
       </v-layout>
+
       <div v-show="ruleOne" v-html="content"></div>
       <div v-show="ruleTwo" v-html="ruleContent"></div>
     </v-flex>
@@ -48,8 +49,8 @@ export default {
         .then(res => {
           this.content = res.data.result.content;
           this.ruleContent = res.data.result.rule_content;
-        })
-        // .catch(err => console.log(err));
+        });
+      // .catch(err => console.log(err));
     }
   },
   created() {
