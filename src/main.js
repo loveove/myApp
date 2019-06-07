@@ -6,6 +6,10 @@ import store from './store'
 import '@fortawesome/fontawesome-free/js/all.min.js'
 
 Vue.config.productionTip = false
+export const bus = new Vue()
+export const apiMethods = {
+
+}
 
 new Vue({
   router,

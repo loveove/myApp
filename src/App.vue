@@ -193,45 +193,45 @@ export default {
     //       console.log(error);
     //     });
     // },
-    logout() {
-      axios({
-        method: "get",
-        url: "http://47.90.100.229:20000/api/logout",
+    // logout() {
+    //   axios({
+    //     method: "get",
+    //     url: "http://47.90.100.229:20000/api/logout",
 
-        // responseType: "stream"
-        headers: {
-          "X-Auth-Token":
-            "354df43ad1c9a637210fb9617a67c217c48c575a1cecd06f4ad27014a1c101f33e1d08946dd7fa6a91c05f1caf1a4b2f1d23c66a580716613af30ca046b804cf+Shh90EWHfZFRWTjmoRCYqYYetCBqp1Hl2GuN3nWNAZmbFcVmFZZ7pv/NOwvY59H/KqKwAobrRRgMtdlYyf+1NWACE+esqqRzwfp+Q5KnrX4tEPGbfEV4Gz9At1LyndcHYH+IJOmymx6XAdSg2NsKNYWBOjuduBXHT2So2IhMvU="
-        }
-      })
-        .then(function(response) {
-          // response.data.pipe(fs.createWriteStream("ada_lovelace.jpg"));
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
-    delete() {
-      axios({
-        method: "post",
-        url: "http://47.90.100.229:20000/api/user/bankCard/del",
-        headers: {
-          "content-type": "application/x-www-form-urlencoded",
-          "X-Auth-Token":
-            "d3b4b06af0d63a097d9ddf41ebb149120052e05d899c746307203f432dbbd84ec5cc52c0c7b9ef4287dacad5927ba422baabc883a2610652ef3da66949d68ea7vG1auVvUBaMXr7sn1vxGeSUfZJfSY8sPcawA4Wwh6HZ521rgMfYeCCi0AAbMK5QmMQg+YU1/j3hh/xtqvntVFt+/0Tz4wJrNzuV1/VC66wjNkquXXWGIeu7SVRGZYFGvJqfH8u9KNU2x7XBVRsBYRrpQhclKgsbrSQ+b4Q4+Kxo="
-        },
-        data: qs.stringify({
-          real_name: 12
-        })
-      })
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
+    //     // responseType: "stream"
+    //     headers: {
+    //       "X-Auth-Token":
+    //         "354df43ad1c9a637210fb9617a67c217c48c575a1cecd06f4ad27014a1c101f33e1d08946dd7fa6a91c05f1caf1a4b2f1d23c66a580716613af30ca046b804cf+Shh90EWHfZFRWTjmoRCYqYYetCBqp1Hl2GuN3nWNAZmbFcVmFZZ7pv/NOwvY59H/KqKwAobrRRgMtdlYyf+1NWACE+esqqRzwfp+Q5KnrX4tEPGbfEV4Gz9At1LyndcHYH+IJOmymx6XAdSg2NsKNYWBOjuduBXHT2So2IhMvU="
+    //     }
+    //   })
+    //     .then(function(response) {
+    //       // response.data.pipe(fs.createWriteStream("ada_lovelace.jpg"));
+    //       console.log(response);
+    //     })
+    //     .catch(function(error) {
+    //       console.log(error);
+    //     });
+    // },
+    // delete() {
+    //   axios({
+    //     method: "post",
+    //     url: "http://47.90.100.229:20000/api/user/bankCard/del",
+    //     headers: {
+    //       "content-type": "application/x-www-form-urlencoded",
+    //       "X-Auth-Token":
+    //         "d3b4b06af0d63a097d9ddf41ebb149120052e05d899c746307203f432dbbd84ec5cc52c0c7b9ef4287dacad5927ba422baabc883a2610652ef3da66949d68ea7vG1auVvUBaMXr7sn1vxGeSUfZJfSY8sPcawA4Wwh6HZ521rgMfYeCCi0AAbMK5QmMQg+YU1/j3hh/xtqvntVFt+/0Tz4wJrNzuV1/VC66wjNkquXXWGIeu7SVRGZYFGvJqfH8u9KNU2x7XBVRsBYRrpQhclKgsbrSQ+b4Q4+Kxo="
+    //     },
+    //     data: qs.stringify({
+    //       real_name: 12
+    //     })
+    //   })
+    //     .then(function(response) {
+    //       console.log(response);
+    //     })
+    //     .catch(function(error) {
+    //       console.log(error);
+    //     });
+    // },
     modifywidthdrawpass() {
       axios({
         method: "post",
@@ -267,6 +267,13 @@ export default {
     // this.logout();
     // this.delete();
     // this.modifywidthdrawpass();
+  },
+  mounted() {
+    if (localStorage.getItem("token") != null) {
+      this.$store.dispatch("setToken", localStorage.getItem("token"));
+      //check login status api should be applied here
+      // apiMethods.checkToken();
+    }
   }
 };
 </script>

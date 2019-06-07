@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      // active:0,
+      active:null,
       dialog: true,
       notifications: false,
       sound: true,
@@ -74,9 +74,9 @@ export default {
     }
   },
   computed: {
-    active() {
-      return this.$store.state.userInfoDefaultTab;
-    }
+    // active() {
+    //   return this.$store.state.userInfoDefaultTab;
+    // }
   }
 };
 </script>
