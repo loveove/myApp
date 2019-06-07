@@ -23,7 +23,7 @@
                   label="收款银行卡"
                   required
                 ></v-select>
-                <v-btn color="red darken-4 white--text" @click="link_addbankcardlist">
+                <v-btn color="red darken-4 white--text" @click="link_userinfo">
                   <i class="fas fa-plus"></i>添加银行卡
                 </v-btn>
               </v-flex>
@@ -60,8 +60,9 @@ export default {
     link_membercenter() {
       this.$router.push("/membercenter");
     },
-    link_addbankcardlist(){
-       this.$router.push("/addbankcardlist");
+    link_userinfo() {
+      this.$store.dispatch("setUserInfoDefaultTab", 1);
+      this.$router.push("/userinfo");
     }
   }
 };
@@ -71,7 +72,7 @@ export default {
   /* border-radius: 10px; */
   margin: 15px;
 }
-.color_custo{
+.color_custo {
   color: white;
 }
 </style>

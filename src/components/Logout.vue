@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ConfirmationDialog @comfirm="logout">
+    <ConfirmationDialog @confirm="logout">
       <div class="pl-3">
-      <i class="fas fa-power-off custo-size9"></i>
+        <i class="fas fa-power-off custo-size9"></i>
       </div>
       <div>退出账户</div>
     </ConfirmationDialog>
@@ -21,8 +21,9 @@ export default {
   },
   methods: {
     logout() {
-      axios.post(`${this.$store.state.apiUrl}/logout`).then(response => {
-        this.$store.dispatch("removeToken");
+      axios.get(`${this.$store.state.apiUrl}/logout`).then(response => {
+        this.$store.dispatch("setToken",null);
+        localStorage.removeItem("token");
         this.$router.push("/");
       });
     }

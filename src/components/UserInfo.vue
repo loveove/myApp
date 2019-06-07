@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      active: null,
+      // active:0,
       dialog: true,
       notifications: false,
       sound: true,
@@ -71,6 +71,11 @@ export default {
   methods: {
     link_membercenter() {
       this.$router.push("/membercenter");
+    }
+  },
+  computed: {
+    active() {
+      return this.$store.state.userInfoDefaultTab;
     }
   }
 };

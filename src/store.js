@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import { bus } from '@/main'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     apiUrl: 'http://47.90.100.229:20000/api',
-    token: null
+    token: null,
+    userInfoDefaultTab: 0
+
   },
   mutations: {
     setToken: (state, payload) => {
@@ -16,7 +19,13 @@ export default new Vuex.Store({
     removeToken: (state) => {
       state.token = null
       localStorage.removeItem('token')
+    },
+    setUserInfoDefaultTab: (state, payload) => {
+      state.userInfoDefaultTab = payload
     }
+    // setBankInfo: (state, payload) => {
+    //   state.bankInfo = payload
+    // }
 
   },
   actions: {
@@ -25,6 +34,13 @@ export default new Vuex.Store({
     },
     removeToken: (context) => {
       context.commit('removeToken')
+    },
+    setUserInfoDefaultTab: (context, payload) => {
+      context.commit('setUserInfoDefaultTab', payload)
     }
+    // setBankInfo: (context, payload) => {
+    //   context.commit('setBankInfo', payload)
+    // }
+
   }
 })

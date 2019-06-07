@@ -36,8 +36,12 @@
   </v-layout>
 </template>
 <script>
+import axios from "axios";
+const qs = require("qs");
+// import { bus } from "@/main";
+// import { apiMethods } from "@/main";
 export default {
-  name: "AddBankCard",
+  name: "AddBankCardList",
   components: {},
   data: () => ({
     dialog: true,
@@ -48,7 +52,8 @@ export default {
   methods: {
     link_membercenter() {
       this.$router.push("/membercenter");
-    }
+    },
+
   }
 };
 </script>

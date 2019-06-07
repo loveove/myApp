@@ -73,6 +73,7 @@
 import axios from "axios";
 import qs from "qs";
 export default {
+  name:"Register",
   data() {
     return {
       dialog: true,
@@ -125,7 +126,8 @@ export default {
       axios({
         method: "post",
         url: "http://47.90.100.229:20000/api/user/register",
-        headers: { "content-type": "application/x-www-form-urlencoded" },
+        headers: { "content-type": "application/x-www-form-urlencoded"
+        },
         data: qs.stringify({
           username: this.name,
           password: this.pass,
@@ -135,6 +137,7 @@ export default {
         })
       })
         .then(response => {
+          // console.log(response);
           if (response.data.msg === "注册成功") {
             this.$store.dispatch("setToken", response.data.result.token);
             this.$router.push("/");

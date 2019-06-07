@@ -40,6 +40,7 @@ export default {
     notifications: false,
     sound: true,
     widgets: false,
+    active: null,
     items: [
       {
         name: "NormalPay",

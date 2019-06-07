@@ -135,6 +135,7 @@ export default {
       this.$router.push("/depositarea");
     },
     link_userinfo() {
+      this.$store.dispatch("setUserInfoDefaultTab", 0);
       this.$router.push("/userinfo");
     },
     link_historyrecord() {
@@ -145,7 +146,7 @@ export default {
     },
     link_autorefresh() {
       this.$router.push("/autorefresh");
-    },
+    }
   }
 };
 </script>
