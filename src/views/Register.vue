@@ -9,7 +9,7 @@
           <v-btn icon dark @click="close">
             <v-icon>close</v-icon>
           </v-btn>
-          <v-toolbar-title class="fontsize">快速注册</v-toolbar-title>
+          <v-toolbar-title class="custoSize">快速注册</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-form ref="form" class="pa-2" v-model="valid" lazy-validation>
@@ -73,7 +73,7 @@
 import axios from "axios";
 import qs from "qs";
 export default {
-  name:"Register",
+  name: "Register",
   data() {
     return {
       dialog: true,
@@ -126,8 +126,7 @@ export default {
       axios({
         method: "post",
         url: "http://47.90.100.229:20000/api/user/register",
-        headers: { "content-type": "application/x-www-form-urlencoded"
-        },
+        headers: { "content-type": "application/x-www-form-urlencoded" },
         data: qs.stringify({
           username: this.name,
           password: this.pass,
@@ -137,12 +136,11 @@ export default {
         })
       })
         .then(response => {
-          // console.log(response);
+          console.log(response);
           if (response.data.msg === "注册成功") {
             this.$store.dispatch("setToken", response.data.result.token);
             this.$router.push("/");
           }
-         
         })
         .catch(function(error) {
           console.log(error);
@@ -156,10 +154,10 @@ export default {
       );
     }
   }
-};
+}
 </script>
 <style scoped>
-.fontsize {
+.custoSize {
   font-weight: bold;
 }
 </style>

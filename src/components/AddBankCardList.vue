@@ -63,8 +63,8 @@
 <script>
 import axios from "axios";
 const qs = require("qs");
-import { bus } from "@/main";
-import { apiMethods } from "@/main";
+// import { bus } from "@/main";
+// import { apiMethods } from "@/main";
 export default {
   name: "AddBankCardList",
   components: {},
@@ -110,7 +110,7 @@ export default {
           }
         )
         .then(res => {
-          console.log(res)
+          console.log(res);
           if (res.data.msg === "ok") {
             (this.bankNumber = ""),
               (this.bankName = ""),

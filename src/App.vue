@@ -19,11 +19,34 @@ export default {
     BottomNav
   },
   data() {
-    return {
-      //
-    };
+    return {};
   },
+  // computed: {
+  //   isLogin: function() {
+  //     return this.$store.state.isLogin;
+  //   }
+  // },
+  // watch: {
+  //   isLogin: function(toGet) {
+  //     if (toGet) {
+  //       this.getUserInfo();
+  //       // this.getDepositeInfo();
+  //     }
+  //   }
+  // },
   methods: {
+    // getUserInfo() {
+    //   axios
+    //     .get(`${this.$store.state.apiUrl}/account/getUserInfo`, {
+    //       headers: {
+    //         "X-Auth-Token": this.$store.state.token
+    //       }
+    //     })
+    //     .then(res => {
+    //       this.$store.dispatch("setUserInfo", res.data.result);
+    //     });
+    //   // .catch(err => console.log(err));
+    // },
     // login() {
     //   axios
     //     .post(
@@ -128,30 +151,7 @@ export default {
     //       console.log(error);
     //     });
     // },
-    // AddBankList() {
-    //   axios
-    //     .post(
-    //       "http://47.90.100.229:20000/api/user/bankCard/add",
-    //       qs.stringify({
-    //         account: "phawphaw",
-    //         bank_no: "14625537635487112",
-    //         bank_name: "KBZ",
-    //         bank_branch: "HlingTharYar"
-    //       }),
-    //       {
-    //         headers: {
-    //           "X-Auth-Token":
-    //             "a536d9f74927bcd965f0d0a072b12addae12e10ecb69297291039458a0c205d5340fe8e092776885d79664949ffb45d3aa54cdd3660a1b4f2e8dbf058838667af2e5fNw5/Galfcgu8jI8PDP3bLh2v7TVqaWxfAjHbEp+JI52IdgAL6i+pEdYgiAEdzOKmr3rfO5oi0MpjNqh52pnRH/5oGLOTa+A5e4JbjVsvFxWORxDvLMjjZJ92OCjG5y1d+230rVHQqZgMcJHH6S9s31RGs3RWx3jUaJqkF8="
-    //         }
-    //       }
-    //     )
-    //     .then(function(response) {
-    //       console.log(response);
-    //     })
-    //     .catch(function(error) {
-    //       console.log(error);
-    //     });
-    // },
+
     // CheckLogin() {
     //   axios({
     //     method: "get",

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import { bus } from '@/main'
+import { bus } from '@/main'
 
 Vue.use(Vuex)
 
@@ -20,6 +20,10 @@ export default new Vuex.Store({
     },
     setBankInfo: (state, payload) => {
       state.bankInfo = payload
+    },
+    setUserInfo: (state, payload) => {
+      state.userInfo = payload
+      bus.$emit('doneSettingUserInfo')
     }
 
   },
@@ -32,6 +36,9 @@ export default new Vuex.Store({
     },
     setBankInfo: (context, payload) => {
       context.commit('setBankInfo', payload)
+    },
+    setUserInfo: (context, payload) => {
+      context.commit('setUserInfo', payload)
     }
 
   }
