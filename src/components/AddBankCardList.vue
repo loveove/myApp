@@ -16,6 +16,7 @@
               :rules="nameRules"
               label="开户名"
               prepend-icon="account_circle"
+              :disabled="$store.state.userInfo.real_name != null"
               required
             ></v-text-field>
             <v-text-field
@@ -63,8 +64,8 @@
 <script>
 import axios from "axios";
 const qs = require("qs");
-// import { bus } from "@/main";
-// import { apiMethods } from "@/main";
+import { bus } from "@/main";
+import { apiMethods } from "@/main";
 export default {
   name: "AddBankCardList",
   components: {},
@@ -119,6 +120,12 @@ export default {
         });
       // .catch(err => console.log(err));
     }
+  },
+  mounted() {
+    bus.$on("doneSettingUserInfo", () => {
+      this.name = this.$store.state.userInfo.real_name;
+    });
+    this.name = this.$store.state.userInfo.real_name;
   }
 };
 </script>

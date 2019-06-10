@@ -1,24 +1,104 @@
 <template>
   <v-card>
     <div class="pa-2">
-      <!-- <v-alert type="info">使用本方式充值, 系统赠送, 最高, 只需一倍流水即可提款</v-alert> -->
-      <v-form ref="form">
+      <v-alert
+        :value="true"
+        type="info"
+      >使用本方式充值, 系统赠送{{$store.state.depositeInfo[1].gift_rate}}, 最高{{$store.state.depositeInfo[1].gift_max}}, 只需一倍流水即可提款</v-alert>
+      <v-form ref="form" v-model="valid" v-show="showAlipayForm">
         <v-flex>
-          <v-text-field prepend-icon="fas fa-coins" type="number" label="存入金额" required></v-text-field>
+          <v-text-field
+            prepend-icon="fas fa-coins"
+            v-model="alipayAmount"
+            :rules="alipayAmountRules"
+            type="number"
+            label="存入金额"
+            required
+          ></v-text-field>
         </v-flex>
-        <v-btn color="red darken-4 white--text" block>下一步</v-btn>
+        <v-btn
+          color="red darken-4 white--text"
+          :disabled="isDisabled"
+          :loading="isLoading"
+          @click="submitDeposite"
+          block
+        >下一步</v-btn>
       </v-form>
+    </div>
+    <div v-if="showQRcode">
+      <QrCode/>
     </div>
   </v-card>
 </template>
 <script>
+import axios from "axios";
+const qs = require("qs");
+import QrCode from "./QrCode.vue";
+
 export default {
   name: "AlipayDepositArea",
-  components: {},
-  data: () => ({})
+  components: { QrCode },
+  data: () => ({
+    errorMessage: "",
+    hasError: false,
+    isLoading: false,
+    valid: false,
+    alipayAmount: "",
+    showQRcode: false,
+    showAlipayForm: true
+  }),
+  computed: {
+    isDisabled() {
+      if (this.valid === false || this.isLoading === true) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    alipayAmountRules() {
+      return [
+        v => !!v || "请输入金额",
+        v =>
+          (v &&
+            v >= this.$store.state.depositeInfo[1].balanceStart &&
+            v < this.$store.state.depositeInfo[1].balanceEnd) ||
+          `限额 ${this.$store.state.depositeInfo[1].balanceStart} - ${
+            this.$store.state.depositeInfo[1].balanceEnd
+          }`
+      ];
+    }
+  },
+  methods: {
+    submitDeposite() {
+      this.isLoading = true;
+      axios
+        .post(
+          `${this.$store.state.apiUrl}/account/deposit/online/ONLINE_ALIPAY`,
+          qs.stringify({
+            paytype: "ONLINE_ALIPAY",
+            amount: this.alipayAmount
+          }),
+          {
+            headers: {
+              "X-Auth-Token": this.$store.state.token
+            }
+          }
+        )
+        .then(res => {
+          console.log(res);
+          // eslint-disable-next-line
+          // .replace('<script>document.myform.submit()<\/script>','')
+          this.$store.dispatch("setQrHtml", res.data.result.html);
+          this.isLoading = false;
+          this.showQRcode = true;
+          this.showAlipayForm = false;
+        });
+      // .catch(err => console.log(err));
+    }
+  },
+  created() {}
 };
 </script>
 <style scoped>
-
 </style>
 
