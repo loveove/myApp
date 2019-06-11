@@ -54,6 +54,14 @@
                     >确定转账</v-btn>
                   </v-flex>
                 </v-layout>
+                <v-alert
+                  v-model="hasAlert"
+                  :value="true"
+                  type="info"
+                  icon="warning"
+                  outline
+                  dismissible
+                >{{alertMessage}}</v-alert>
               </v-container>
             </v-form>
           </v-card>
@@ -69,6 +77,8 @@ export default {
   name: "PlatformTransfer",
   data() {
     return {
+      alertMessage: "",
+      hasAlert: false,
       dialog: true,
       notifications: false,
       sound: true,
@@ -152,7 +162,7 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.msg === "ok") {
             this.hasAlert = true;
             this.alertMessage = "成功";

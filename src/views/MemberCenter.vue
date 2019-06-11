@@ -14,7 +14,7 @@
                 <div>账户余额(元)</div>
               </v-flex>
               <v-flex xs6 class="pt-5 pl-2">
-                <div>&nbsp;&nbsp;</div>
+                <div>&nbsp; &nbsp;</div>
                 <div>
                   总资产(元)
                   <span class="ml-5">
@@ -33,14 +33,14 @@
       <div class="white botton-rounded">
         <v-layout xs-12 class="pl-3 pt-3">
           <v-flex xs-6 class="pl-4">
-            <div class="pl-3" @click="link_overview">
-              <i class="fas fa-yen-sign custo-size1"></i>
+            <div class="pl-3" @click="linkOverView">
+              <i class="fas fa-yen-sign fa-lg" style="color:brown"></i>
             </div>
             <div>资产总览</div>
           </v-flex>
           <v-flex xs-6>
-            <div class="pl-3" @click="link_withdraw">
-              <i class="fas fa-hand-holding-usd custo-size2"></i>
+            <div class="pl-3" @click="linkWithdraw">
+              <i class="fas fa-hand-holding-usd fa-lg" style="color:#76ff03;"></i>
             </div>
             <div>提款专区</div>
           </v-flex>
@@ -51,14 +51,14 @@
       <div class="white border-rounded">
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex xs-6 class="pl-4">
-            <div class="pl-3" @click="link_deposit">
-              <i class="fas fa-donate custo-size3"></i>
+            <div class="pl-3" @click="linkDeposit">
+              <i class="fas fa-donate fa-lg" style="color:#66bb6a;"></i>
             </div>
             <div>存款专区</div>
           </v-flex>
           <v-flex xs-6>
-            <div class="pl-3" @click="link_platformtransfer">
-              <i class="fas fa-exchange-alt custo-size4"></i>
+            <div class="pl-3" @click="linkPlatformTransfer">
+              <i class="fas fa-exchange-alt fa-lg" style="color:#ffa726;"></i>
             </div>
             <div>平台互转</div>
           </v-flex>
@@ -66,14 +66,14 @@
         <!-- two -->
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex xs-6 class="pl-4">
-            <div class="pl-3" @click="link_myagent">
-              <i class="fas fa-users custo-size5"></i>
+            <div class="pl-3" @click="linkMyAgent">
+              <i class="fas fa-users fa-lg" style="color:#00b0ff;"></i>
             </div>
             <div>我的代理</div>
           </v-flex>
           <v-flex xs-6>
-            <div class="pl-3" @click="link_autorefresh">
-              <i class="fas fa-sync custo-size6"></i>
+            <div class="pl-3" @click="linkAutoRefresh">
+              <i class="fas fa-sync fa-lg" style="color:#26a69a;"></i>
             </div>
             <div>自助洗码</div>
           </v-flex>
@@ -81,14 +81,14 @@
         <!-- three -->
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex xs-6 class="pl-4">
-            <div class="pl-3" @click="link_userinfo">
-              <i class="fas fa-user-edit custo-size7"></i>
+            <div class="pl-3" @click="linkUserInfo">
+              <i class="fas fa-user-edit fa-lg" style="color:#ff6d00;"></i>
             </div>
             <div>个人资料</div>
           </v-flex>
           <v-flex xs-6>
-            <div class="pl-3" @click="link_historyrecord">
-              <i class="fas fa-history custo-size8"></i>
+            <div class="pl-3" @click="linkHistoryRecord">
+              <i class="fas fa-history fa-lg" style="color:#5c6bc0;"></i>
             </div>
             <div>历史记录</div>
           </v-flex>
@@ -96,10 +96,11 @@
         <!-- four -->
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex sx6 class="pl-4">
-            <div class="pl-3">
-              <i class="far fa-hand-point-right custo-size10"></i>
+            <div class="pl-3" @click="forgotpassword">
+              <!-- <i class="fas fa-gift"></i> -->
+              <i class="fas fa-lock fa-lg" style="color:darkblue;"></i>
             </div>
-            <div>代理加盟</div>
+            <div>忘记密码?</div>
           </v-flex>
           <v-flex xs-6 class="pl-3">
             <Logout/>
@@ -115,37 +116,43 @@ import QueryBalance from "../components/QueryBalance.vue";
 export default {
   name: "MemberCenter",
   data() {
-    return {};
+    return {
+      mainBalance: 0
+    };
   },
   components: {
     Logout,
     QueryBalance
   },
   methods: {
-    link_overview() {
+    linkOverView() {
       this.$router.push("/querybalance");
     },
-    link_withdraw() {
+    linkWithdraw() {
       this.$router.push("/withdrawarea");
     },
-    link_platformtransfer() {
+    linkPlatformTransfer() {
       this.$router.push("/platformtransfer");
     },
-    link_deposit() {
+    linkDeposit() {
       this.$router.push("/depositarea");
     },
-    link_userinfo() {
+    linkUserInfo() {
       // this.$store.dispatch("setUserInfoDefaultTab", 0);
       this.$router.push("/userinfo");
     },
-    link_historyrecord() {
+    linkHistoryRecord() {
       this.$router.push("/historyrecord");
     },
-    link_myagent() {
+    linkMyAgent() {
       this.$router.push("/myagent");
     },
-    link_autorefresh() {
+    linkAutoRefresh() {
       this.$router.push("/autorefresh");
+    },
+    forgotpassword(){
+      alert("请联系在线客服")
+      
     }
   }
 };
@@ -160,46 +167,6 @@ export default {
 }
 .border-rounded {
   border-radius: 15px;
-}
-.custo-size1 {
-  font-size: 20px;
-  color: brown;
-}
-.custo-size2 {
-  font-size: 20px;
-  color: #76ff03;
-}
-.custo-size3 {
-  font-size: 20px;
-  color: #66bb6a;
-}
-.custo-size4 {
-  font-size: 20px;
-  color: #ffa726;
-}
-.custo-size5 {
-  font-size: 20px;
-  color: #00b0ff;
-}
-.custo-size6 {
-  font-size: 20px;
-  color: #26a69a;
-}
-.custo-size7 {
-  font-size: 20px;
-  color: #ff6d00;
-}
-.custo-size8 {
-  font-size: 20px;
-  color: #5c6bc0;
-}
-.custo-size9 {
-  font-size: 20px;
-  color: brown;
-}
-.custo-size10 {
-  font-size: 20px;
-  color: darkblue;
 }
 .customize_img {
   width: 50px;

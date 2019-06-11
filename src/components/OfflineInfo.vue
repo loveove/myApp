@@ -28,16 +28,19 @@
           </v-layout>
         </v-container>
       </v-form>
+
+      <v-flex xs12>
+        <v-alert
+          v-model="hasAlert"
+          :value="true"
+          color="error"
+          icon="warning"
+          outline
+          dismissible
+        >{{alertMessage}}</v-alert>
+      </v-flex>
     </v-card>
-    <v-alert
-      v-model="hasError"
-      :value="true"
-      color="error"
-      icon="warning"
-      outline
-      dismissible
-      error
-    >{{errorMessage}}</v-alert>
+
     <v-data-iterator
       :items="records"
       :rows-per-page-items="rowsPerPageItems"
@@ -99,8 +102,8 @@ export default {
         rowsPerPage: 3
       },
       name: "",
-      errorMessage: "",
-      hasError: false
+      alertMessage: "",
+      hasAlert: false
     };
   },
   computed: {
@@ -133,8 +136,8 @@ export default {
             // console.log(res.data);
           } else {
             // console.log(res.data);
-            this.hasError = true;
-            this.errorMessage = res.data.msg;
+            this.hasAlert = true;
+            this.alertMessage = res.data.msg;
           }
         });
       // .catch(err => console.log(err));

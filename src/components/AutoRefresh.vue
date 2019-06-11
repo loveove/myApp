@@ -1,8 +1,7 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" fullscreen hide-overlay>
-      <template v-slot:activator="{ on }">
-      </template>
+      <template v-slot:activator="{ on }"></template>
       <v-card color="yellow darken-4">
         <v-toolbar dark color="yellow darken-4">
           <v-btn icon dark @click="link_membercenter">
@@ -23,14 +22,24 @@
                 <v-btn color="red darken-4 white--text" block>一键结算</v-btn>
               </v-flex>
             </v-container>
+            <v-flex xs12>
+              <v-alert
+                v-model="hasError"
+                :value="true"
+                color="error"
+                icon="warning"
+                outline
+                dismissible
+                error
+              >{{errorMessage}}</v-alert>
+            </v-flex>
           </v-form>
         </v-card>
 
-        <!-- <v-data-iterator
+        <v-data-iterator
           :items="refreshcode"
           :rows-per-page-items="rowsPerPageItems"
           :pagination.sync="pagination"
-          content-tag="v-layout"
           row
           wrap
         >
@@ -70,7 +79,7 @@
               </v-flex>
             </v-container>
           </template>
-        </v-data-iterator>-->
+        </v-data-iterator>
       </v-card>
     </v-dialog>
   </v-layout>
@@ -78,20 +87,81 @@
 
   
 <script>
-// import axios from "axios";
-// const qs = require("qs");
+import axios from "axios";
+const qs = require("qs");
 export default {
   name: "AutoRefreshCode",
   components: {},
   data: () => ({
+    errorMessage: "",
+    hasError: false,
     dialog: true,
     notifications: false,
     sound: true,
-    widgets: false
+    widgets: false,
+    hasAlert: false,
+    alertMessage: "",
+    refreshcode: [],
+    rowsPerPageItems: [3, 4, 5],
+    pagination: {
+      rowsPerPage: 3
+    },
+    isLoading: false
   }),
   methods: {
     link_membercenter() {
       this.$router.push("/membercenter");
+    },
+    getRefreshCodeInfo() {
+      this.isLoading = true;
+      axios
+        .get(`${this.$store.state.apiUrl}/account/xima/getInfo`, {
+          headers: {
+            "X-Auth-Token": this.$store.state.token
+          }
+        })
+        .then(res => {
+          this.isLoading = false;
+          console.log(res.data);
+          this.refreshcode = Array.from(res.data.result);
+        });
+    },
+    refreshCode() {
+      this.isLoading = true;
+      axios
+        .post(
+          `${this.$store.state.apiUrl}/account/xima/jiesuan`,
+          qs.stringify({
+            platId: ""
+          }),
+          {
+            headers: {
+              "X-Auth-Token": this.$store.state.token
+            }
+          }
+        )
+        .then(res => {
+          this.isLoading = false;
+          console.log(res);
+          if (res.data.msg === "ok") {
+            this.hasAlert = true;
+            this.alertMessage = "成功";
+            this.getRefreshCodeInfo();
+          } else {
+            this.hasAlert = true;
+            this.alertMessage = res.data.msg;
+          }
+        });
+    },
+    created() {
+      this.getRefreshCodeInfo();
+    }
+  },
+  computed: {
+    totalXimaMoney() {
+      let money = 0;
+      this.refreshcode.forEach(item => (money += item.xima_money));
+      return money;
     }
   }
 };

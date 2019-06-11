@@ -137,7 +137,7 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.msg === "ok") {
             this.records = res.data.result;
           } else {

@@ -15,6 +15,14 @@
           </v-layout>
         </v-container>
       </v-form>
+      <v-alert
+        v-model="hasAlert"
+        :value="true"
+        color="error"
+        icon="warning"
+        outline
+        dismissible
+      >{{alertMessage}}</v-alert>
     </v-card>
     <v-data-iterator
       :items="records"
@@ -67,6 +75,8 @@ export default {
   name: "DepositeHistory",
   data() {
     return {
+      alertMessage: "",
+      hasAlert: false,
       startDate: "",
       endDate: "",
       records: [],
@@ -101,7 +111,8 @@ export default {
             this.records = res.data.result;
             // console.log(res.data);
           } else {
-            // console.log(res.data);
+            this.hasAlert = true;
+            this.alertMessage = res.data.msg;
           }
         });
       // .catch(err => console.log(err));

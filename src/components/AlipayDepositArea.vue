@@ -39,8 +39,6 @@ export default {
   name: "AlipayDepositArea",
   components: { QrCode },
   data: () => ({
-    errorMessage: "",
-    hasError: false,
     isLoading: false,
     valid: false,
     alipayAmount: "",

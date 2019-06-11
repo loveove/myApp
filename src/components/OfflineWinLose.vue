@@ -28,16 +28,17 @@
           </v-layout>
         </v-container>
       </v-form>
+
+      <v-alert
+        v-model="hasError"
+        :value="true"
+        color="error"
+        icon="warning"
+        outline
+        dismissible
+        error
+      >{{errorMessage}}</v-alert>
     </v-card>
-    <v-alert
-      v-model="hasError"
-      :value="true"
-      color="error"
-      icon="warning"
-      outline
-      dismissible
-      error
-    >{{errorMessage}}</v-alert>
     <v-data-iterator
       :items="records"
       :rows-per-page-items="rowsPerPageItems"

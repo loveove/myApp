@@ -79,13 +79,22 @@
             </v-flex>
           </v-layout>
         </v-layout>
+        <!-- six -->
+        <v-layout row wrap v-if="current=='优惠'">
+          <Discount @discount="linkDiscount"></Discount>
+        </v-layout>
       </v-flex>
     </v-layout>
   </div>
 </template>
 
 <script>
+import Discount from "./Discount.vue";
 export default {
+  name: "LiveGame",
+  components: {
+    Discount
+  },
   data() {
     return {
       // color: "blue lighten-3",
@@ -106,8 +115,7 @@ export default {
         { image: require("../assets/3.jpg"), gameName: "HABA电子" },
         { image: require("../assets/3.jpg"), gameName: "MG电子" },
         { image: require("../assets/3.jpg"), gameName: "PT电子" },
-        { image: require("../assets/3.jpg"), gameName: "SW电子" },
-     
+        { image: require("../assets/3.jpg"), gameName: "SW电子" }
       ],
       chess: [
         { image: require("../assets/4.jpg"), gameName: "HABA电子" },
@@ -135,7 +143,11 @@ export default {
       ]
     };
   },
-  methods: {}
+  methods: {
+    linkDiscount() {
+      this.current = "电子";
+    }
+  }
 };
 </script>
 <style scoped>

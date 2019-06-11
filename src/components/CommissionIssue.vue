@@ -28,16 +28,16 @@
           </v-layout>
         </v-container>
       </v-form>
+      <v-alert
+        v-model="hasError"
+        :value="true"
+        color="error"
+        icon="warning"
+        outline
+        dismissible
+      >{{errorMessage}}</v-alert>
     </v-card>
-    <v-alert
-      v-model="hasError"
-      :value="true"
-      color="error"
-      icon="warning"
-      outline
-      dismissible
-      error
-    >{{errorMessage}}</v-alert>
+
     <v-data-iterator
       :items="records"
       :rows-per-page-items="rowsPerPageItems"
@@ -119,6 +119,7 @@ export default {
         )
         .then(res => {
           this.isLoading = false;
+          console.log(res);
           if (res.data.msg === "ok") {
             this.records = res.data.result;
             // console.log(res.data);

@@ -55,6 +55,14 @@
                 </v-flex>
               </v-layout>
             </v-container>
+            <v-alert
+              v-model="hasAlert"
+              :value="true"
+              icon="warning"
+              type="info"
+              outline
+              dismissible
+            >{{alertMessage}}</v-alert>
           </v-form>
         </v-card>
       </v-card>
@@ -70,6 +78,8 @@ export default {
   name: "AddBankCardList",
   components: {},
   data: () => ({
+    alertMessage: "",
+    hasAlert: false,
     isLoading: false,
     dialog: true,
     notifications: false,
@@ -111,11 +121,16 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          // console.log(res);
+          this.hasAlert = true;
+          this.alertMessage = "添加银行卡成功";
           if (res.data.msg === "ok") {
             (this.bankNumber = ""),
               (this.bankName = ""),
               (this.bankBranch = "");
+          } else {
+            this.hasAlert = true;
+            this.alertMessage = res.data.msg;
           }
         });
       // .catch(err => console.log(err));

@@ -43,6 +43,14 @@
           </v-flex>
         </v-layout>
       </v-container>
+      <v-alert
+        v-model="hasAlert"
+        :value="true"
+        icon="warning"
+        outline
+        dismissible
+        type="info"
+      >{{alertMessage}}</v-alert>
     </v-form>
   </v-card>
 </template>
@@ -53,6 +61,8 @@ export default {
   name: "EditWithdrawPassword",
   components: {},
   data: () => ({
+    alertMessage: "",
+    hasAlert: false,
     valid: true,
     showPassword: false,
     showConfirmPassword: false,
@@ -113,13 +123,13 @@ export default {
         .then(res => {
           console.log(res);
           // this.isLoading = false;
-          // this.hasAlert = true;
+          this.hasAlert = true;
           this.alertMessage = "更改密码成功";
           if (res.data.msg === "ok") {
             this.getUserInfo();
           } else {
-            // this.hasAlert = true;
-            // this.alertMessage = res.data.msg;
+            this.hasAlert = true;
+            this.alertMessage = res.data.msg;
           }
           // console.log(res.data.msg);
         });

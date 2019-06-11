@@ -83,7 +83,7 @@
             <span>各种优惠为您撑腰</span>
           </v-flex>
           <v-flex xs2>
-            <span @click="linktolivegame">更多</span>
+            <span @click="linktodiscount">更多</span>
             <i class="fas fa-chevron-right"></i>
           </v-flex>
         </v-layout>
@@ -145,8 +145,12 @@ export default {
     linktolivegame() {
       this.$router.push("/livegame");
       this.dialog = false;
+    },
+    linktodiscount() {
+      this.$router.push("/discount");
+      this.dialog = false;
     }
-  },
+  }
   // mounted() {
   //   if (localStorage.getItem("token") != null) {
   //     if (localStorage.getItem("token").length > 10) {

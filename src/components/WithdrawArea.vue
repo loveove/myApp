@@ -27,7 +27,7 @@
               <v-btn block @click="redirectAddBankCard">返回到添加银行卡</v-btn>
             </v-alert>
             <v-alert :value="withdrawInfo.need_xima != 0" type="info">剩余打码量需要为 0</v-alert>
-            <v-alert :value="withdrawInfo.has_drawing != 0" type="info">提款在审核中，请通过后再次申请提款</v-alert> -->
+            <v-alert :value="withdrawInfo.has_drawing != 0" type="info">提款在审核中，请通过后再次申请提款</v-alert>-->
             <v-form ref="form" v-model="valid" class="px-4">
               <v-flex>
                 <v-select
@@ -69,6 +69,16 @@
                     <v-btn color="red darken-4 white--text" block @click.native="withdraw">立即提交</v-btn>
                   </v-flex>
                 </v-layout>
+                <v-flex xs12>
+                  <v-alert
+                    v-model="hasAlert"
+                    :value="true"
+                    type="info"
+                    icon="warning"
+                    outline
+                    dismissible
+                  >{{alertMessage}}</v-alert>
+                </v-flex>
               </v-container>
             </v-form>
           </v-card>
@@ -89,6 +99,8 @@ export default {
       sound: true,
       widgets: false,
       valid: false,
+      alertMessage: "",
+      hasAlert: false,
       bankId: "",
       show: false,
       amount: "",
@@ -150,14 +162,14 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.msg === "ok") {
-            // this.hasAlert = true;
-            // this.alertMessage = "成功";
+            this.hasAlert = true;
+            this.alertMessage = "成功";
             // console.log(res.data);
           } else {
-            // this.hasAlert = true;
-            // this.alertMessage = res.data.msg;
+            this.hasAlert = true;
+            this.alertMessage = res.data.msg;
           }
         });
       // .catch(err => console.log(err));

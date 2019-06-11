@@ -19,19 +19,29 @@
                 <h3 class="pl-2">我的资产</h3>
               </v-flex>
               <v-flex xs6>
-                同步时间: 23/5/9999 12:30
-                <v-btn color="red darken-4 white--text">刷新</v-btn>
+                时间:
+                {{timestampt}}
+                <v-btn
+                  color="red darken-4 white--text"
+                  @click="refreshAllBalance"
+                  :loading="isLoading"
+                  :disabled="isLoading"
+                >刷新</v-btn>
               </v-flex>
             </v-layout>
             <v-layout xs12 row>
               <v-flex xs6>
                 <v-card-text>
                   <span>￥</span>
+                  <span v-if="showBalance">{{totalBalance ==1 ?(totalBalance - 1):(totalBalance)}}</span>
+                  <span v-if="!showBalance">***</span>
                 </v-card-text>
               </v-flex>
               <v-flex xs6>
                 <v-card-text>
-                  <i class="far fa-eye"></i>
+                  <div @click="showBalance =!showBalance">
+                    <i class="far fa-eye"></i>
+                  </div>
                 </v-card-text>
               </v-flex>
             </v-layout>
@@ -42,8 +52,8 @@
               <v-flex xs6>
                 <v-card-text>
                   <span>￥</span>
-
-                  <span>***</span>
+                  <span v-if="showBalance">{{mainBalance}}</span>
+                  <span v-if="!showBalance">***</span>
                 </v-card-text>
               </v-flex>
             </v-layout>
@@ -51,54 +61,103 @@
               <v-flex xs6>
                 <v-card-text>投注总额</v-card-text>
               </v-flex>
-              <v-flex xs6></v-flex>
+              <v-flex xs6>
+                <v-card-text>{{$store.state.userInfo.total_bet}}</v-card-text>
+              </v-flex>
             </v-layout>
             <v-layout xs12 row>
               <v-flex xs6>
-                <v-btn color="red darken-4 white--text">存款</v-btn>
+                <v-btn color="red darken-4 white--text" @click.native="linkDepositeArea">存款</v-btn>
               </v-flex>
               <v-flex xs6>
-                <v-btn color="red darken-4 white--text">提款</v-btn>
+                <v-btn color="red darken-4 white--text" @click.native="linkWithdrawArea">提款</v-btn>
               </v-flex>
             </v-layout>
           </v-card>
 
           <v-card class="mt-3 pb-3 border_rounded">
             <h3 class="pt-2 pl-2">资产分布</h3>
-            <v-layout xs12 row class="pt-5">
-              <v-flex xs3 class="d-flex">
-                <v-progress-circular :rotate="360" :size="70" :width="6" color="primary">
-                  主账户
-                  <br>0.0%
-                </v-progress-circular>
+            <v-layout row>
+              <v-flex xs6>
+                <v-flex xs12 class="text-xs-center">
+                  <span v-if="showBalance">主账户 ￥{{mainBalance}}</span>
+                  <span v-if="!showBalance">主账户 ￥***</span>
+                </v-flex>
+                <v-flex xs12 class="d-flex">
+                  <v-progress-circular
+                    :rotate="360"
+                    :size="100"
+                    :width="15"
+                    :value="mainAccountPercentage"
+                    color="primary"
+                  >{{mainAccountPercentage}}%</v-progress-circular>
+                </v-flex>
+                <v-card-actions>&nbsp;</v-card-actions>
               </v-flex>
-              <v-flex xs3 class="d-flex">
-                <div>主账户</div>
-                <div>0.00</div>
-              </v-flex>
-              <v-flex xs3 class="d-flex">
-                <v-progress-circular :rotate="360" :size="70" :width="6" color="primary">
-                  新锦江
-                  <br>0.0%
-                </v-progress-circular>
-              </v-flex>
-              <v-flex xs3 class="d-flex">
-                <div>新锦江</div>
-                <div>0.00</div>
+
+              <v-flex xs6>
+                <v-flex xs12 class="text-xs-center">
+                  <span v-if="showBalance">新锦江 ￥{{xjjBalance}}</span>
+                  <span v-if="!showBalance">新锦江 ￥***</span>
+                </v-flex>
+                <v-flex xs12 class="d-flex">
+                  <v-progress-circular
+                    :rotate="360"
+                    :size="100"
+                    :width="15"
+                    :value="xjjPercentage"
+                    color="primary"
+                  >{{xjjPercentage}}%</v-progress-circular>
+                </v-flex>
+                <v-card-actions>&nbsp;</v-card-actions>
               </v-flex>
             </v-layout>
-            <v-layout xs12 row class="pt-5">
-              <v-flex xs3 class="d-flex">
-                <v-progress-circular :rotate="360" :size="70" :width="6" color="primary">
-                  MG
-                  <br>0.0%
-                </v-progress-circular>
+            <v-layout row>
+              <v-flex xs6>
+                <v-flex xs12 class="text-xs-center">
+                  <span v-if="showBalance">MG ￥{{mgBalance}}</span>
+                  <span v-if="!showBalance">MG ￥***</span>
+                </v-flex>
+                <v-flex xs12 class="d-flex">
+                  <v-progress-circular
+                    :rotate="360"
+                    :size="100"
+                    :width="15"
+                    :value="mgPercentage"
+                    color="primary"
+                  >{{mgPercentage}}%</v-progress-circular>
+                </v-flex>
+                <v-card-actions>&nbsp;</v-card-actions>
               </v-flex>
-              <v-flex xs3 class="d-flex">
-                <div>MG</div>
-                <div>0.00</div>
+
+              <v-flex xs6>
+                <v-flex xs12 class="text-xs-center">
+                  <span v-if="showBalance">新锦江(新版) ￥{{njjBalance}}</span>
+                  <span v-if="!showBalance">新锦江(新版) ￥***</span>
+                </v-flex>
+                <v-flex xs12 class="d-flex">
+                  <v-progress-circular
+                    :rotate="360"
+                    :size="100"
+                    :width="15"
+                    :value="njjPercentage"
+                    color="primary"
+                  >{{njjPercentage}}%</v-progress-circular>
+                </v-flex>
+                <v-card-actions>&nbsp;</v-card-actions>
               </v-flex>
             </v-layout>
+            <v-flex xs12>
+              <v-alert
+                v-model="hasError"
+                :value="true"
+                color="error"
+                icon="warning"
+                outline
+                dismissible
+                error
+              >{{errorMessage}}</v-alert>
+            </v-flex>
           </v-card>
         </v-card>
       </v-dialog>
@@ -106,6 +165,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "QueryBalance",
   components: {},
@@ -115,16 +175,124 @@ export default {
       dialog: true,
       notifications: false,
       sound: true,
-      widgets: false
+      widgets: false,
+      errorMessage: "",
+      hasError: false,
+      showBalance: true,
+      mainBalance: 0,
+      timestampt: "",
+      isLoading: false,
+      xjjBalance: 0,
+      mgBalance: 0,
+      njjBalance: 0
     };
+  },
+  computed: {
+    icon: function() {
+      return this.showBalance ? "visibility" : "visibility_off";
+    },
+    totalBalance() {
+      let total;
+      total =
+        this.mainBalance + this.xjjBalance + this.njjBalance + this.mgBalance;
+      if (total === 0) {
+        return 1;
+      } else {
+        return total;
+      }
+    },
+    mainAccountPercentage() {
+      let percentage;
+      percentage = (this.mainBalance / this.totalBalance) * 100;
+      return Math.round(percentage);
+    },
+    xjjPercentage() {
+      let percentage = (this.xjjBalance / this.totalBalance) * 100;
+      return Math.round(percentage);
+    },
+    mgPercentage() {
+      let percentage = (this.mgBalance / this.totalBalance) * 100;
+      return Math.round(percentage);
+    },
+    njjPercentage() {
+      let percentage = (this.njjBalance / this.totalBalance) * 100;
+      return Math.round(percentage);
+    }
   },
   methods: {
     link_membercenter() {
       this.$router.push("/membercenter");
+    },
+    getPlatformBalance(id) {
+      this.isLoading = true;
+      axios
+        .get(
+          `${
+            this.$store.state.apiUrl
+          }/account/getPlatformBalance?platformId=${id}`,
+          // qs.stringify({
+          //   platformId: id
+          // }),
+          {
+            headers: {
+              "X-Auth-Token": this.$store.state.token
+            }
+          }
+        )
+        .then(res => {
+          this.isLoading = false;
+
+          if (res.data.msg === "ok") {
+            if (id === 0) {
+              // console.log("main");
+              this.mainBalance = res.data.result.balance;
+            }
+            if (id === 32) {
+              // console.log("xjj");
+              this.xjjBalance = res.data.result.balance;
+            }
+            if (id === 33) {
+              // console.log("mg");
+              this.mgBalance = res.data.result.balance;
+            }
+            if (id === 35) {
+              // console.log("njj");
+              this.njjBalance = res.data.result.balance;
+            }
+          } else {
+            this.hasError = true;
+            this.errorMessage = res.data.msg;
+          }
+        });
+      // .catch(err => console.log(err));
+    },
+    linkDepositeArea() {
+      this.$router.push("/depositarea");
+    },
+    linkWithdrawArea() {
+      this.$router.push("/withdrawarea");
+    },
+    refreshAllBalance() {
+      this.timestampt = "";
+      this.getPlatformBalance(0);
+      this.getPlatformBalance(32);
+      this.getPlatformBalance(33);
+      this.getPlatformBalance(35);
+      let date = new Date();
+      this.timestampt += date.getFullYear();
+      this.timestampt += `/${date.getMonth()}`;
+      this.timestampt += `/${date.getDate()}`;
+      this.timestampt += ` ${date.getHours()}`;
+      this.timestampt += `:${date.getMinutes()}`;
+      this.timestampt += `:${date.getSeconds()}`;
     }
+  },
+  created() {
+    this.refreshAllBalance();
   }
 };
 </script>
+
 <style scoped>
 .border_rounded {
   margin: 10px;

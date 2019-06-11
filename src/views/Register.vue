@@ -64,6 +64,17 @@
             :disabled="!valid"
             @click="userRegisteration"
           >下一步</v-btn>
+          <v-flex xs12>
+            <v-alert
+              v-model="hasError"
+              :value="true"
+              color="error"
+              icon="warning"
+              outline
+              dismissible
+              error
+            >{{errorMessage}}</v-alert>
+          </v-flex>
         </v-form>
       </v-card>
     </v-dialog>
@@ -76,6 +87,8 @@ export default {
   name: "Register",
   data() {
     return {
+      errorMessage: "",
+      hasError: false,
       dialog: true,
       valid: true,
       notifications: false,
@@ -140,6 +153,9 @@ export default {
           if (response.data.msg === "注册成功") {
             this.$store.dispatch("setToken", response.data.result.token);
             this.$router.push("/");
+          } else {
+            this.hasError = true;
+            this.errorMessage = res.data.msg;
           }
         })
         .catch(function(error) {
@@ -154,7 +170,7 @@ export default {
       );
     }
   }
-}
+};
 </script>
 <style scoped>
 .custoSize {

@@ -23,8 +23,8 @@ export default new Router({
     },
     {
       path: '/livegame',
-      name: 'classification',
-      component: () => import(/* webpackChunkName: "about" */ './views/Classification.vue')
+      name: 'livegame',
+      component: () => import(/* webpackChunkName: "about" */ './components/LiveGame.vue')
 
     },
     {
@@ -103,6 +103,12 @@ export default new Router({
       path: '/addbankcardlist',
       name: 'addbankcardlist',
       component: () => import(/* webpackChunkName: "about" */ './components/AddBankCardList.vue')
+
+    },
+    {
+      path: '/discount',
+      name: 'discount',
+      component: () => import(/* webpackChunkName: "about" */ './components/Discount.vue')
 
     }
 

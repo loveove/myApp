@@ -33,6 +33,17 @@
             ></v-text-field>
           </v-card>
           <v-btn color="yellow darken-4 white--text" @click="login" :disabled="!valid" block>登陆</v-btn>
+          <v-flex xs12>
+            <v-alert
+              v-model="hasError"
+              :value="true"
+              color="error"
+              icon="warning"
+              outline
+              dismissible
+              error
+            >{{errorMessage}}</v-alert>
+          </v-flex>
           <div class="text-xs-right">
             <v-btn color="red white--text" @click="linkregister">快速注册</v-btn>
           </div>
@@ -48,6 +59,8 @@ export default {
   name: "Login",
   data() {
     return {
+      errorMessage: "",
+      hasError: false,
       name: "",
       nameRules: [v => !!v || "请填写用户名"],
       password: "",
@@ -85,6 +98,9 @@ export default {
           if (response.data.result.token != undefined) {
             this.$store.dispatch("setToken", response.data.result.token);
             this.$router.push("/");
+          } else {
+            this.hasError = true;
+            this.errorMessage = response.data.msg;
           }
         });
     }
