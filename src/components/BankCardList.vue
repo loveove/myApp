@@ -1,55 +1,57 @@
 <template>
   <div>
-    <v-flex xs12>
-      <v-btn color="red darken-4 white--text" @click="addBankCardList">
-        <i class="fas fa-plus"></i>添加银行卡
-      </v-btn>
-    </v-flex>
-    <div>
-      <v-data-iterator
-        :items="bankCards"
-        :rows-per-page-items="rowsPerPageItems"
-        :pagination.sync="pagination"
-        row
-        wrap
-        v-if="bankCards.length>0"
-      >
-        <template v-slot:item="props">
-          <v-flex xs12 sm6 md4 lg3>
-            <v-card class="mt-1">
-              <v-card-title>
-                <h4>银行: {{ props.item.bankName }}</h4>
-              </v-card-title>
-              <v-divider></v-divider>
-              <v-list dense>
-                <v-list-tile>
-                  <v-list-tile-content>开户名:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.account }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>卡号:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.cardNumber }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>开户行:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.bankBranch }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <ConfirmationDialog @confirm="deleteBank(props.item.id)">
-                    <v-btn color="red darken-1" block depressed flat>
-                      <v-icon>delete_forever</v-icon>
-                      <span>删除</span>
-                    </v-btn>
-                  </ConfirmationDialog>
-                  <!-- <v-list-tile-content>Delete</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.id }}</v-list-tile-content>-->
-                </v-list-tile>
-              </v-list>
-            </v-card>
-          </v-flex>
-        </template>
-      </v-data-iterator>
-    </div>
+    <v-container>
+      <v-flex xs12>
+        <v-btn color="red darken-4 white--text" @click="addBankCardList">
+          <i class="fas fa-plus"></i>添加银行卡
+        </v-btn>
+      </v-flex>
+      <div>
+        <v-data-iterator
+          :items="bankCards"
+          :rows-per-page-items="rowsPerPageItems"
+          :pagination.sync="pagination"
+          row
+          wrap
+          v-if="bankCards.length>0"
+        >
+          <template v-slot:item="props">
+            <v-flex xs12 sm6 md4 lg3>
+              <v-card class="mt-1 border_custo">
+                <v-card-title>
+                  <h4>银行: {{ props.item.bankName }}</h4>
+                </v-card-title>
+                <v-divider></v-divider>
+                <v-list dense>
+                  <v-list-tile>
+                    <v-list-tile-content>开户名:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.account }}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>卡号:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.cardNumber }}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>开户行:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.bankBranch }}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <ConfirmationDialog @confirm="deleteBank(props.item.id)">
+                      <v-btn color="red darken-1" block depressed flat>
+                        <v-icon>delete_forever</v-icon>
+                        <span>删除</span>
+                      </v-btn>
+                    </ConfirmationDialog>
+                    <!-- <v-list-tile-content>Delete</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.id }}</v-list-tile-content>-->
+                  </v-list-tile>
+                </v-list>
+              </v-card>
+            </v-flex>
+          </template>
+        </v-data-iterator>
+      </div>
+    </v-container>
   </div>
 </template>
   <script>
@@ -120,6 +122,9 @@ export default {
 };
 </script>
     <style scope>
+.border_custo {
+  border-radius: 10px;
+}
 </style>
     
     

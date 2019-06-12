@@ -17,7 +17,7 @@
             <span>精彩荟萃,激情无限</span>
           </v-flex>
           <v-flex xs2>
-            <span @click="linktolivegame">更多</span>
+            <span @click="linkClassification">更多</span>
             <i class="fas fa-chevron-right"></i>
           </v-flex>
         </v-layout>
@@ -83,7 +83,7 @@
             <span>各种优惠为您撑腰</span>
           </v-flex>
           <v-flex xs2>
-            <span @click="linktodiscount">更多</span>
+            <span @click="linkClassification">更多</span>
             <i class="fas fa-chevron-right"></i>
           </v-flex>
         </v-layout>
@@ -142,14 +142,14 @@ export default {
     };
   },
   methods: {
-    linktolivegame() {
-      this.$router.push("/livegame");
-      this.dialog = false;
-    },
-    linktodiscount() {
-      this.$router.push("/discount");
+    linkClassification() {
+      this.$router.push("/classification");
       this.dialog = false;
     }
+    // linktodiscount() {
+    //   this.$router.push("/discount");
+    //   this.dialog = false;
+    // }
   }
   // mounted() {
   //   if (localStorage.getItem("token") != null) {

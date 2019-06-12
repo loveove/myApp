@@ -1,5 +1,6 @@
 <template>
-  <v-card>
+<v-container>
+  <v-card class="border_custo">
     <div class="pa-2">
       <v-alert
         :value="true"
@@ -29,6 +30,7 @@
       <QrCode/>
     </div>
   </v-card>
+</v-container>
 </template>
 <script>
 import axios from "axios";
@@ -98,5 +100,8 @@ export default {
 };
 </script>
 <style scoped>
+.border_custo{
+  border-radius: 10px;
+}
 </style>
 

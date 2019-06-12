@@ -1,67 +1,69 @@
 <template>
-  <v-card>
-    <v-form ref="form" class="pa-2">
-      <v-text-field
-        v-model="name"
-        :counter="20"
-        :rules="nameRules"
-        label="用户名"
-        prepend-icon="person"
-        required
-        :disabled="$store.state.userInfo.real_name != null"
-      ></v-text-field>
-      <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        label="邮箱"
-        prepend-icon="email"
-        required
-        disabled
-      ></v-text-field>
-      <v-text-field
-        v-model="phone"
-        :rules="phoneRules"
-        :counter="11"
-        label="+86 中国"
-        prepend-icon="phone_iphone"
-        type="number"
-        required
-        disabled
-      ></v-text-field>
-      <v-text-field
-        v-model="wechat"
-        :counter="20"
-        :rules="wechatRules"
-        label="微信"
-        prepend-icon="fab fa-weixin"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="qq"
-        :rules="qqRules"
-        :counter="20"
-        label="QQ"
-        prepend-icon="fab fa-qq"
-        type="number"
-        required
-      ></v-text-field>
-      <v-btn
-        :disabled="isDisabled"
-        color="red darken-4 white--text"
-        block
-        @click.native="updateUserInfo"
-        :loading="isLoading"
-      >更新</v-btn>
-      <v-alert
-        v-model="hasAlert"
-        :value="true"
-        type="info"
-        icon="warning"
-        outline
-        dismissible
-      >{{alertMessage}}</v-alert>
-    </v-form>
-  </v-card>
+  <v-container>
+    <v-card class="border_custo">
+      <v-form ref="form" class="pa-2">
+        <v-text-field
+          v-model="name"
+          :counter="20"
+          :rules="nameRules"
+          label="用户名"
+          prepend-icon="person"
+          required
+          :disabled="$store.state.userInfo.real_name != null"
+        ></v-text-field>
+        <v-text-field
+          v-model="email"
+          :rules="emailRules"
+          label="邮箱"
+          prepend-icon="email"
+          required
+          disabled
+        ></v-text-field>
+        <v-text-field
+          v-model="phone"
+          :rules="phoneRules"
+          :counter="11"
+          label="+86 中国"
+          prepend-icon="phone_iphone"
+          type="number"
+          required
+          disabled
+        ></v-text-field>
+        <v-text-field
+          v-model="wechat"
+          :counter="20"
+          :rules="wechatRules"
+          label="微信"
+          prepend-icon="fab fa-weixin"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="qq"
+          :rules="qqRules"
+          :counter="20"
+          label="QQ"
+          prepend-icon="fab fa-qq"
+          type="number"
+          required
+        ></v-text-field>
+        <v-btn
+          :disabled="isDisabled"
+          color="red darken-4 white--text"
+          block
+          @click.native="updateUserInfo"
+          :loading="isLoading"
+        >更新</v-btn>
+        <v-alert
+          v-model="hasAlert"
+          :value="true"
+          type="info"
+          icon="warning"
+          outline
+          dismissible
+        >{{alertMessage}}</v-alert>
+      </v-form>
+    </v-card>
+  </v-container>
 </template>
 <script>
 import axios from "axios";
@@ -133,12 +135,14 @@ export default {
           }
         )
         .then(res => {
-          console.log(res)
+          console.log(res);
           if (res.data.msg === "ok") {
             // console.log(res.data.msg);
+
             this.hasAlert = true;
             this.alertMessage = "信息更新成功";
             this.getUserInfo();
+
             this.isLoading = false;
           } else {
             this.hasAlert = true;
@@ -177,3 +181,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.border_custo{
+  border-radius: 10px;
+}
+</style>

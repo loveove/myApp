@@ -1,58 +1,51 @@
 <template>
-  <v-card class="py-4">
-    <v-form ref="form" class="px-4" v-model="valid">
-      <v-text-field
-        v-model="bankOldPassword"
-        :append-icon="showOldPassword ? 'visibility' : 'visibility_off'"
-        :rules="oldPasswordRules"
-        label="原取款密码"
-        :type="showOldPassword ? 'text' : 'password'"
-        prepend-icon="fas fa-unlock"
-        @click:append="showOldPassword = !showOldPassword"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="bankNewPassword"
-        :append-icon="showPassword ? 'visibility' : 'visibility_off'"
-        :rules="newPasswordRules"
-        label="新取款密码"
-        :type="showPassword ? 'text' : 'password'"
-        prepend-icon="fas fa-unlock"
-        @click:append="showPassword = !showPassword"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="confirmBankNewPassword"
-        :append-icon="showConfirmPassword ? 'visibility' : 'visibility_off'"
-        :rules="newPasswordConfirmationRules"
-        label="确认新密码"
-        :type="showConfirmPassword ? 'text' : 'password'"
-        prepend-icon="fas fa-unlock"
-        @click:append="showConfirmPassword = !showConfirmPassword"
-        required
-      ></v-text-field>
-
-      <v-container fluid>
-        <v-layout row>
-          <v-flex xs12>
-            <v-btn
-              color="red darken-4 white--text"
-              block
-              @click.native="updateWithdrawPassword"
-            >立即提交</v-btn>
-          </v-flex>
-        </v-layout>
-      </v-container>
-      <v-alert
-        v-model="hasAlert"
-        :value="true"
-        icon="warning"
-        outline
-        dismissible
-        type="info"
-      >{{alertMessage}}</v-alert>
-    </v-form>
-  </v-card>
+  <div>
+    <v-container>
+      <v-card class="border_custo">
+        <v-form ref="form" v-model="valid" class="pa-2">
+          <v-text-field
+            v-model="bankOldPassword"
+            :append-icon="showOldPassword ? 'visibility' : 'visibility_off'"
+            :rules="oldPasswordRules"
+            label="原取款密码"
+            :type="showOldPassword ? 'text' : 'password'"
+            prepend-icon="fas fa-unlock"
+            @click:append="showOldPassword = !showOldPassword"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="bankNewPassword"
+            :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+            :rules="newPasswordRules"
+            label="新取款密码"
+            :type="showPassword ? 'text' : 'password'"
+            prepend-icon="fas fa-unlock"
+            @click:append="showPassword = !showPassword"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="confirmBankNewPassword"
+            :append-icon="showConfirmPassword ? 'visibility' : 'visibility_off'"
+            :rules="newPasswordConfirmationRules"
+            label="确认新密码"
+            :type="showConfirmPassword ? 'text' : 'password'"
+            prepend-icon="fas fa-unlock"
+            @click:append="showConfirmPassword = !showConfirmPassword"
+            required
+          ></v-text-field>
+          <v-btn color="red darken-4 white--text" block @click.native="updateWithdrawPassword">立即提交</v-btn>
+          <v-alert
+            v-model="hasAlert"
+            :value="true"
+            icon="warning"
+            outline
+            dismissible
+            type="info"
+          >{{alertMessage}}</v-alert>
+        </v-form>
+      </v-card>
+    </v-container>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -155,3 +148,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.border_custo{
+  border-radius: 10px;
+}
+</style>

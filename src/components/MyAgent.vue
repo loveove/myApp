@@ -12,26 +12,6 @@
             </v-btn>
             <v-toolbar-title>我的代理</v-toolbar-title>
           </v-toolbar>
-          <!-- <v-card class="custo_border">
-            <v-form>
-              <v-container>
-                <v-layout row wrap>
-                  <v-flex xs12>
-                    <v-text-field :counter="20" label="用户名" prepend-icon="person"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12>
-                    <v-text-field label="时间" v-model="startDate" type="date"></v-text-field>
-                  </v-flex>
-
-                  <v-flex xs12>
-                    <v-text-field label="时间" v-model="endDate" type="date"></v-text-field>
-                  </v-flex>
-                  <v-btn color="red darken-4 white--text" @click="getRecords" block>搜索</v-btn>
-                </v-layout>
-              </v-container>
-            </v-form>
-          </v-card>-->
-
           <v-tabs v-model="active" color="red darken-4 white--text" dark slider-color="yellow" grow>
             <v-tab v-for="item in items" :key="item.content" ripple d-flex>{{item.name}}</v-tab>
             <v-tab-item v-for="item in items" :key="item.content">

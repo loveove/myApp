@@ -1,77 +1,81 @@
 <template>
-  <v-card>
-    <div>
-      <v-form ref="form" class="pa-2">
-        <!-- <v-alert type="info">使用本方式充值, 系统赠送, 最高, 只需一倍流水即可提款</v-alert> -->
-        <v-alert
-          :value="true"
-          type="info"
-        >使用本方式充值, 系统赠送{{$store.state.depositeInfo[0].gift_rate}}, 最高{{$store.state.depositeInfo[0].gift_max}}, 只需一倍流水即可提款</v-alert>
-        <v-flex>
+  <v-container>
+    <v-card class="border_custo">
+      <div>
+        <v-form ref="form" class="pa-2">
+          <!-- <v-alert type="info">使用本方式充值, 系统赠送, 最高, 只需一倍流水即可提款</v-alert> -->
+          <v-alert
+            :value="true"
+            type="info"
+          >使用本方式充值, 系统赠送{{$store.state.depositeInfo[0].gift_rate}}, 最高{{$store.state.depositeInfo[0].gift_max}}, 只需一倍流水即可提款</v-alert>
+          <v-flex>
+            <v-text-field
+              prepend-icon="fas fa-coins"
+              type="number"
+              label="存入金额"
+              v-model="selectAmount"
+              :rules="selectAmountRules"
+              required
+            ></v-text-field>
+          </v-flex>
           <v-text-field
-            prepend-icon="fas fa-coins"
-            type="number"
-            label="存入金额"
-            v-model="selectAmount"
-            :rules="selectAmountRules"
+            label="存款人姓名"
+            prepend-icon="account_circle"
+            v-model="username"
+            :rules="usernameRules"
             required
           ></v-text-field>
-        </v-flex>
-        <v-text-field
-          label="存款人姓名"
-          prepend-icon="account_circle"
-          v-model="username"
-          :rules="usernameRules"
-          required
-        ></v-text-field>
-        <br>
-        <label>付款方式</label>
-        <v-radio-group row>
-          <v-radio label="网线转账" color="secondary" value="网线转账"></v-radio>
-          <v-radio label="支付宝转账" color="secondary" value="支付宝转账"></v-radio>
-          <v-radio label="微信转账" color="secondary" value="微信转账"></v-radio>
-          <v-radio label="手机银行转账" color="secondary" value="手机银行转账"></v-radio>
-          <v-radio label="ATM 转账" color="secondary" value="ATM 转账"></v-radio>
-          <v-radio label="柜台转账" color="secondary" value="柜台转账"></v-radio>
-        </v-radio-group>
-        <v-btn
-          color="red darken-4 white--text"
-          :loading="isLoading"
-          v-on:click="fastDeposite()"
-          block
-        >下一步</v-btn>
-      </v-form>
-    </div>
-    <div v-show="showTable">
-      <template>
-        <v-data-table :items="dataInfo" hide-actions hide-headers dark>
-          <template v-slot:items="props">
-            <td>{{ props.item.name }}</td>
-            <td>{{ props.item.result }}</td>
-          </template>
-        </v-data-table>
-        <ConfirmationDialog @confirm="cancelDeposite" class="d-flex">
-          <v-btn color="warning" :loading="isLoading" block>取消订单</v-btn>
-        </ConfirmationDialog>
-        <v-btn
-          color="red darken-4 white--text"
-          :loading="isLoading"
-          v-on:click="submitDeposite"
-          block
-        >完成存款，下一步</v-btn>
-      </template>
-    </div>
-    <v-flex xs12>
-      <v-alert
-        v-model="hasAlert"
-        :value="true"
-        type="info"
-        icon="warning"
-        outline
-        dismissible
-      >{{alertMessage}}</v-alert>
-    </v-flex>
-  </v-card>
+          <br>
+          <label>付款方式</label>
+          <v-radio-group row>
+            <v-radio label="网线转账" color="secondary" value="网线转账"></v-radio>
+            <v-radio label="支付宝转账" color="secondary" value="支付宝转账"></v-radio>
+            <v-radio label="微信转账" color="secondary" value="微信转账"></v-radio>
+            <v-radio label="手机银行转账" color="secondary" value="手机银行转账"></v-radio>
+            <v-radio label="ATM 转账" color="secondary" value="ATM 转账"></v-radio>
+            <v-radio label="柜台转账" color="secondary" value="柜台转账"></v-radio>
+          </v-radio-group>
+          <v-btn
+            color="red darken-4 white--text"
+            :loading="isLoading"
+            v-on:click="fastDeposite()"
+            block
+          >下一步</v-btn>
+        </v-form>
+      </div>
+      <div v-show="showTable">
+        <template>
+          <v-data-table :items="dataInfo" hide-actions hide-headers dark>
+            <template v-slot:items="props">
+              <td>{{ props.item.name }}</td>
+              <td>{{ props.item.result }}</td>
+            </template>
+          </v-data-table>
+          <ConfirmationDialog @confirm="cancelDeposite" class="d-flex">
+            <v-btn color="warning" :loading="isLoading" block>取消订单</v-btn>
+          </ConfirmationDialog>
+          <v-btn
+            color="red darken-4 white--text"
+            :loading="isLoading"
+            v-on:click="submitDeposite"
+            block
+          >完成存款，下一步</v-btn>
+        </template>
+      </div>
+      <v-container>
+      <v-flex xs12>
+        <v-alert
+          v-model="hasAlert"
+          :value="true"
+          type="info"
+          icon="warning"
+          outline
+          dismissible
+        >{{alertMessage}}</v-alert>
+      </v-flex>
+      </v-container>
+    </v-card>
+  </v-container>
 </template>
 <script>
 import ConfirmationDialog from "./ConfirmationDialog.vue";
@@ -235,6 +239,9 @@ export default {
 };
 </script>
 <style scoped>
+.border_custo{
+  border-radius: 10px;
+}
 </style>
 
 

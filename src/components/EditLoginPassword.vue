@@ -1,50 +1,54 @@
 <template>
-  <v-card>
-    <v-form ref="form" v-model="valid" class="pa-2">
-      <v-text-field
-        v-model="oldPassword"
-        :append-icon="showOld ? 'visibility' : 'visibility_off'"
-        :rules="[rules.required]"
-        :type="showOld ? 'text' : 'password'"
-        @click:append="showOld = !showOld"
-        label="原登陆密码"
-        prepend-icon="lock"
-        required
-      ></v-text-field>
+  <div>
+    <v-container>
+      <v-card class="border_custo">
+        <v-form ref="form" v-model="valid" class="pa-2">
+          <v-text-field
+            v-model="oldPassword"
+            :append-icon="showOld ? 'visibility' : 'visibility_off'"
+            :rules="[rules.required]"
+            :type="showOld ? 'text' : 'password'"
+            @click:append="showOld = !showOld"
+            label="原登陆密码"
+            prepend-icon="lock"
+            required
+          ></v-text-field>
 
-      <v-text-field
-        v-model="password"
-        :append-icon="show ? 'visibility' : 'visibility_off'"
-        :rules="newPasswordRules"
-        :type="show ? 'text' : 'password'"
-        @click:append="show = !show"
-        label="新登陆密码"
-        prepend-icon="lock"
-        required
-      ></v-text-field>
+          <v-text-field
+            v-model="password"
+            :append-icon="show ? 'visibility' : 'visibility_off'"
+            :rules="newPasswordRules"
+            :type="show ? 'text' : 'password'"
+            @click:append="show = !show"
+            label="新登陆密码"
+            prepend-icon="lock"
+            required
+          ></v-text-field>
 
-      <v-text-field
-        v-model="confirmPassword"
-        :append-icon="showConfirm ? 'visibility' : 'visibility_off'"
-        :rules="newPasswordConfirmationRules"
-        :type="showConfirm ? 'text' : 'password'"
-        label="确认新密码"
-        @click:append="showConfirm = !showConfirm"
-        prepend-icon="lock"
-        required
-      ></v-text-field>
+          <v-text-field
+            v-model="confirmPassword"
+            :append-icon="showConfirm ? 'visibility' : 'visibility_off'"
+            :rules="newPasswordConfirmationRules"
+            :type="showConfirm ? 'text' : 'password'"
+            label="确认新密码"
+            @click:append="showConfirm = !showConfirm"
+            prepend-icon="lock"
+            required
+          ></v-text-field>
 
-      <v-btn color="red darken-4 white--text" @click="UpdateLoginPassword" block>立即提交</v-btn>
-      <v-alert
-        v-model="hasAlert"
-        :value="true"
-        icon="warning"
-        outline
-        dismissible
-        type="info"
-      >{{alertMessage}}</v-alert>
-    </v-form>
-  </v-card>
+          <v-btn color="red darken-4 white--text" @click="UpdateLoginPassword" block>立即提交</v-btn>
+          <v-alert
+            v-model="hasAlert"
+            :value="true"
+            icon="warning"
+            outline
+            dismissible
+            type="info"
+          >{{alertMessage}}</v-alert>
+        </v-form>
+      </v-card>
+    </v-container>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -134,3 +138,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.border_custo{
+  border-radius: 10px;
+}
+</style>

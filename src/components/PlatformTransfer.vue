@@ -12,38 +12,38 @@
             </v-btn>
             <v-toolbar-title>平台互转</v-toolbar-title>
           </v-toolbar>
-          <v-card class="custo_border">
-            <v-form ref="form" v-model="valid" class="px-4">
-              <v-flex>
-                <v-select
-                  v-model="outgoing"
-                  prepend-icon="account_circle"
-                  :items="outgoingItems"
-                  label="转出"
+          <v-container>
+            <v-card class="custo_border">
+              <v-form ref="form" v-model="valid" class="px-4">
+                <v-flex>
+                  <v-select
+                    v-model="outgoing"
+                    prepend-icon="account_circle"
+                    :items="outgoingItems"
+                    label="转出"
+                    required
+                  ></v-select>
+                </v-flex>
+                <v-flex>
+                  <v-select
+                    v-model="incoming"
+                    prepend-icon="account_circle"
+                    :items="incomingItems"
+                    label="转入"
+                    required:items="items"
+                  ></v-select>
+                </v-flex>
+
+                <v-text-field
+                  v-model="amount"
+                  :rules="amountRules"
+                  label="金额 "
+                  prepend-icon="fas fa-coins"
+                  type="number"
                   required
-                ></v-select>
-              </v-flex>
-              <v-flex>
-                <v-select
-                  v-model="incoming"
-                  prepend-icon="account_circle"
-                  :items="incomingItems"
-                  label="转入"
-                  required:items="items"
-                ></v-select>
-              </v-flex>
+                ></v-text-field>
 
-              <v-text-field
-                v-model="amount"
-                :rules="amountRules"
-                label="金额 "
-                prepend-icon="fas fa-coins"
-                type="number"
-                required
-              ></v-text-field>
-
-              <v-container fluid>
-                <v-layout row>
+                <v-layout row wrap>
                   <v-flex xs12>
                     <v-btn
                       :disabled="isDisabled"
@@ -53,18 +53,20 @@
                       @click.native="transferBalance"
                     >确定转账</v-btn>
                   </v-flex>
+                  <v-flex xs12>
+                    <v-alert
+                      v-model="hasAlert"
+                      :value="true"
+                      type="info"
+                      icon="warning"
+                      outline
+                      dismissible
+                    >{{alertMessage}}</v-alert>
+                  </v-flex>
                 </v-layout>
-                <v-alert
-                  v-model="hasAlert"
-                  :value="true"
-                  type="info"
-                  icon="warning"
-                  outline
-                  dismissible
-                >{{alertMessage}}</v-alert>
-              </v-container>
-            </v-form>
-          </v-card>
+              </v-form>
+            </v-card>
+          </v-container>
         </v-card>
       </v-dialog>
     </v-layout>
@@ -179,7 +181,7 @@ export default {
 </script>
 <style scope>
 .custo_border {
-  margin: 10px;
+  border-radius: 10px;
 }
 </style>
 

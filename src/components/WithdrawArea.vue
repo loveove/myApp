@@ -12,8 +12,8 @@
             </v-btn>
             <v-toolbar-title class="color_custo">提款专区</v-toolbar-title>
           </v-toolbar>
-
-          <v-card class="border_rounded mt-3">
+          <v-container>
+          <v-card class="border_rounded">
             <!-- <v-alert :value="$store.state.userInfo.real_name === null" type="info">
               提款金额需要真实姓名
               <v-btn block @click="redirectEditUserInfo">返回到设置真实姓名</v-btn>
@@ -63,25 +63,28 @@
                 @click:append="show = !show"
                 required
               ></v-text-field>
-              <v-container fluid>
-                <v-layout row>
+              
+                <v-layout row wrap>
                   <v-flex xs12>
                     <v-btn color="red darken-4 white--text" block @click.native="withdraw">立即提交</v-btn>
                   </v-flex>
+
+                  <v-flex xs12>
+                    <v-alert
+                      v-model="hasAlert"
+                      :value="true"
+                      type="info"
+                      icon="warning"
+                      outline
+                      dismissible
+                      color="error"
+                    >{{alertMessage}}</v-alert>
+                  </v-flex>
                 </v-layout>
-                <v-flex xs12>
-                  <v-alert
-                    v-model="hasAlert"
-                    :value="true"
-                    type="info"
-                    icon="warning"
-                    outline
-                    dismissible
-                  >{{alertMessage}}</v-alert>
-                </v-flex>
-              </v-container>
+              
             </v-form>
           </v-card>
+          </v-container>
         </v-card>
       </v-dialog>
     </v-layout>
@@ -215,8 +218,7 @@ export default {
 </script>
 <style>
 .border_rounded {
-  /* border-radius: 10px; */
-  margin: 15px;
+  border-radius: 10px;
 }
 .color_custo {
   color: white;

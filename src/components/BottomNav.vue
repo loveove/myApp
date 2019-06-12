@@ -7,7 +7,7 @@
           <span>首页</span>
           <v-icon>home</v-icon>
         </v-btn>
-        <v-btn color="#FFB300" flat value="favorites" to="/livegame">
+        <v-btn color="#FFB300" flat value="favorites" to="/classification">
           <span>分类</span>
           <v-icon>select_all</v-icon>
         </v-btn>

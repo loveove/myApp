@@ -1,82 +1,87 @@
 <template>
   <div>
-    <v-card>
-      <v-form>
-        <v-container>
-          <v-layout row wrap>
-            <v-flex xs12>
-              <v-text-field label="时间" v-model="startDate" type="date"></v-text-field>
-            </v-flex>
+    <v-container>
+      <v-card class="border_custo">
+        <v-form>
+          <v-container>
+            <v-layout row wrap>
+              <v-flex xs12>
+                <v-text-field label="时间" v-model="startDate" type="date"></v-text-field>
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field label="时间" v-model="endDate" type="date"></v-text-field>
+              <v-flex xs12>
+                <v-text-field label="时间" v-model="endDate" type="date"></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-select v-model="gamePlatform" :items="inputPlatforms" label=" 游戏平台" outline></v-select>
+              </v-flex>
+              <v-btn color="red darken-4 white--text" @click="getRecords" block>搜索</v-btn>
+              <v-flex xs12>
+                <v-alert
+                  v-model="hasError"
+                  :value="true"
+                  color="error"
+                  icon="warning"
+                  outline
+                  dismissible
+                  error
+                >{{errorMessage}}</v-alert>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-form>
+      </v-card>
+
+      <v-data-iterator
+        :items="records"
+        :rows-per-page-items="rowsPerPageItems"
+        :pagination.sync="pagination"
+        content-tag="v-layout"
+        row
+        wrap
+        v-if="records.length > 0"
+      >
+        <template v-slot:item="props">
+          <v-container fluid grid-list-md>
+            <v-flex xs12 sm12 md4 lg3>
+              <v-card>
+                <v-list dense>
+                  <v-list-tile>
+                    <v-list-tile-content>平台</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.plat }}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>时间</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.createTime }}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>下注金额</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.amount }}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>派彩金额</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.amountPc }}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>输赢金额</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.amountWin}}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>有效投注</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.validBet}}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>洗码量</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.xml}}</v-list-tile-content>
+                  </v-list-tile>
+                </v-list>
+              </v-card>
             </v-flex>
-            <v-flex xs12>
-              <v-select v-model="gamePlatform" :items="inputPlatforms" label=" 游戏平台" outline></v-select>
-            </v-flex>
-            <v-btn color="red darken-4 white--text" @click="getRecords" block>搜索</v-btn>
-          </v-layout>
-        </v-container>
-      </v-form>
-    </v-card>
-    <v-alert
-      v-model="hasError"
-      :value="true"
-      color="error"
-      icon="warning"
-      outline
-      dismissible
-      error
-    >{{errorMessage}}</v-alert>
-    <v-data-iterator
-      :items="records"
-      :rows-per-page-items="rowsPerPageItems"
-      :pagination.sync="pagination"
-      content-tag="v-layout"
-      row
-      wrap
-      v-if="records.length > 0"
-    >
-      <template v-slot:item="props">
-        <v-container fluid grid-list-md>
-          <v-flex xs12 sm12 md4 lg3>
-            <v-card>
-              <v-list dense>
-                <v-list-tile>
-                  <v-list-tile-content>平台</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.plat }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>时间</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.createTime }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>下注金额</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.amount }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>派彩金额</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.amountPc }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>输赢金额</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.amountWin}}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>有效投注</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.validBet}}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>洗码量</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.xml}}</v-list-tile-content>
-                </v-list-tile>
-              </v-list>
-            </v-card>
-          </v-flex>
-        </v-container>
-      </template>
-    </v-data-iterator>
-    <v-alert :value="true" type="info" v-if="records.length === 0">无数据</v-alert>
+          </v-container>
+        </template>
+      </v-data-iterator>
+      <v-alert :value="true" type="info" v-if="records.length === 0">无数据</v-alert>
+    </v-container>
   </div>
 </template>
 <script>
@@ -153,4 +158,7 @@ export default {
 };
 </script>
 <style scoped>
+.border_custo {
+  border-radius: 10px;
+}
 </style>

@@ -7,7 +7,7 @@
         </template>
         <v-card color="yellow darken-4">
           <v-toolbar dark color="yellow darken-4">
-            <v-btn icon dark @click.native="linkLiveGame">
+            <v-btn icon dark @click.native="linkClassification">
               <i class="fas fa-arrow-left"></i>
             </v-btn>
             <v-toolbar-title>优惠活动</v-toolbar-title>
@@ -52,7 +52,7 @@ export default {
   },
   computed: {},
   methods: {
-    linkLiveGame() {
+    linkClassification() {
       this.$emit("discount");
     },
     getOffers() {

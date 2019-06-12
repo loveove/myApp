@@ -1,77 +1,81 @@
 <template>
-  <v-flex xs12 sm12 md4 lg3>
-    <v-alert :value="true" type="info">
-      您的邀请码: {{$store.state.agentInfo.invitationCode}}, 已推荐好友: {{$store.state.agentInfo.childNum}} 人,
-      已获得: {{$store.state.agentInfo.rebateSum}}佣金
-    </v-alert>
-    <v-card>
-      <v-form>
-        <v-container>
-          <v-layout row wrap>
-            <v-flex xs12>
-              <v-text-field v-model="name" :counter="20" label="用户名" prepend-icon="person"></v-text-field>
-            </v-flex>
-            <v-flex xs12>
-              <v-text-field type="date" v-model="startDate"></v-text-field>
-            </v-flex>
+  <v-container>
+    <v-flex xs12 sm12 md4 lg3>
+      <v-alert :value="true" type="info">
+        您的邀请码: {{$store.state.agentInfo.invitationCode}}, 已推荐好友: {{$store.state.agentInfo.childNum}} 人,
+        已获得: {{$store.state.agentInfo.rebateSum}}佣金
+      </v-alert>
+      <v-card class="border_custo">
+        <v-form>
+          <v-container>
+            <v-layout row wrap>
+              <v-flex xs12>
+                <v-text-field v-model="name" :counter="20" label="用户名" prepend-icon="person"></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field type="date" v-model="startDate"></v-text-field>
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field type="date" v-model="endDate"></v-text-field>
-            </v-flex>
-            <v-btn
-              color="red darken-4 white--text"
-              block
-              @click="getRecords"
-              :loading="isLoading"
-              :disabled="isLoading"
-            >搜索</v-btn>
-          </v-layout>
-        </v-container>
-      </v-form>
-      <v-alert
-        v-model="hasError"
-        :value="true"
-        color="error"
-        icon="warning"
-        outline
-        dismissible
-      >{{errorMessage}}</v-alert>
-    </v-card>
+              <v-flex xs12>
+                <v-text-field type="date" v-model="endDate"></v-text-field>
+              </v-flex>
+              <v-btn
+                color="red darken-4 white--text"
+                block
+                @click="getRecords"
+                :loading="isLoading"
+                :disabled="isLoading"
+              >搜索</v-btn>
+              <v-flex xs12>
+                <v-alert
+                  v-model="hasError"
+                  :value="true"
+                  color="error"
+                  icon="warning"
+                  outline
+                  dismissible
+                >{{errorMessage}}</v-alert>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-form>
+      </v-card>
 
-    <v-data-iterator
-      :items="records"
-      :rows-per-page-items="rowsPerPageItems"
-      :pagination.sync="pagination"
-      content-tag="v-layout"
-      row
-      wrap
-      v-if="records.length > 0"
-    >
-      <template v-slot:item="props">
-        <v-container fluid grid-list-md>
-          <v-flex xs12 sm12 md4 lg3>
-            <v-card>
-              <v-list dense>
-                <v-list-tile>
-                  <v-list-tile-content>时间</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.created_at }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>佣金</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.money }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>备注</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.remark }}</v-list-tile-content>
-                </v-list-tile>
-              </v-list>
-            </v-card>
-          </v-flex>
-        </v-container>
-      </template>
-    </v-data-iterator>
-    <v-alert :value="true" type="info" v-if="records.length === 0">无数据</v-alert>
-  </v-flex>
+      <v-data-iterator
+        :items="records"
+        :rows-per-page-items="rowsPerPageItems"
+        :pagination.sync="pagination"
+        content-tag="v-layout"
+        row
+        wrap
+        v-if="records.length > 0"
+      >
+        <template v-slot:item="props">
+          <v-container fluid grid-list-md>
+            <v-flex xs12 sm12 md4 lg3>
+              <v-card>
+                <v-list dense>
+                  <v-list-tile>
+                    <v-list-tile-content>时间</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.created_at }}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>佣金</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.money }}</v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-content>备注</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.remark }}</v-list-tile-content>
+                  </v-list-tile>
+                </v-list>
+              </v-card>
+            </v-flex>
+          </v-container>
+        </template>
+      </v-data-iterator>
+      <v-alert :value="true" type="info" v-if="records.length === 0">无数据</v-alert>
+    </v-flex>
+  </v-container>
 </template>
   
 <script>
@@ -119,7 +123,7 @@ export default {
         )
         .then(res => {
           this.isLoading = false;
-          console.log(res);
+          // console.log(res);
           if (res.data.msg === "ok") {
             this.records = res.data.result;
             // console.log(res.data);
@@ -134,3 +138,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.border_custo {
+  border-radius: 10px;
+}
+</style>

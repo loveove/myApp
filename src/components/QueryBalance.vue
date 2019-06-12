@@ -12,153 +12,156 @@
             </v-btn>
             <v-toolbar-title>资产总览</v-toolbar-title>
           </v-toolbar>
+          <v-container>
+            <v-card class="border-custo">
+              <v-layout xs12 row class>
+                <v-flex xs6 class="pt-2">
+                  <h3 class="pl-2">我的资产</h3>
+                </v-flex>
+                <v-flex xs6 class="pt-2">
+                  时间:
+                  {{timestampt}}
+                  <v-btn
+                    color="red darken-4 white--text"
+                    @click="refreshAllBalance"
+                    :loading="isLoading"
+                    :disabled="isLoading"
+                  >刷新</v-btn>
+                </v-flex>
+              </v-layout>
+              <v-layout xs12 row>
+                <v-flex xs6>
+                  <v-card-text>
+                    <span>￥</span>
+                    <span v-if="showBalance">{{totalBalance ==1 ?(totalBalance - 1):(totalBalance)}}</span>
+                    <span v-if="!showBalance">***</span>
+                  </v-card-text>
+                </v-flex>
+                <v-flex xs6>
+                  <v-card-text>
+                    <div @click="showBalance =!showBalance">
+                      <i class="far fa-eye"></i>
+                    </div>
+                  </v-card-text>
+                </v-flex>
+              </v-layout>
+              <v-layout xs12 row>
+                <v-flex xs6>
+                  <v-card-text>账户余额</v-card-text>
+                </v-flex>
+                <v-flex xs6>
+                  <v-card-text>
+                    <span>￥</span>
+                    <span v-if="showBalance">{{mainBalance}}</span>
+                    <span v-if="!showBalance">***</span>
+                  </v-card-text>
+                </v-flex>
+              </v-layout>
+              <v-layout xs12 row>
+                <v-flex xs6>
+                  <v-card-text>投注总额</v-card-text>
+                </v-flex>
+                <v-flex xs6>
+                  <v-card-text>{{$store.state.userInfo.total_bet}}</v-card-text>
+                </v-flex>
+              </v-layout>
+              <v-layout xs12 row>
+                <v-flex xs6>
+                  <v-btn color="red darken-4 white--text" @click.native="linkDepositeArea">存款</v-btn>
+                </v-flex>
+                <v-flex xs6>
+                  <v-btn color="red darken-4 white--text" @click.native="linkWithdrawArea">提款</v-btn>
+                </v-flex>
+              </v-layout>
+            </v-card>
 
-          <v-card color class="mt-3 border_rounded">
-            <v-layout xs12 row class="pt-3">
-              <v-flex xs6>
-                <h3 class="pl-2">我的资产</h3>
-              </v-flex>
-              <v-flex xs6>
-                时间:
-                {{timestampt}}
-                <v-btn
-                  color="red darken-4 white--text"
-                  @click="refreshAllBalance"
-                  :loading="isLoading"
-                  :disabled="isLoading"
-                >刷新</v-btn>
-              </v-flex>
-            </v-layout>
-            <v-layout xs12 row>
-              <v-flex xs6>
-                <v-card-text>
-                  <span>￥</span>
-                  <span v-if="showBalance">{{totalBalance ==1 ?(totalBalance - 1):(totalBalance)}}</span>
-                  <span v-if="!showBalance">***</span>
-                </v-card-text>
-              </v-flex>
-              <v-flex xs6>
-                <v-card-text>
-                  <div @click="showBalance =!showBalance">
-                    <i class="far fa-eye"></i>
-                  </div>
-                </v-card-text>
-              </v-flex>
-            </v-layout>
-            <v-layout xs12 row>
-              <v-flex xs6>
-                <v-card-text>账户余额</v-card-text>
-              </v-flex>
-              <v-flex xs6>
-                <v-card-text>
-                  <span>￥</span>
-                  <span v-if="showBalance">{{mainBalance}}</span>
-                  <span v-if="!showBalance">***</span>
-                </v-card-text>
-              </v-flex>
-            </v-layout>
-            <v-layout xs12 row>
-              <v-flex xs6>
-                <v-card-text>投注总额</v-card-text>
-              </v-flex>
-              <v-flex xs6>
-                <v-card-text>{{$store.state.userInfo.total_bet}}</v-card-text>
-              </v-flex>
-            </v-layout>
-            <v-layout xs12 row>
-              <v-flex xs6>
-                <v-btn color="red darken-4 white--text" @click.native="linkDepositeArea">存款</v-btn>
-              </v-flex>
-              <v-flex xs6>
-                <v-btn color="red darken-4 white--text" @click.native="linkWithdrawArea">提款</v-btn>
-              </v-flex>
-            </v-layout>
-          </v-card>
+            <v-card class="mt-1 border-custo">
+              <h3 class="pl-2 pt-2">资产分布</h3>
+              <v-layout xs12 row wrap>
+                <v-flex xs6 class="pt-2">
+                  <v-flex xs12 class="text-xs-center">
+                    <span v-if="showBalance">主账户 ￥{{mainBalance}}</span>
+                    <span v-if="!showBalance">主账户 ￥***</span>
+                  </v-flex>
+                  <v-flex xs12 class="d-flex">
+                    <v-progress-circular
+                      :rotate="360"
+                      :size="100"
+                      :width="15"
+                      :value="mainAccountPercentage"
+                      color="primary"
+                    >{{mainAccountPercentage}}%</v-progress-circular>
+                  </v-flex>
+                  <v-card-actions>&nbsp;</v-card-actions>
+                </v-flex>
 
-          <v-card class="mt-3 pb-3 border_rounded">
-            <h3 class="pt-2 pl-2">资产分布</h3>
-            <v-layout row>
-              <v-flex xs6>
-                <v-flex xs12 class="text-xs-center">
-                  <span v-if="showBalance">主账户 ￥{{mainBalance}}</span>
-                  <span v-if="!showBalance">主账户 ￥***</span>
+                <v-flex xs6>
+                  <v-flex xs12 class="text-xs-center">
+                    <span v-if="showBalance">新锦江 ￥{{xjjBalance}}</span>
+                    <span v-if="!showBalance">新锦江 ￥***</span>
+                  </v-flex>
+                  <v-flex xs12 class="d-flex">
+                    <v-progress-circular
+                      :rotate="360"
+                      :size="100"
+                      :width="15"
+                      :value="xjjPercentage"
+                      color="primary"
+                    >{{xjjPercentage}}%</v-progress-circular>
+                  </v-flex>
+                  <v-card-actions>&nbsp;</v-card-actions>
                 </v-flex>
-                <v-flex xs12 class="d-flex">
-                  <v-progress-circular
-                    :rotate="360"
-                    :size="100"
-                    :width="15"
-                    :value="mainAccountPercentage"
-                    color="primary"
-                  >{{mainAccountPercentage}}%</v-progress-circular>
+              </v-layout>
+              <v-layout xs12 row wrap>
+                <v-flex xs6>
+                  <v-flex xs12 class="text-xs-center">
+                    <span v-if="showBalance">MG ￥{{mgBalance}}</span>
+                    <span v-if="!showBalance">MG ￥***</span>
+                  </v-flex>
+                  <v-flex xs12 class="d-flex">
+                    <v-progress-circular
+                      :rotate="360"
+                      :size="100"
+                      :width="15"
+                      :value="mgPercentage"
+                      color="primary"
+                    >{{mgPercentage}}%</v-progress-circular>
+                  </v-flex>
+                  <v-card-actions>&nbsp;</v-card-actions>
                 </v-flex>
-                <v-card-actions>&nbsp;</v-card-actions>
-              </v-flex>
 
-              <v-flex xs6>
-                <v-flex xs12 class="text-xs-center">
-                  <span v-if="showBalance">新锦江 ￥{{xjjBalance}}</span>
-                  <span v-if="!showBalance">新锦江 ￥***</span>
+                <v-flex xs6>
+                  <v-flex xs12 class="text-xs-center">
+                    <span v-if="showBalance">新锦江(新版) ￥{{njjBalance}}</span>
+                    <span v-if="!showBalance">新锦江(新版) ￥***</span>
+                  </v-flex>
+                  <v-flex xs12 class="d-flex">
+                    <v-progress-circular
+                      :rotate="360"
+                      :size="100"
+                      :width="15"
+                      :value="njjPercentage"
+                      color="primary"
+                    >{{njjPercentage}}%</v-progress-circular>
+                  </v-flex>
+                  <v-card-actions>&nbsp;</v-card-actions>
                 </v-flex>
-                <v-flex xs12 class="d-flex">
-                  <v-progress-circular
-                    :rotate="360"
-                    :size="100"
-                    :width="15"
-                    :value="xjjPercentage"
-                    color="primary"
-                  >{{xjjPercentage}}%</v-progress-circular>
+                <v-container>
+                <v-flex xs12>
+                  <v-alert
+                    v-model="hasError"
+                    :value="true"
+                    color="error"
+                    icon="warning"
+                    outline
+                    dismissible
+                    error
+                  >{{errorMessage}}</v-alert>
                 </v-flex>
-                <v-card-actions>&nbsp;</v-card-actions>
-              </v-flex>
-            </v-layout>
-            <v-layout row>
-              <v-flex xs6>
-                <v-flex xs12 class="text-xs-center">
-                  <span v-if="showBalance">MG ￥{{mgBalance}}</span>
-                  <span v-if="!showBalance">MG ￥***</span>
-                </v-flex>
-                <v-flex xs12 class="d-flex">
-                  <v-progress-circular
-                    :rotate="360"
-                    :size="100"
-                    :width="15"
-                    :value="mgPercentage"
-                    color="primary"
-                  >{{mgPercentage}}%</v-progress-circular>
-                </v-flex>
-                <v-card-actions>&nbsp;</v-card-actions>
-              </v-flex>
-
-              <v-flex xs6>
-                <v-flex xs12 class="text-xs-center">
-                  <span v-if="showBalance">新锦江(新版) ￥{{njjBalance}}</span>
-                  <span v-if="!showBalance">新锦江(新版) ￥***</span>
-                </v-flex>
-                <v-flex xs12 class="d-flex">
-                  <v-progress-circular
-                    :rotate="360"
-                    :size="100"
-                    :width="15"
-                    :value="njjPercentage"
-                    color="primary"
-                  >{{njjPercentage}}%</v-progress-circular>
-                </v-flex>
-                <v-card-actions>&nbsp;</v-card-actions>
-              </v-flex>
-            </v-layout>
-            <v-flex xs12>
-              <v-alert
-                v-model="hasError"
-                :value="true"
-                color="error"
-                icon="warning"
-                outline
-                dismissible
-                error
-              >{{errorMessage}}</v-alert>
-            </v-flex>
-          </v-card>
+                </v-container>
+              </v-layout>
+            </v-card>
+          </v-container>
         </v-card>
       </v-dialog>
     </v-layout>
@@ -294,7 +297,7 @@ export default {
 </script>
 
 <style scoped>
-.border_rounded {
-  margin: 10px;
+.border-custo {
+  border-radius: 10px;
 }
 </style>

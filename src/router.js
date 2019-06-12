@@ -22,9 +22,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
-      path: '/livegame',
-      name: 'livegame',
-      component: () => import(/* webpackChunkName: "about" */ './components/LiveGame.vue')
+      path: '/classification',
+      name: 'classification',
+      component: () => import(/* webpackChunkName: "about" */ './views/Classification.vue')
 
     },
     {
@@ -109,6 +109,12 @@ export default new Router({
       path: '/discount',
       name: 'discount',
       component: () => import(/* webpackChunkName: "about" */ './components/Discount.vue')
+
+    },
+    {
+      path: '/game/:page',
+      name: 'game',
+      component: () => import(/* webpackChunkName: "about" */ './components/Game.vue')
 
     }
 
