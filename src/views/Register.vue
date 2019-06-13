@@ -4,78 +4,82 @@
       <template v-slot:activator="{ on }">
         <!-- <v-btn color="primary" dark v-on="on">Open Dialog</v-btn> -->
       </template>
-      <v-card>
+      <v-card class="yellow darken-4">
         <v-toolbar dark color="yellow darken-4">
           <v-btn icon dark @click="close">
             <v-icon>close</v-icon>
           </v-btn>
-          <v-toolbar-title class="custoSize">快速注册</v-toolbar-title>
+          <v-toolbar-title>快速注册</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
-        <v-form ref="form" class="pa-2" v-model="valid" lazy-validation>
-          <!-- <v-text-field :counter="10" label="用户名" prepend-icon="person" required></v-text-field> -->
-          <v-text-field
-            label="用户名"
-            prepend-icon="person"
-            :rules="nameRules"
-            v-model="name"
-            required
-          ></v-text-field>
-          <v-text-field
-            label="密码"
-            prepend-icon="lock"
-            v-model="pass"
-            :rules="passwordRules"
-            :append-icon="show ? 'visibility' : 'visibility_off'"
-            :type="show ? 'text' : 'password'"
-            @click:append="show = !show"
-            required
-          ></v-text-field>
-          <v-text-field
-            label="邮箱"
-            prepend-icon="email"
-            v-model="email"
-            :rules="emailRules"
-            required
-          ></v-text-field>
-          <v-text-field
-            :counter="11"
-            :rules="phoneRules"
-            v-model="phone"
-            label="+86 中国"
-            prepend-icon="phone_iphone"
-            type="number"
-            required
-          ></v-text-field>
-          <v-text-field
-            :counter="4"
-            v-model="code"
-            :rules="codeRules"
-            label="验证码"
-            prepend-icon="verified_user"
-            type="number"
-            required
-          >
-            <img slot="append" :src="imageSource" alt="Code" @click="changeImageCode">
-          </v-text-field>
-          <v-btn
-            color="yellow darken-4 white--text"
-            block
-            :disabled="!valid"
-            @click="userRegisteration"
-          >下一步</v-btn>
-          <v-flex xs12>
-            <v-alert
-              v-model="hasError"
-              :value="true"
-              color="error"
-              icon="warning"
-              outline
-              dismissible
-              error
-            >{{errorMessage}}</v-alert>
-          </v-flex>
-        </v-form>
+        <v-container>
+          <v-card class="border_custo">
+            <v-form ref="form" class="pa-2" v-model="valid" lazy-validation>
+              <!-- <v-text-field :counter="10" label="用户名" prepend-icon="person" required></v-text-field> -->
+              <v-text-field
+                label="用户名"
+                prepend-icon="person"
+                :rules="nameRules"
+                v-model="name"
+                required
+              ></v-text-field>
+              <v-text-field
+                label="密码"
+                prepend-icon="lock"
+                v-model="pass"
+                :rules="passwordRules"
+                :append-icon="show ? 'visibility' : 'visibility_off'"
+                :type="show ? 'text' : 'password'"
+                @click:append="show = !show"
+                required
+              ></v-text-field>
+              <v-text-field
+                label="邮箱"
+                prepend-icon="email"
+                v-model="email"
+                :rules="emailRules"
+                required
+              ></v-text-field>
+              <v-text-field
+                :counter="11"
+                :rules="phoneRules"
+                v-model="phone"
+                label="+86 中国"
+                prepend-icon="phone_iphone"
+                type="number"
+                required
+              ></v-text-field>
+              <v-text-field
+                :counter="4"
+                v-model="code"
+                :rules="codeRules"
+                label="验证码"
+                prepend-icon="verified_user"
+                type="number"
+                required
+              >
+                <img slot="append" :src="imageSource" alt="Code" @click="changeImageCode">
+              </v-text-field>
+              <v-btn
+                color="red darken-4 white--text"
+                block
+                :disabled="!valid"
+                @click="userRegisteration"
+              >下一步</v-btn>
+              <v-flex xs12>
+                <v-alert
+                  v-model="hasError"
+                  :value="true"
+                  color="error"
+                  icon="warning"
+                  outline
+                  dismissible
+                  error
+                >{{errorMessage}}</v-alert>
+              </v-flex>
+            </v-form>
+          </v-card>
+        </v-container>
       </v-card>
     </v-dialog>
   </v-layout>
@@ -173,7 +177,7 @@ export default {
 };
 </script>
 <style scoped>
-.custoSize {
-  font-weight: bold;
+.border_custo {
+  border-radius: 10px;
 }
 </style>

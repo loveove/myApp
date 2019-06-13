@@ -1,20 +1,22 @@
 <template>
-  <v-layout row justify-center>
-    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-      <v-card>
-        <v-toolbar dark color="yellow darken-4">
-          <v-btn icon dark @click="close">
-            <v-icon>close</v-icon>
-          </v-btn>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-form ref="form" class="px-4 pt-5" v-model="valid">
-          <img src="@/assets/logo.png">
+  <v-dialog v-model="dialog" fullscreen hide-overlay>
+    <v-card color="yellow darken-4">
+      <v-toolbar dark color="yellow darken-4">
+        <v-btn icon dark @click="close">
+          <v-icon>close</v-icon>
+        </v-btn>
+        <v-toolbar-title class="custoSize">账号登录</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-toolbar>
+      <v-form ref="form" class="px-4 pt-5" v-model="valid">
+        <img src="@/assets/logo.png">
 
-          <div class="text-xs-center py-3">
-            <span class="fontsize">账号登录</span>
-          </div>
-          <v-card>
+        <div class="text-xs-center py-3">
+          <span class="fontsize" color="red darken-4">账号登录</span>
+        </div>
+
+        <v-card class="border_custo">
+          <v-form ref="form" v-model="valid" class="px-4">
             <v-text-field
               label="用户名"
               prepend-icon="person"
@@ -31,26 +33,36 @@
               :type="show ? 'text' : 'password'"
               required
             ></v-text-field>
-          </v-card>
-          <v-btn color="yellow darken-4 white--text" @click="login" :disabled="!valid" block>登陆</v-btn>
-          <v-flex xs12>
-            <v-alert
-              v-model="hasError"
-              :value="true"
-              color="error"
-              icon="warning"
-              outline
-              dismissible
-              error
-            >{{errorMessage}}</v-alert>
-          </v-flex>
-          <div class="text-xs-right">
-            <v-btn color="red white--text" @click="linkregister">快速注册</v-btn>
-          </div>
-        </v-form>
-      </v-card>
-    </v-dialog>
-  </v-layout>
+            <v-layout xs12 row wrap>
+              <v-flex xs12>
+                <v-btn
+                  color="red darken-4 white--text"
+                  @click="login"
+                  :disabled="!valid"
+                  block
+                >登陆</v-btn>
+              </v-flex>
+              <v-flex xs12>
+                <v-alert
+                  v-model="hasError"
+                  :value="true"
+                  color="error"
+                  icon="warning"
+                  outline
+                  dismissible
+                  error
+                >{{errorMessage}}</v-alert>
+              </v-flex>
+            </v-layout>
+          </v-form>
+        </v-card>
+
+        <div class="text-xs-right mt-4">
+          <v-btn color="red white--text" @click="linkregister">快速注册</v-btn>
+        </div>
+      </v-form>
+    </v-card>
+  </v-dialog>
 </template>
 <script>
 import axios from "axios";
@@ -114,6 +126,8 @@ export default {
 <style scoped>
 .fontsize {
   font-weight: bold;
-  color: chocolate;
+}
+.border_custo{
+  border-radius: 10px;
 }
 </style>

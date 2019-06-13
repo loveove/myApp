@@ -112,11 +112,11 @@ export default new Router({
 
     },
     {
-      path: '/game/:page',
+      path: '/game',
       name: 'game',
       component: () => import(/* webpackChunkName: "about" */ './components/Game.vue')
 
-    }
+    },
 
   ]
 })
