@@ -21,16 +21,16 @@
       <v-flex xs9>
         <!-- one -->
         <v-layout row wrap v-if="current=='电子'">
-          <!-- <v-layout v-for="item in electronic" :key="item.gameName"> -->
-            <!-- <v-flex xs6>
+          <v-layout v-for="item in electronic" :key="item.gameName">
+            <v-flex xs6>
               <img :src="item.image" height="80" width="120">
             </v-flex>
             <v-flex xs6>
               <span class="white--text pl-3">{{item.gameName}}</span>
-              <v-btn round small color="red darken-4 mt-4" dark>开始游戏</v-btn>
-            </v-flex>-->
-            <Game/>
-          <!-- </v-layout> -->
+              <v-btn round small color="red darken-4 mt-4" dark @click="toLogin">开始游戏</v-btn>
+            </v-flex>
+            <!-- <Game/> -->
+          </v-layout>
         </v-layout>
         <!-- two -->
         <v-layout row wrap v-if="current=='棋牌'">
@@ -92,13 +92,13 @@
 
 <script>
 import Discount from "../components/Discount.vue";
-import Game from "../components/Game.vue";
+// import Game from "../components/Game.vue";
 
 export default {
   name: "Classification",
   components: {
-    Discount,
-    Game
+    Discount
+    // Game
   },
   data() {
     return {
@@ -151,6 +151,9 @@ export default {
   methods: {
     linkDiscount() {
       this.current = "电子";
+    },
+    toLogin() {
+      this.$router.push("/login");
     }
   }
 };

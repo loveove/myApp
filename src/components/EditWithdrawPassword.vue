@@ -33,7 +33,12 @@
             @click:append="showConfirmPassword = !showConfirmPassword"
             required
           ></v-text-field>
-          <v-btn color="red darken-4 white--text" block @click.native="updateWithdrawPassword">立即提交</v-btn>
+          <v-btn
+            color="red darken-4 white--text"
+            block
+            @click.native="updateWithdrawPassword"
+            :disabled="isDisabled"
+          >立即提交</v-btn>
           <v-alert
             v-model="hasAlert"
             :value="true"
@@ -54,6 +59,7 @@ export default {
   name: "EditWithdrawPassword",
   components: {},
   data: () => ({
+    isLoading: false,
     alertMessage: "",
     hasAlert: false,
     valid: true,
@@ -71,13 +77,13 @@ export default {
     comfirmPasswordRules: [v => !!v || "请确认新取款密码"]
   }),
   computed: {
-    // isDisabled() {
-    //   if (this.valid === false || this.isLoading === true) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // },
+    isDisabled() {
+      if (this.valid === false || this.isLoading === true) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     newPasswordRules() {
       return [
         v => !!v || "请输入新取款密码",
@@ -114,7 +120,7 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          // console.log(res);
           // this.isLoading = false;
           this.hasAlert = true;
           this.alertMessage = "更改密码成功";
@@ -149,7 +155,7 @@ export default {
 };
 </script>
 <style scoped>
-.border_custo{
+.border_custo {
   border-radius: 10px;
 }
 </style>

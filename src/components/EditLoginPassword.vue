@@ -36,7 +36,12 @@
             required
           ></v-text-field>
 
-          <v-btn color="red darken-4 white--text" @click="UpdateLoginPassword" block>立即提交</v-btn>
+          <v-btn
+            color="red darken-4 white--text"
+            @click="UpdateLoginPassword"
+            block
+            :disabled="isDisabled"
+          >立即提交</v-btn>
           <v-alert
             v-model="hasAlert"
             :value="true"
@@ -57,6 +62,7 @@ export default {
   name: "EditLoginPassword",
   components: {},
   data: () => ({
+    isLoading: false,
     alertMessage: "",
     hasAlert: false,
     password: "",
@@ -115,7 +121,7 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.result.token) {
             this.hasAlert = true;
             this.alertMessage = "更改密码成功";
@@ -139,7 +145,7 @@ export default {
 };
 </script>
 <style scoped>
-.border_custo{
+.border_custo {
   border-radius: 10px;
 }
 </style>

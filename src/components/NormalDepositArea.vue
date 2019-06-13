@@ -2,7 +2,7 @@
   <v-container>
     <v-card class="border_custo">
       <div>
-        <v-form ref="form" class="pa-2">
+        <v-form ref="form" class="pa-2" v-model="valid">
           <!-- <v-alert type="info">使用本方式充值, 系统赠送, 最高, 只需一倍流水即可提款</v-alert> -->
           <v-alert
             :value="true"
@@ -38,6 +38,7 @@
           <v-btn
             color="red darken-4 white--text"
             :loading="isLoading"
+            :disabled="isDisabled"
             v-on:click="fastDeposite()"
             block
           >下一步</v-btn>
@@ -63,16 +64,16 @@
         </template>
       </div>
       <v-container>
-      <v-flex xs12>
-        <v-alert
-          v-model="hasAlert"
-          :value="true"
-          type="info"
-          icon="warning"
-          outline
-          dismissible
-        >{{alertMessage}}</v-alert>
-      </v-flex>
+        <v-flex xs12>
+          <v-alert
+            v-model="hasAlert"
+            :value="true"
+            type="info"
+            icon="warning"
+            outline
+            dismissible
+          >{{alertMessage}}</v-alert>
+        </v-flex>
       </v-container>
     </v-card>
   </v-container>
@@ -111,13 +112,13 @@ export default {
     orderId: ""
   }),
   computed: {
-    // isDisabled() {
-    //   if (this.valid === false || this.isLoading === true) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // },
+    isDisabled() {
+      if (this.valid === false || this.isLoading === true) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     selectAmountRules() {
       return [
         v => !!v || "请输入金额",
@@ -195,7 +196,6 @@ export default {
         )
         .then(res => {
           this.isLoading = false;
-
           if (res.data.msg === "ok") {
             // console.log(res.data.msg);
             this.getUserInfo();
@@ -239,7 +239,7 @@ export default {
 };
 </script>
 <style scoped>
-.border_custo{
+.border_custo {
   border-radius: 10px;
 }
 </style>

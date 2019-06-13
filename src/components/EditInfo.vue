@@ -135,7 +135,7 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.msg === "ok") {
             // console.log(res.data.msg);
 

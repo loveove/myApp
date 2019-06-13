@@ -1,36 +1,36 @@
 <template>
-<v-container>
-  <v-card class="border_custo">
-    <div class="pa-2">
-      <v-alert
-        :value="true"
-        type="info"
-      >使用本方式充值, 系统赠送{{$store.state.depositeInfo[1].gift_rate}}, 最高{{$store.state.depositeInfo[1].gift_max}}, 只需一倍流水即可提款</v-alert>
-      <v-form ref="form" v-model="valid" v-show="showAlipayForm">
-        <v-flex>
-          <v-text-field
-            prepend-icon="fas fa-coins"
-            v-model="alipayAmount"
-            :rules="alipayAmountRules"
-            type="number"
-            label="存入金额"
-            required
-          ></v-text-field>
-        </v-flex>
-        <v-btn
-          color="red darken-4 white--text"
-          :disabled="isDisabled"
-          :loading="isLoading"
-          @click="submitDeposite"
-          block
-        >下一步</v-btn>
-      </v-form>
-    </div>
-    <div v-if="showQRcode">
-      <QrCode/>
-    </div>
-  </v-card>
-</v-container>
+  <v-container>
+    <v-card class="border_custo">
+      <div class="pa-2">
+        <v-alert
+          :value="true"
+          type="info"
+        >使用本方式充值, 系统赠送{{$store.state.depositeInfo[1].gift_rate}}, 最高{{$store.state.depositeInfo[1].gift_max}}, 只需一倍流水即可提款</v-alert>
+        <v-form ref="form" v-model="valid" v-show="showAlipayForm">
+          <v-flex>
+            <v-text-field
+              prepend-icon="fas fa-coins"
+              v-model="alipayAmount"
+              :rules="alipayAmountRules"
+              type="number"
+              label="存入金额"
+              required
+            ></v-text-field>
+          </v-flex>
+          <v-btn
+            color="red darken-4 white--text"
+            :disabled="isDisabled"
+            :loading="isLoading"
+            @click="submitDeposite"
+            block
+          >下一步</v-btn>
+        </v-form>
+      </div>
+      <div v-if="showQRcode">
+        <QrCode/>
+      </div>
+    </v-card>
+  </v-container>
 </template>
 <script>
 import axios from "axios";
@@ -85,7 +85,7 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          // console.log(res);
           // eslint-disable-next-line
           // .replace('<script>document.myform.submit()<\/script>','')
           this.$store.dispatch("setQrHtml", res.data.result.html);
@@ -100,7 +100,7 @@ export default {
 };
 </script>
 <style scoped>
-.border_custo{
+.border_custo {
   border-radius: 10px;
 }
 </style>

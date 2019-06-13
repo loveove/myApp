@@ -149,13 +149,13 @@ export default {
         })
       })
         .then(response => {
-          console.log(response);
+          // console.log(response);
           if (response.data.msg === "注册成功") {
             this.$store.dispatch("setToken", response.data.result.token);
             this.$router.push("/");
           } else {
             this.hasError = true;
-            this.errorMessage = res.data.msg;
+            this.errorMessage = response.data.msg;
           }
         })
         .catch(function(error) {

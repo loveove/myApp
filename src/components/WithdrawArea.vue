@@ -13,8 +13,8 @@
             <v-toolbar-title class="color_custo">提款专区</v-toolbar-title>
           </v-toolbar>
           <v-container>
-          <v-card class="border_rounded">
-            <!-- <v-alert :value="$store.state.userInfo.real_name === null" type="info">
+            <v-card class="border_rounded">
+              <!-- <v-alert :value="$store.state.userInfo.real_name === null" type="info">
               提款金额需要真实姓名
               <v-btn block @click="redirectEditUserInfo">返回到设置真实姓名</v-btn>
             </v-alert>
@@ -27,46 +27,51 @@
               <v-btn block @click="redirectAddBankCard">返回到添加银行卡</v-btn>
             </v-alert>
             <v-alert :value="withdrawInfo.need_xima != 0" type="info">剩余打码量需要为 0</v-alert>
-            <v-alert :value="withdrawInfo.has_drawing != 0" type="info">提款在审核中，请通过后再次申请提款</v-alert>-->
-            <v-form ref="form" v-model="valid" class="px-4">
-              <v-flex>
-                <v-select
-                  v-model="bankId"
-                  prepend-icon="credit_card"
-                  :items="withdrawInfo.bankCardList"
-                  item-text="cardNumber"
-                  :rules="bankRules"
-                  item-value="id"
-                  label="收款银行卡"
+              <v-alert :value="withdrawInfo.has_drawing != 0" type="info">提款在审核中，请通过后再次申请提款</v-alert>-->
+              <v-form ref="form" v-model="valid" class="px-4">
+                <v-flex>
+                  <v-select
+                    v-model="bankId"
+                    prepend-icon="credit_card"
+                    :items="withdrawInfo.bankCardList"
+                    item-text="cardNumber"
+                    :rules="bankRules"
+                    item-value="id"
+                    label="收款银行卡"
+                    required
+                  ></v-select>
+                  <v-btn color="red darken-4 white--text" @click="addBankCardList">
+                    <i class="fas fa-plus"></i>添加银行卡
+                  </v-btn>
+                </v-flex>
+                <v-text-field
+                  label="提款金额"
+                  v-model="amount"
+                  :rules="amountRules"
+                  type="number"
+                  prepend-icon="fas fa-coins"
                   required
-                ></v-select>
-                <v-btn color="red darken-4 white--text" @click="addBankCardList">
-                  <i class="fas fa-plus"></i>添加银行卡
-                </v-btn>
-              </v-flex>
-              <v-text-field
-                label="提款金额"
-                v-model="amount"
-                :rules="amountRules"
-                type="number"
-                prepend-icon="fas fa-coins"
-                required
-              ></v-text-field>
+                ></v-text-field>
 
-              <v-text-field
-                label="取款密码"
-                v-model="password"
-                :append-icon="show ? 'visibility' : 'visibility_off'"
-                :rules="[rules.required]"
-                :type="show ? 'text' : 'password'"
-                prepend-icon="lock"
-                @click:append="show = !show"
-                required
-              ></v-text-field>
-              
+                <v-text-field
+                  label="取款密码"
+                  v-model="password"
+                  :append-icon="show ? 'visibility' : 'visibility_off'"
+                  :rules="[rules.required]"
+                  :type="show ? 'text' : 'password'"
+                  prepend-icon="lock"
+                  @click:append="show = !show"
+                  required
+                ></v-text-field>
+
                 <v-layout row wrap>
                   <v-flex xs12>
-                    <v-btn color="red darken-4 white--text" block @click.native="withdraw">立即提交</v-btn>
+                    <v-btn
+                      color="red darken-4 white--text"
+                      :disabled="isDisabled"
+                      block
+                      @click.native="withdraw"
+                    >立即提交</v-btn>
                   </v-flex>
 
                   <v-flex xs12>
@@ -81,9 +86,8 @@
                     >{{alertMessage}}</v-alert>
                   </v-flex>
                 </v-layout>
-              
-            </v-form>
-          </v-card>
+              </v-form>
+            </v-card>
           </v-container>
         </v-card>
       </v-dialog>
@@ -138,7 +142,7 @@ export default {
           }
         })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           this.withdrawInfo = res.data.result;
         });
       // .catch(err => console.log(err));
@@ -179,13 +183,13 @@ export default {
     }
   },
   computed: {
-    // isDisabled() {
-    //   if (this.valid === false || this.isLoading === true) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // },
+    isDisabled() {
+      if (this.valid === false || this.isLoading === true) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     token() {
       return this.$store.state.token;
     },
