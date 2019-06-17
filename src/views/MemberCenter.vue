@@ -17,7 +17,7 @@
                 <div>&nbsp; &nbsp;</div>
                 <div>
                   总资产(元)
-                  <span class="ml-5">
+                  <span class="ml-5" @click="toQueryBalance">
                     <i class="fas fa-chevron-right"></i>
                   </span>
                 </div>
@@ -150,9 +150,11 @@ export default {
     linkAutoRefresh() {
       this.$router.push("/autorefresh");
     },
-    forgotpassword(){
-      alert("请联系在线客服")
-      
+    toQueryBalance() {
+      this.$router.push("/querybalance");
+    },
+    forgotpassword() {
+      alert("请联系在线客服");
     }
   }
 };

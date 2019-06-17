@@ -5,7 +5,6 @@
         <v-card-text class="text-xs-center fontsize orange">分类</v-card-text>
       </v-flex>
     </v-layout>
-
     <v-layout row class="pt-1" style="height:100%">
       <v-flex xs3>
         <div
@@ -14,7 +13,7 @@
           :class="{yellow:current==i.title, 'darken-4':current==i.title}"
           class="pa-3 text-xs-center ma-1 menucolor"
         >
-          <span @click="current=i.title">{{i.title}}</span>
+          <span @click="current=i.title" class="brown--text">{{i.title}}</span>
           <!-- <span @click="current = i.title">{{i.title}}</span> -->
         </div>
       </v-flex>
@@ -32,11 +31,14 @@
           </v-layout>
         </v-layout>-->
         <v-layout row wrap v-if="current=='电子'">
-          <Game @game="linkGame"></Game>
+          <Game @confirmgame="linkGame"></Game>
         </v-layout>
         <!-- six -->
         <v-layout row wrap v-if="current=='优惠'">
           <Discount @discount="linkDiscount"></Discount>
+        </v-layout>
+        <v-layout row wrap v-if="current=='真人'">
+          <LiveGame/>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -48,12 +50,14 @@ const qs = require("qs");
 import Discount from "../components/Discount.vue";
 // import GamePlayTransferDialog from "../components/GamePlayTransferDialog.vue";
 import Game from "../components/Game.vue";
+import LiveGame from "../components/LiveGame.vue";
 export default {
   name: "Classification",
   components: {
     Discount,
     // GamePlayTransferDialog,
-    Game
+    Game,
+    LiveGame
   },
   data() {
     return {
@@ -62,15 +66,16 @@ export default {
       current: "真人",
       // electronic: [{ image: require("../assets/3.jpg"), content: "Game" }]
       items: [
-        { title: "电子" },
-        { title: "棋牌" },
         { title: "真人" },
-        { title: "电竞" },
-        { title: "体育" },
-        { title: "彩票" },
+        { title: "电子" },
         { title: "红包" },
         { title: "优惠" },
-        { title: "关于" }
+        { title: "关于" },
+        { title: "合约条款 " },
+        { title: "博彩责任 " },
+        { title: "百家乐规则" },
+        { title: "龙虎规则" },
+        { title: "博彩牌照 " }
       ]
     };
   },
@@ -80,9 +85,11 @@ export default {
     },
     linkGame() {
       this.current = "真人";
+    },
+    linkLiveGame() {
+      this.current = "真人";
     }
   }
-
 };
 </script>
 <style scoped>

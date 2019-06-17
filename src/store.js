@@ -9,12 +9,13 @@ export default new Vuex.Store({
     apiUrl: 'http://47.90.100.229:20000/api',
     apiGameUrl: 'https://new.xjj3.com/api',
     bankInfo: '',
+    token:null,
     userInfo: '',
     isLogin: false,
-    depositeInfo: [
-      { "balanceEnd": 2000000, "balanceStart": 100, "code": "OFFLINE_BANK", "name": "快速入款", "gift_rate": 1, "gift_max": 388 },
-      { "balanceEnd": 2999, "balanceStart": 1, "code": "ONLINE_ALIPAY", "name": "支付宝扫码", "gift_rate": 1, "gift_max": 388 }
-    ],
+    // depositeInfo: [
+    //   { "balanceEnd": 2000000, "balanceStart": 100, "code": "OFFLINE_BANK", "name": "快速入款", "gift_rate": 1, "gift_max": 388 },
+    //   { "balanceEnd": 2999, "balanceStart": 1, "code": "ONLINE_ALIPAY", "name": "支付宝扫码", "gift_rate": 1, "gift_max": 388 }
+    // ],
     qrHtml: '',
     agentInfo: {}
   },

@@ -13,11 +13,11 @@
       <v-layout row wrap>
         <v-layout xs12 class="pt-4">
           <v-flex xs10>
-            <span class="px-4">平台推荐</span>
+            <span class="px-4 ">平台推荐</span>
             <span>精彩荟萃,激情无限</span>
           </v-flex>
           <v-flex xs2>
-            <span @click="linkClassification">更多</span>
+            <span @click="linkClassification" class="blue--text">更多</span>
             <i class="fas fa-chevron-right"></i>
           </v-flex>
         </v-layout>
@@ -83,7 +83,7 @@
             <span>各种优惠为您撑腰</span>
           </v-flex>
           <v-flex xs2>
-            <span @click="linkClassification">更多</span>
+            <span @click="linkClassification" class="blue--text">更多</span>
             <i class="fas fa-chevron-right"></i>
           </v-flex>
         </v-layout>

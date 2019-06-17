@@ -46,21 +46,22 @@
       </div>
       <div v-show="showTable">
         <template>
-          <v-data-table :items="dataInfo" hide-actions hide-headers dark>
+          <v-data-table :items="dataInfo" hide-actions hide-headers>
             <template v-slot:items="props">
               <td>{{ props.item.name }}</td>
               <td>{{ props.item.result }}</td>
             </template>
           </v-data-table>
-          <ConfirmationDialog @confirm="cancelDeposite" class="d-flex">
+
+          <!-- <ConfirmationDialog @confirm="cancelDeposite" class="d-flex">
             <v-btn color="warning" :loading="isLoading" block>取消订单</v-btn>
-          </ConfirmationDialog>
-          <v-btn
+          </ConfirmationDialog>-->
+          <!-- <v-btn
             color="red darken-4 white--text"
             :loading="isLoading"
             v-on:click="submitDeposite"
             block
-          >完成存款，下一步</v-btn>
+          >完成存款，下一步</v-btn>-->
         </template>
       </div>
       <v-container>
@@ -79,14 +80,14 @@
   </v-container>
 </template>
 <script>
-import ConfirmationDialog from "./ConfirmationDialog.vue";
+// import ConfirmationDialog from "./ConfirmationDialog.vue";
 import axios from "axios";
 import { constants } from "crypto";
 const qs = require("qs");
 export default {
   name: "NormalDepositArea",
   components: {
-    ConfirmationDialog
+    // ConfirmationDialog
   },
   data: () => ({
     alertMessage: "",
@@ -177,63 +178,63 @@ export default {
           }
         });
       // .catch(err => console.log(err));
-    },
-    cancelDeposite() {
-      this.showForm = true;
-      this.showTable = false;
-      this.isLoading = true;
-      axios
-        .post(
-          `${this.$store.state.apiUrl}/account/deposit/fast/cancel`,
-          qs.stringify({
-            id: this.orderId
-          }),
-          {
-            headers: {
-              "X-Auth-Token": this.$store.state.token
-            }
-          }
-        )
-        .then(res => {
-          this.isLoading = false;
-          if (res.data.msg === "ok") {
-            // console.log(res.data.msg);
-            this.getUserInfo();
-          } else {
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
-          }
-        });
-      // .catch(err => console.log(err));
-    },
-    submitDeposite() {
-      this.showForm = true;
-      this.showTable = false;
-      this.isLoading = true;
-      axios
-        .post(
-          `${this.$store.state.apiUrl}/account/deposit/fast/success`,
-          qs.stringify({
-            id: this.orderId
-          }),
-          {
-            headers: {
-              "X-Auth-Token": this.$store.state.token
-            }
-          }
-        )
-        .then(res => {
-          this.isLoading = false;
-          if (res.data.msg === "ok") {
-            this.selectAmount = "";
-            this.username = "";
-          } else {
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
-          }
-        });
-      // .catch(err => console.log(err));
     }
+    // cancelDeposite() {
+    //   this.showForm = true;
+    //   this.showTable = false;
+    //   this.isLoading = true;
+    //   axios
+    //     .post(
+    //       `${this.$store.state.apiUrl}/account/deposit/fast/cancel`,
+    //       qs.stringify({
+    //         id: this.orderId
+    //       }),
+    //       {
+    //         headers: {
+    //           "X-Auth-Token": this.$store.state.token
+    //         }
+    //       }
+    //     )
+    //     .then(res => {
+    //       this.isLoading = false;
+    //       if (res.data.msg === "ok") {
+    //         // console.log(res.data.msg);
+    //         this.getUserInfo();
+    //       } else {
+    //         this.hasAlert = true;
+    //         this.alertMessage = res.data.msg;
+    //       }
+    //     });
+    //   // .catch(err => console.log(err));
+    // },
+    // submitDeposite() {
+    //   this.showForm = true;
+    //   this.showTable = false;
+    //   this.isLoading = true;
+    //   axios
+    //     .post(
+    //       `${this.$store.state.apiUrl}/account/deposit/fast/success`,
+    //       qs.stringify({
+    //         id: this.orderId
+    //       }),
+    //       {
+    //         headers: {
+    //           "X-Auth-Token": this.$store.state.token
+    //         }
+    //       }
+    //     )
+    //     .then(res => {
+    //       this.isLoading = false;
+    //       if (res.data.msg === "ok") {
+    //         this.selectAmount = "";
+    //         this.username = "";
+    //       } else {
+    //         this.hasAlert = true;
+    //         this.alertMessage = res.data.msg;
+    //       }
+    //     });
+    //   // .catch(err => console.log(err));
+    // }
   },
   created() {}
 };

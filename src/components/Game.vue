@@ -7,10 +7,10 @@
       </template>
       <v-card color="yellow darken-4">
         <v-toolbar dark color="yellow darken-4">
-          <v-btn icon dark @click.native="linkBack">
+          <v-btn icon dark @click.native="linkClassification">
             <i class="fas fa-arrow-left"></i>
           </v-btn>
-          <v-toolbar-title>优惠活动</v-toolbar-title>
+          <v-toolbar-title>电子</v-toolbar-title>
         </v-toolbar>
         <!-- pagination -->
         <div class="text-xs-center grey">
@@ -22,20 +22,20 @@
             <v-flex v-for="game in games" :key="game.id" xs5>
               <v-img :src="game.img_path" height="150" contain class="grey darken-4 my-1"></v-img>
               <v-btn block color="orange" v-if="isLogin" @click.native="goToGame(game.url)">进路游戏</v-btn>
-              <!-- <LoginDialog v-if="!isLogin" class="d-flex">
-            <v-btn block color="grey">进路游戏</v-btn>
-              </LoginDialog>-->
+              <!-- <Login v-if="!isLogin" class="d-flex">
+                <v-btn block color="grey">进路游戏</v-btn>
+              </Login>-->
               <!-- <a href="#" v-if="!isLogin">
-              <v-img :src="game.img_path" height="150" contain class="grey darken-4 my-1"></v-img>
+                <v-img :src="game.img_path" height="150" contain class="grey darken-4 my-1"></v-img>
               </a>-->
             </v-flex>
           </v-layout>
         </v-container>
-        <v-layout row justify-center>
+        <!-- <v-layout row justify-center>
           <v-dialog v-model="showDialog" max-width="290">
             <v-btn loading class="henry-ml" flat></v-btn>
           </v-dialog>
-        </v-layout>
+        </v-layout>-->
       </v-card>
     </v-dialog>
     <!-- </v-layout> -->
@@ -47,13 +47,13 @@ import { apiMethods } from "@/main";
 import axios from "axios";
 const qs = require("qs");
 
-// import LoginDialog from "../components/LoginDialog.vue";
+// import Login from "../views/Login.vue";
 // import TokenExpiredDialog from "../components/TokenExpiredDialog.vue";
 
 export default {
   name: "Game",
   components: {
-    // LoginDialog,
+    // Login
     // TokenExpiredDialog
   },
   data() {
@@ -77,8 +77,8 @@ export default {
     }
   },
   methods: {
-    linkBack() {
-      this.$emit("game");
+    linkClassification() {
+      this.$emit("confirmgame");
     },
     paging(page) {
       this.$router.push({
