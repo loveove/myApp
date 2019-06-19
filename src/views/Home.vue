@@ -21,57 +21,46 @@
             <i class="fas fa-chevron-right" style="color:#2962FF;"></i>
           </v-flex>
         </v-layout>
-        <v-layout xs12 class="pt-4">
-          <v-flex xs3>
-            <v-btn fab dark color="cyan">
-              <v-icon dark>android</v-icon>
-            </v-btn>
+        <v-layout xs12 class="pt-4 pl-1">
+          <v-flex xs3 v-for="firstGameList in firstGameLists" :key="firstGameList.name">
+            <img :src="firstGameList.image" class="custo_coin ml-3" @click="linkClassification">
+            <p class="pl-3 pb-3">{{firstGameList.name}}</p>
+          </v-flex>
+          <!-- <v-flex xs3>
+            <img src="@/assets/coin3.png" class="custo_coin">
             <p class="pl-3 pb-3">Game</p>
           </v-flex>
           <v-flex xs3>
-            <v-btn fab dark color="purple">
-              <v-icon dark>android</v-icon>
-            </v-btn>
+            <img src="@/assets/coin7.jpg" class="custo_coin">
             <p class="pl-3 pb-3">Game</p>
           </v-flex>
           <v-flex xs3>
-            <v-btn fab dark color="orange">
-              <v-icon dark>android</v-icon>
-            </v-btn>
+            <img src="@/assets/coin4.jpg" class="custo_coin">
             <p class="pl-3 pb-3">Game</p>
-          </v-flex>
-          <v-flex xs3>
-            <v-btn fab dark color="black">
-              <v-icon dark>android</v-icon>
-            </v-btn>
-            <p class="pl-3 pb-3">Game</p>
-          </v-flex>
+          </v-flex>-->
         </v-layout>
-        <v-layout xs12 class="pt-4">
-          <v-flex xs3>
-            <v-btn fab dark color="cyan">
-              <v-icon dark>android</v-icon>
-            </v-btn>
+
+        <v-layout xs12 class="pt-4 pl-1">
+          <v-flex xs3 v-for="secondGameList in secondGameLists" :key="secondGameList.name">
+            <img :src="secondGameList.image" class="custo_coin ml-3" @click="linkClassification">
+            <p class="pl-3 pb-3">{{secondGameList.name}}</p>
+          </v-flex>
+          <!-- <v-flex xs3>
+            <img src="@/assets/coin4.jpg" class="custo_coin">
             <p class="pl-3 pb-3">Game</p>
           </v-flex>
           <v-flex xs3>
-            <v-btn fab dark color="purple">
-              <v-icon dark>android</v-icon>
-            </v-btn>
+            <img src="@/assets/coin5.jpg" class="custo_coin">
             <p class="pl-3 pb-3">Game</p>
           </v-flex>
           <v-flex xs3>
-            <v-btn fab dark color="orange">
-              <v-icon dark>android</v-icon>
-            </v-btn>
+            <img src="@/assets/coin6.jpg" class="custo_coin">
             <p class="pl-3 pb-3">Game</p>
           </v-flex>
           <v-flex xs3>
-            <v-btn fab dark color="black">
-              <v-icon dark>android</v-icon>
-            </v-btn>
+            <img src="@/assets/coin7.jpg" class="custo_coin">
             <p class="pl-3 pb-3">Game</p>
-          </v-flex>
+          </v-flex>-->
         </v-layout>
       </v-layout>
     </v-card>
@@ -106,45 +95,56 @@
 </template>
 
 <script>
-import axios from 'axios'
-import HeaderComponent from '../components/HeaderComponent.vue'
+import axios from "axios";
+import HeaderComponent from "../components/HeaderComponent.vue";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     HeaderComponent
   },
-  data () {
+  data() {
     return {
-      page: 1,
       items: [
         {
-          src: 'https://line.xwiht.cn/QUC/imgs/1558436265047捕鱼1.jpg'
+          src: "https://line.xwiht.cn/QUC/imgs/1558436265047捕鱼1.jpg"
         },
         {
-          src: 'https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg'
+          src: "https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg"
         },
         {
-          src: 'https://line.xwiht.cn/QUC/imgs/1552732533284首页2453.png'
+          src: "https://line.xwiht.cn/QUC/imgs/1552732533284首页2453.png"
         },
         {
-          src: 'https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg'
+          src: "https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg"
         },
         {
-          src: 'https://line.xwiht.cn/QUC/imgs/1558432826800末端.jpg'
+          src: "https://line.xwiht.cn/QUC/imgs/1558432826800末端.jpg"
         },
         {
-          src: 'https://line.xwiht.cn/QUC/imgs/15584354210091234.jpg'
+          src: "https://line.xwiht.cn/QUC/imgs/15584354210091234.jpg"
         },
         {
-          src: 'https://line.xwiht.cn/QUC/imgs/1558437245325猴子.jpg'
+          src: "https://line.xwiht.cn/QUC/imgs/1558437245325猴子.jpg"
         }
+      ],
+      firstGameLists: [
+        { image: require("@/assets/coin8.jpg"), name: "GameOne" },
+        { image: require("@/assets/coin3.png"), name: "GameTwo" },
+        { image: require("@/assets/coin7.jpg"), name: "GameThree" },
+        { image: require("@/assets/coin4.jpg"), name: "GameFour" }
+      ],
+      secondGameLists: [
+        { image: require("@/assets/coin5.jpg"), name: "GameFive" },
+        { image: require("@/assets/coin3.png"), name: "GameSix" },
+        { image: require("@/assets/coin6.jpg"), name: "GameSeven" },
+        { image: require("@/assets/coin7.jpg"), name: "GameEight" }
       ]
-    }
+    };
   },
   methods: {
-    linkClassification () {
-      this.$router.push('/classification')
-      this.dialog = false
+    linkClassification() {
+      this.$router.push("/classification");
+      this.dialog = false;
     }
     // linktodiscount() {
     //   this.$router.push("/discount");
@@ -161,5 +161,13 @@ export default {
   //     }
   //   }
   // }
-}
+};
 </script>
+<style scoped>
+.custo_coin {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+</style>
+

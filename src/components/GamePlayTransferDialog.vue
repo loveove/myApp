@@ -63,7 +63,7 @@
             </v-layout>-->
           </v-form>
         </v-card-text>
-        <v-layout xs12 row wrap>
+        <v-layout xs12 row wrap class="pb-3">
           <!-- <v-card-actions>
           <v-spacer></v-spacer>-->
           <v-flex xs6 class="pl-5">

@@ -96,11 +96,18 @@
         <!-- four -->
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex sx6 class="pl-4">
-            <div class="pl-3" @click="forgotpassword">
-              <!-- <i class="fas fa-gift"></i> -->
+            <!-- <div class="pl-3" @click="tosnackbar">
+              <i class="fas fa-lock fa-lg" style="color:darkblue;"></i>
+            </div>-->
+            <!-- <div>忘记密码?</div> -->
+            <div class="pl-3" @click="snackbar = true">
               <i class="fas fa-lock fa-lg" style="color:darkblue;"></i>
             </div>
             <div>忘记密码?</div>
+            <v-snackbar v-model="snackbar" :top="y === 'top'">
+              {{ text }}
+              <v-btn color="white" flat @click="snackbar = false">Close</v-btn>
+            </v-snackbar>
           </v-flex>
           <v-flex xs-6 class="pl-3">
             <Logout/>
@@ -111,53 +118,65 @@
   </div>
 </template>
 <script>
-import Logout from '../components/Logout.vue'
+import Logout from "../components/Logout.vue";
 // import QueryBalance from '../components/QueryBalance.vue'
 export default {
-  name: 'MemberCenter',
-  data () {
+  name: "MemberCenter",
+  data() {
     return {
-      mainBalance: 0
-    }
+      mainBalance: 0,
+      y: "top",
+      snackbar: false,
+      timeout: 6000,
+      text: "请联系在线客服"
+    };
   },
   components: {
     Logout
     // QueryBalance
   },
   methods: {
-    linkOverView () {
-      this.$router.push('/querybalance')
+    linkOverView() {
+      this.$router.push("/querybalance");
     },
-    linkWithdraw () {
-      this.$router.push('/withdrawarea')
+    linkWithdraw() {
+      this.$router.push("/withdrawarea");
     },
-    linkPlatformTransfer () {
-      this.$router.push('/platformtransfer')
+    linkPlatformTransfer() {
+      this.$router.push("/platformtransfer");
     },
-    linkDeposit () {
-      this.$router.push('/depositarea')
+    linkDeposit() {
+      this.$router.push("/depositarea");
     },
-    linkUserInfo () {
+    linkUserInfo() {
       // this.$store.dispatch("setUserInfoDefaultTab", 0);
-      this.$router.push('/userinfo')
+      this.$router.push("/userinfo");
     },
-    linkHistoryRecord () {
-      this.$router.push('/historyrecord')
+    linkHistoryRecord() {
+      this.$router.push("/historyrecord");
     },
-    linkMyAgent () {
-      this.$router.push('/myagent')
+    linkMyAgent() {
+      this.$router.push("/myagent");
     },
-    linkAutoRefresh () {
-      this.$router.push('/autorefresh')
+    linkAutoRefresh() {
+      this.$router.push("/autorefresh");
     },
-    toQueryBalance () {
-      this.$router.push('/querybalance')
-    },
-    forgotpassword () {
-      alert('请联系在线客服')
+    toQueryBalance() {
+      this.$router.push("/querybalance");
     }
+
+    // tosnackbar() {
+    //   this.$emit("snackbar");
+    // }
+    // tosnackbar(){
+    //   this.$router.push('/snackbar')
+
+    // }
+    // forgotpassword () {
+    //   alert('请联系在线客服')
+    // }
   }
-}
+};
 </script>
 
 <style scope>
