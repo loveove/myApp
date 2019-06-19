@@ -24,18 +24,18 @@
 </template>
 <script>
 export default {
-  name: "ConfirmationDialog",
+  name: 'ConfirmationDialog',
   components: {},
-  data() {
+  data () {
     return {
       show: false
-    };
+    }
   },
   methods: {
-    confirm() {
-      this.$emit("confirm");
-      this.show = false;
+    confirm () {
+      this.$emit('confirm')
+      this.show = false
     }
   }
-};
+}
 </script>

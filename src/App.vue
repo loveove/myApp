@@ -10,16 +10,16 @@
 </template>
 
 <script>
-import BottomNav from "./components/BottomNav.vue";
-import axios from "axios";
-const qs = require("qs");
+import BottomNav from './components/BottomNav.vue'
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "App",
+  name: 'App',
   components: {
     BottomNav
   },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   // computed: {
   //   isLogin: function() {
@@ -35,32 +35,31 @@ export default {
   //   }
   // },
   methods: {
-      getUserInfo() {
+    getUserInfo () {
       axios
         .get(`${this.$store.state.apiUrl}/account/getUserInfo`, {
           headers: {
-            "X-Auth-Token": this.$store.state.token
+            'X-Auth-Token': this.$store.state.token
           }
         })
         .then(res => {
-          this.$store.dispatch("setUserInfo", res.data.result);
+          this.$store.dispatch('setUserInfo', res.data.result)
         })
         // .catch(err => console.log(err));
     },
-     getDepositeInfo() {
+    getDepositeInfo () {
       axios
         .get(`${this.$store.state.apiUrl}/account/deposit/paytypes`, {
           headers: {
-            "X-Auth-Token": this.$store.state.token
+            'X-Auth-Token': this.$store.state.token
           }
         })
         .then(res => {
           // console.log(res.data)
-          this.$store.dispatch("setDepositeInfo", res.data.result);
+          this.$store.dispatch('setDepositeInfo', res.data.result)
         })
         // .catch(err => console.log(err));
     }
- 
 
     // CheckLogin() {
     //   axios({
@@ -81,11 +80,9 @@ export default {
     //       console.log(error);
     //     });
     // },
-  
-  
-   
+
   },
-  created() {
+  created () {
     // this.login();
     // this.getUserInfo();
     // this.userRegisteration();
@@ -98,14 +95,12 @@ export default {
     // this.delete();
     // this.modifywidthdrawpass();
   },
-  mounted() {
-    if (localStorage.getItem("token") != null) {
-      this.$store.dispatch("setToken", localStorage.getItem("token"));
-      //check login status api should be applied here
+  mounted () {
+    if (localStorage.getItem('token') != null) {
+      this.$store.dispatch('setToken', localStorage.getItem('token'))
+      // check login status api should be applied here
       // apiMethods.checkToken();
     }
   }
-};
+}
 </script>
-
-

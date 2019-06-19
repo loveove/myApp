@@ -83,35 +83,35 @@
       <v-alert :value="true" type="info" v-if="records.length === 0">无数据</v-alert>
     </v-flex>
   </v-container>
-</template> 
+</template>
 <script>
-import axios from "axios";
-const qs = require("qs");
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "OfflineInfo",
-  data() {
+  name: 'OfflineInfo',
+  data () {
     return {
       isLoading: false,
-      startDate: "",
-      endDate: "",
+      startDate: '',
+      endDate: '',
       records: [],
       rowsPerPageItems: [3, 4, 5],
       pagination: {
         rowsPerPage: 3
       },
-      name: "",
-      alertMessage: "",
+      name: '',
+      alertMessage: '',
       hasAlert: false
-    };
+    }
   },
   computed: {
-    dateRange: function() {
-      return `${this.startDate} - ${this.endDate}`;
+    dateRange: function () {
+      return `${this.startDate} - ${this.endDate}`
     }
   },
   methods: {
-    getRecords() {
-      this.isLoading = true;
+    getRecords () {
+      this.isLoading = true
       axios
         .post(
           `${this.$store.state.apiUrl}/agent/myDownline/`,
@@ -123,25 +123,25 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
-          this.isLoading = false;
-          if (res.data.msg === "ok") {
-            this.records = res.data.result;
+          this.isLoading = false
+          if (res.data.msg === 'ok') {
+            this.records = res.data.result
             // console.log(res.data);
           } else {
             // console.log(res.data);
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
+            this.hasAlert = true
+            this.alertMessage = res.data.msg
           }
-        });
+        })
       // .catch(err => console.log(err));
     }
   }
-};
+}
 </script>
 <style scoped>
 .border_custo {

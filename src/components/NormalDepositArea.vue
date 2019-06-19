@@ -81,48 +81,48 @@
 </template>
 <script>
 // import ConfirmationDialog from "./ConfirmationDialog.vue";
-import axios from "axios";
-import { constants } from "crypto";
-const qs = require("qs");
+import axios from 'axios'
+import { constants } from 'crypto'
+const qs = require('qs')
 export default {
-  name: "NormalDepositArea",
+  name: 'NormalDepositArea',
   components: {
     // ConfirmationDialog
   },
   data: () => ({
-    alertMessage: "",
+    alertMessage: '',
     hasAlert: false,
     dataInfo: [
-      { name: "订单编号", result: "" },
-      { name: "存款金额", result: "" },
-      { name: "银行", result: "" },
-      { name: "账号", result: " " },
-      { name: "开户名", result: "" },
-      { name: "分行名称", result: "" }
+      { name: '订单编号', result: '' },
+      { name: '存款金额', result: '' },
+      { name: '银行', result: '' },
+      { name: '账号', result: ' ' },
+      { name: '开户名', result: '' },
+      { name: '分行名称', result: '' }
     ],
     items: [],
 
     isLoading: false,
     valid: false,
-    selectAmount: "",
-    username: "",
-    usernameRules: [v => !!v || "请输入存款人姓名"],
+    selectAmount: '',
+    username: '',
+    usernameRules: [v => !!v || '请输入存款人姓名'],
     showTable: false,
     showForm: true,
-    payWay: "网线转账",
-    orderId: ""
+    payWay: '网线转账',
+    orderId: ''
   }),
   computed: {
-    isDisabled() {
+    isDisabled () {
       if (this.valid === false || this.isLoading === true) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     },
-    selectAmountRules() {
+    selectAmountRules () {
       return [
-        v => !!v || "请输入金额",
+        v => !!v || '请输入金额',
         v =>
           (v &&
             v >= this.$store.state.depositeInfo[0].balanceStart &&
@@ -130,53 +130,53 @@ export default {
           `限额 ${this.$store.state.depositeInfo[0].balanceStart} - ${
             this.$store.state.depositeInfo[0].balanceEnd
           }`
-      ];
+      ]
     }
   },
   methods: {
-    displayTable: function() {
-      this.showTable = !this.showTable;
-      this.showForm = !this.showForm;
+    displayTable: function () {
+      this.showTable = !this.showTable
+      this.showForm = !this.showForm
     },
-    fastDeposite() {
-      this.isLoading = true;
+    fastDeposite () {
+      this.isLoading = true
       axios
         .post(
           `${this.$store.state.apiUrl}/account/deposit/fast`,
           qs.stringify({
-            paytype: "OFFLINE_BANK",
+            paytype: 'OFFLINE_BANK',
             amount: this.selectAmount,
             name: this.username,
             payway: this.payWay
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
-          this.isLoading = false;
-          if (res.data.msg === "ok") {
+          this.isLoading = false
+          if (res.data.msg === 'ok') {
             // this.hasAlert = true;
             // this.alertMessage = "成功";
-            this.isLoading = false;
-            this.showTable = true;
-            this.showForm = false;
-            this.dataInfo[0].result = res.data.result.bill_no;
-            this.dataInfo[1].result = res.data.result.amount;
-            this.dataInfo[2].result = res.data.result.bank_name;
-            this.dataInfo[3].result = res.data.result.bank_no;
-            this.dataInfo[4].result = res.data.result.name;
-            this.dataInfo[5].result = res.data.result.bank_address;
-            this.orderId = res.data.result.id;
+            this.isLoading = false
+            this.showTable = true
+            this.showForm = false
+            this.dataInfo[0].result = res.data.result.bill_no
+            this.dataInfo[1].result = res.data.result.amount
+            this.dataInfo[2].result = res.data.result.bank_name
+            this.dataInfo[3].result = res.data.result.bank_no
+            this.dataInfo[4].result = res.data.result.name
+            this.dataInfo[5].result = res.data.result.bank_address
+            this.orderId = res.data.result.id
             // console.log(res.data);
             // this.getUserInfo();
           } else {
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
+            this.hasAlert = true
+            this.alertMessage = res.data.msg
           }
-        });
+        })
       // .catch(err => console.log(err));
     }
     // cancelDeposite() {
@@ -236,13 +236,11 @@ export default {
     //   // .catch(err => console.log(err));
     // }
   },
-  created() {}
-};
+  created () {}
+}
 </script>
 <style scoped>
 .border_custo {
   border-radius: 10px;
 }
 </style>
-
-

@@ -1,10 +1,12 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <template v-slot:activator="{ on }">
-        <!-- <v-btn color="primary" dark v-on="on">Open Dialog</v-btn> -->
-        <v-btn round small color="red darken-4 mt-4" class="mr-5" dark v-on="on">开始游戏</v-btn>
-      </template>
+      <v-btn icon dark @click="dialog = false">
+        <v-icon>close</v-icon>
+      </v-btn>
+      <!-- <template v-slot:activator="{ on }"> -->
+      <!-- <v-btn round small color="red darken-4 mt-4" class="mr-5" dark v-on="on">开始游戏</v-btn> -->
+      <!-- </template> -->
       <v-card>
         <v-card-title>
           <span class="headline">财务互转</span>
@@ -41,21 +43,21 @@
 
             <v-layout row wrap>
               <v-flex xs12>
-                <v-btn
+                <!-- <v-btn
                   :disabled="isDisabled"
                   color="red darken-4 white--text"
                   :loading="isLoading"
                   block
                   @click.native="transferBalance"
-                >确定转账</v-btn>
+                >确定转账</v-btn> -->
               </v-flex>
             </v-layout>
           </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click="dialog = false">Save</v-btn>
+          <v-btn color="blue darken-1" flat @click="transferBalance">确定转账</v-btn>
+          <v-btn color="blue darken-1" flat @gameplaytransfer="toLiveGame">直接游戏</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -65,9 +67,8 @@
 import axios from "axios";
 const qs = require("qs");
 export default {
+  name: "GamePlayTransferDialog",
   data: () => ({
-    dialog: false,
-
     dialog: true,
     notifications: false,
     sound: true,
@@ -131,6 +132,11 @@ export default {
     }
   },
   methods: {
+     toLiveGame() {
+      // this.$router.push("/gameplaytransferdialog");
+      this.$emit("gameplaytransfer");
+
+    },
     link_membercenter() {
       this.$router.push("/membercenter");
     },

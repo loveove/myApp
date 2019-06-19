@@ -54,18 +54,18 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       dialog: true
-    };
+    }
   },
   methods: {
-    close() {
-      this.$router.push("/");
-      this.dialog = false;
+    close () {
+      this.$router.push('/')
+      this.dialog = false
     }
   }
-};
+}
 </script>
 <style scoped>
 .qq {

@@ -112,8 +112,8 @@ export default new Router({
 
     },
     {
-      path: '/game/:page',
-      name: 'game',
+      path: '/games/:page',
+      name: 'games',
       component: () => import(/* webpackChunkName: "about" */ './components/Game.vue')
 
     },
@@ -123,6 +123,12 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './components/LiveGame.vue')
 
     },
+    {
+      path: '/gameplaytransferdialog',
+      name: 'gameplaytransferdialog',
+      component: () => import(/* webpackChunkName: "about" */ './components/GamePlayTransferDialog.vue')
+
+    }
 
   ]
 })

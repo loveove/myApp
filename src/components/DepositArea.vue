@@ -24,11 +24,11 @@
   </div>
 </template>
 <script>
-import AlipayDepositArea from "./AlipayDepositArea.vue";
-import NormalDepositArea from "./NormalDepositArea.vue";
+import AlipayDepositArea from './AlipayDepositArea.vue'
+import NormalDepositArea from './NormalDepositArea.vue'
 
 export default {
-  name: "DepositArea",
+  name: 'DepositArea',
   components: {
     AlipayDepositArea,
     NormalDepositArea
@@ -43,32 +43,31 @@ export default {
     active: null,
     items: [
       {
-        name: "NormalPay",
+        name: 'NormalPay',
 
         content: `NormalDepositArea`
       },
       {
-        name: "Alipay",
+        name: 'Alipay',
 
         content: `AlipayDepositArea`
       }
     ]
   }),
   methods: {
-    displayNormalPay() {
-      this.showNormalPay = true;
-      this.showAliPay = false;
+    displayNormalPay () {
+      this.showNormalPay = true
+      this.showAliPay = false
       // this.showTable = false;
     },
-    displayAliPay() {
-      this.showAliPay = true;
-      this.showNormalPay = false;
+    displayAliPay () {
+      this.showAliPay = true
+      this.showNormalPay = false
       // this.showTable = false;
     },
-    link_membercenter() {
-      this.$router.push("/membercenter");
+    link_membercenter () {
+      this.$router.push('/membercenter')
     }
   }
-};
+}
 </script>
-

@@ -5,15 +5,15 @@
 
 <script>
 export default {
-  name: "HeaderComponent",
+  name: 'HeaderComponent',
   components: {},
-  data() {
+  data () {
     return {
-      image: require("@/assets/logo.png")
-    };
+      image: require('@/assets/logo.png')
+    }
   },
   computed: {}
-};
+}
 </script>
 
 <style scoped>

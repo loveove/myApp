@@ -17,7 +17,7 @@
           class="pa-3 text-xs-center ma-1 menucolor"
         >
           <span @click="current = i.title">{{i.title}}</span>
-         
+
     </div>-->
     <!-- <v-layout row wrap v-if="current=='电竞'"> -->
     <!-- <v-container> -->
@@ -27,7 +27,7 @@
         <img :src="item.image" height="100" width="120">
       </v-flex>
       <v-flex xs12>
-        <div class="pt-1">
+        <div class="pl-3">
           <span class="white--text">{{item.gameTitle}}</span>
         </div>
         <div class="pt-2">
@@ -45,9 +45,26 @@
           target="_blank"
           :loading="isLoading"
           :disabled="isLoading"
-        >开始游戏</v-btn> -->
+        >开始游戏</v-btn>-->
         <!-- <Login v-if="!isLogin"> -->
-          <v-btn color="red darken-4 white--text" round small>进路游戏</v-btn>
+        <v-btn
+          color="orange accent-4 white--text"
+          v-if="$store.state.token!=null"
+          @gameplaytransfer="getGameUrl"
+          round
+          small
+        >
+          <!-- <GamePlayTransferDialog/> -->
+          进路游戏
+        </v-btn>
+        <!-- <v-btn block color="red" :href="urlXJJ" round small v-if="$store.state.token!=null">进路游戏</v-btn> -->
+        <v-btn
+          color="red darken-4 white--text"
+          @click.native="linkLogin"
+          round
+          small
+          v-if="$store.state.token==null"
+        >进路游戏</v-btn>
         <!-- </Login> -->
       </v-flex>
     </v-layout>
@@ -60,14 +77,15 @@
 </template>
 
 <script>
-
+// import GamePlayTransferDialog from "../components/GamePlayTransferDialog.vue";
 import axios from "axios";
 const qs = require("qs");
 
 export default {
   name: "LiveGame",
   components: {
-  
+    // Login
+    // GamePlayTransferDialog
   },
   data() {
     return {
@@ -115,9 +133,13 @@ export default {
     }
   },
   methods: {
-    linkClassification() {
-      this.$emit("livegame");
+    // linkClassification() {
+    //   this.$emit("livegame");
+    // },
+    linkLogin() {
+      this.$router.push("/login");
     },
+
     getGameUrl(gamePlatformId, gameId = 0) {
       this.isLoading = true;
       axios
@@ -157,4 +179,3 @@ export default {
 </script>
 <style scoped>
 </style>
-

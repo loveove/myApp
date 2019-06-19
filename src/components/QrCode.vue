@@ -8,11 +8,11 @@
 </template>
 <script>
 export default {
-  name: "QrCode",
-  mounted() {
+  name: 'QrCode',
+  mounted () {
     // document.myform.submit();
   }
-};
+}
 </script>
 <style scoped>
 iframe{
@@ -20,5 +20,3 @@ iframe{
   height:500px;
 }
 </style>
-
-

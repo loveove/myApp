@@ -56,55 +56,55 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-const qs = require("qs");
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "EditLoginPassword",
+  name: 'EditLoginPassword',
   components: {},
   data: () => ({
     isLoading: false,
-    alertMessage: "",
+    alertMessage: '',
     hasAlert: false,
-    password: "",
-    oldPassword: "",
-    confirmPassword: "",
+    password: '',
+    oldPassword: '',
+    confirmPassword: '',
     showConfirm: false,
     valid: false,
-    show: false, //show password
+    show: false, // show password
     showOld: false,
 
     rules: {
-      required: value => !!value || "请输入原登陆密码"
+      required: value => !!value || '请输入原登陆密码'
     }
   }),
   computed: {
-    isDisabled() {
+    isDisabled () {
       if (this.valid === false || this.isLoading === true) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     },
-    newPasswordRules() {
+    newPasswordRules () {
       return [
-        v => !!v || "请输入新密码",
-        v => (v && v == this.confirmPassword) || "确认密码不符合"
-      ];
+        v => !!v || '请输入新密码',
+        v => (v && v == this.confirmPassword) || '确认密码不符合'
+      ]
     },
-    newPasswordConfirmationRules() {
+    newPasswordConfirmationRules () {
       return [
-        v => !!v || "请确认新密码",
-        v => (v && v == this.password) || "确认密码不符合"
-      ];
+        v => !!v || '请确认新密码',
+        v => (v && v == this.password) || '确认密码不符合'
+      ]
     }
   },
   watch: {
-    confirmPassword: function() {
-      this.$refs.form.validate();
+    confirmPassword: function () {
+      this.$refs.form.validate()
     }
   },
   methods: {
-    UpdateLoginPassword() {
+    UpdateLoginPassword () {
       // this.isLoading = true;
       axios
         .post(
@@ -116,33 +116,33 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
           // console.log(res);
           if (res.data.result.token) {
-            this.hasAlert = true;
-            this.alertMessage = "更改密码成功";
-            this.$store.dispatch("setToken", res.data.result.token);
+            this.hasAlert = true
+            this.alertMessage = '更改密码成功'
+            this.$store.dispatch('setToken', res.data.result.token)
             // console.log(res.data.result.token)
           } else {
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
+            this.hasAlert = true
+            this.alertMessage = res.data.msg
             // console.log(res.data)
           }
           // this.isLoading = false;
           //   this.$forceUpdate();
-        });
+        })
       // .catch(err => console.log(err));
       // .then(()=>console.log(this.$store.state.token));
-      this.oldPassword = "";
-      this.password = "";
-      this.confirmPassword = "";
+      this.oldPassword = ''
+      this.password = ''
+      this.confirmPassword = ''
     }
   }
-};
+}
 </script>
 <style scoped>
 .border_custo {

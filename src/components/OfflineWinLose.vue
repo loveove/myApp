@@ -93,35 +93,35 @@
     </v-flex>
   </v-container>
 </template>
-  
+
 <script>
-import axios from "axios";
-const qs = require("qs");
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "WinloseInfo",
-  data() {
+  name: 'WinloseInfo',
+  data () {
     return {
       isLoading: false,
-      startDate: "",
-      endDate: "",
+      startDate: '',
+      endDate: '',
       records: [],
       rowsPerPageItems: [3, 4, 5],
       pagination: {
         rowsPerPage: 3
       },
-      name: "",
-      errorMessage: "",
+      name: '',
+      errorMessage: '',
       hasError: false
-    };
+    }
   },
   computed: {
-    dateRange: function() {
-      return `${this.startDate} - ${this.endDate}`;
+    dateRange: function () {
+      return `${this.startDate} - ${this.endDate}`
     }
   },
   methods: {
-    getRecords() {
-      this.isLoading = true;
+    getRecords () {
+      this.isLoading = true
       axios
         .post(
           `${this.$store.state.apiUrl}/agent/reportWin/`,
@@ -133,26 +133,26 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
-          this.isLoading = false;
-          if (res.data.msg === "ok") {
-            this.records = res.data.result;
+          this.isLoading = false
+          if (res.data.msg === 'ok') {
+            this.records = res.data.result
             // console.log(res.data);
           } else {
             // console.log(res.data);
-            this.hasError = true;
-            this.errorMessage = res.data.msg;
+            this.hasError = true
+            this.errorMessage = res.data.msg
           }
-        });
+        })
       // .catch(err => console.log(err));
     }
   },
-  created() {}
-};
+  created () {}
+}
 </script>
 <style scoped>
 .border_custo{

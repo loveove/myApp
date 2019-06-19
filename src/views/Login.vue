@@ -65,19 +65,19 @@
   </v-dialog>
 </template>
 <script>
-import axios from "axios";
-import qs from "qs";
+import axios from 'axios'
+import qs from 'qs'
 export default {
-  name: "Login",
-  data() {
+  name: 'Login',
+  data () {
     return {
-      errorMessage: "",
+      errorMessage: '',
       hasError: false,
-      name: "",
-      nameRules: [v => !!v || "请填写用户名"],
-      password: "",
+      name: '',
+      nameRules: [v => !!v || '请填写用户名'],
+      password: '',
       rules: {
-        required: value => !!value || "请填写密码."
+        required: value => !!value || '请填写密码.'
       },
       show: false,
       valid: true,
@@ -85,16 +85,16 @@ export default {
       notifications: false,
       sound: true,
       widgets: false
-    };
+    }
   },
   methods: {
-    close() {
-      this.$router.push("/");
-      this.dialog = false;
+    close () {
+      this.$router.push('/')
+      this.dialog = false
     },
-    linkregister() {
-      this.$router.push("/register");
-      this.dialog = false;
+    linkregister () {
+      this.$router.push('/register')
+      this.dialog = false
     },
     login() {
       axios
@@ -108,20 +108,21 @@ export default {
         .then(response => {
           // console.log(this)
           if (response.data.result.token != undefined) {
-            this.$store.dispatch("setToken", response.data.result.token);
-            this.$router.push("/");
+            this.$store.dispatch('setToken', response.data.result.token)
+            this.$store.dispatch("isLoginTrue");
+            this.$router.push('/')
           } else {
-            this.hasError = true;
-            this.errorMessage = response.data.msg;
+            this.hasError = true
+            this.errorMessage = response.data.msg
           }
-        });
+        })
     }
   },
   computed: {},
-  created() {
+  created () {
     // this.login();
   }
-};
+}
 </script>
 <style scoped>
 .fontsize {

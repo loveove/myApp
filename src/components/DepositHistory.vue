@@ -72,32 +72,32 @@
     </v-container>
   </div>
 </template>
-  
+
 <script>
-import axios from "axios";
-const qs = require("qs");
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "DepositeHistory",
-  data() {
+  name: 'DepositeHistory',
+  data () {
     return {
-      alertMessage: "",
+      alertMessage: '',
       hasAlert: false,
-      startDate: "",
-      endDate: "",
+      startDate: '',
+      endDate: '',
       records: [],
       rowsPerPageItems: [3, 4, 5],
       pagination: {
         rowsPerPage: 3
       }
-    };
+    }
   },
   computed: {
-    dateRange: function() {
-      return `${this.startDate} - ${this.endDate}`;
+    dateRange: function () {
+      return `${this.startDate} - ${this.endDate}`
     }
   },
   methods: {
-    getRecords() {
+    getRecords () {
       axios
         .post(
           `${this.$store.state.apiUrl}/record/game`,
@@ -106,24 +106,24 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
-          console.log(res);
-          if (res.data.msg === "ok") {
-            this.records = res.data.result;
+          console.log(res)
+          if (res.data.msg === 'ok') {
+            this.records = res.data.result
             // console.log(res.data);
           } else {
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
+            this.hasAlert = true
+            this.alertMessage = res.data.msg
           }
-        });
+        })
       // .catch(err => console.log(err));
     }
   }
-};
+}
 </script>
 <style scoped>
 .border_custo{

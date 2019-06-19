@@ -53,57 +53,57 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-const qs = require("qs");
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "EditWithdrawPassword",
+  name: 'EditWithdrawPassword',
   components: {},
   data: () => ({
     isLoading: false,
-    alertMessage: "",
+    alertMessage: '',
     hasAlert: false,
     valid: true,
     showPassword: false,
     showConfirmPassword: false,
     showOldPassword: false,
 
-    bankOldPassword: "",
-    oldPasswordRules: [v => !!v || "请输入原本取款密码"],
+    bankOldPassword: '',
+    oldPasswordRules: [v => !!v || '请输入原本取款密码'],
 
-    bankNewPassword: "",
-    passwordRules: [v => !!v || "请输入新取款密码"],
+    bankNewPassword: '',
+    passwordRules: [v => !!v || '请输入新取款密码'],
 
-    confirmBankNewPassword: "",
-    comfirmPasswordRules: [v => !!v || "请确认新取款密码"]
+    confirmBankNewPassword: '',
+    comfirmPasswordRules: [v => !!v || '请确认新取款密码']
   }),
   computed: {
-    isDisabled() {
+    isDisabled () {
       if (this.valid === false || this.isLoading === true) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     },
-    newPasswordRules() {
+    newPasswordRules () {
       return [
-        v => !!v || "请输入新取款密码",
-        v => (v && v == this.confirmBankNewPassword) || "确认密码不符合"
-      ];
+        v => !!v || '请输入新取款密码',
+        v => (v && v == this.confirmBankNewPassword) || '确认密码不符合'
+      ]
     },
-    newPasswordConfirmationRules() {
+    newPasswordConfirmationRules () {
       return [
-        v => !!v || "请确认新取款密码",
-        v => (v && v == this.bankNewPassword) || "确认密码不符合"
-      ];
+        v => !!v || '请确认新取款密码',
+        v => (v && v == this.bankNewPassword) || '确认密码不符合'
+      ]
     }
   },
   watch: {
-    confirmBankNewPassword: function() {
-      this.$refs.form.validate();
+    confirmBankNewPassword: function () {
+      this.$refs.form.validate()
     }
   },
   methods: {
-    updateWithdrawPassword() {
+    updateWithdrawPassword () {
       // this.isLoading = true;
       axios
         .post(
@@ -115,44 +115,44 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
           // console.log(res);
           // this.isLoading = false;
-          this.hasAlert = true;
-          this.alertMessage = "更改密码成功";
-          if (res.data.msg === "ok") {
-            this.getUserInfo();
+          this.hasAlert = true
+          this.alertMessage = '更改密码成功'
+          if (res.data.msg === 'ok') {
+            this.getUserInfo()
           } else {
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
+            this.hasAlert = true
+            this.alertMessage = res.data.msg
           }
           // console.log(res.data.msg);
-        });
+        })
       // .catch(err => console.log(err));
-      this.withdrawPassword = "";
-      this.oldWithdrawPassword = "";
-      this.confirmWithdrawPassword = "";
+      this.withdrawPassword = ''
+      this.oldWithdrawPassword = ''
+      this.confirmWithdrawPassword = ''
     },
-    getUserInfo() {
-      this.isLoading = false;
+    getUserInfo () {
+      this.isLoading = false
       axios
         .get(`${this.$store.state.apiUrl}/account/getUserInfo`, {
           headers: {
-            "X-Auth-Token": this.$store.state.token
+            'X-Auth-Token': this.$store.state.token
           }
         })
         .then(res => {
-          this.$store.dispatch("setUserInfo", res.data.result);
-          this.isLoading = false;
-        });
+          this.$store.dispatch('setUserInfo', res.data.result)
+          this.isLoading = false
+        })
       // .catch(err => console.log(err));
     }
   }
-};
+}
 </script>
 <style scoped>
 .border_custo {

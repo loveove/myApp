@@ -85,22 +85,21 @@
   </v-layout>
 </template>
 
-  
 <script>
-import axios from "axios";
-const qs = require("qs");
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "AutoRefreshCode",
+  name: 'AutoRefreshCode',
   components: {},
   data: () => ({
-    errorMessage: "",
+    errorMessage: '',
     hasError: false,
     dialog: true,
     notifications: false,
     sound: true,
     widgets: false,
     hasAlert: false,
-    alertMessage: "",
+    alertMessage: '',
     refreshcode: [],
     rowsPerPageItems: [3, 4, 5],
     pagination: {
@@ -109,60 +108,60 @@ export default {
     isLoading: false
   }),
   methods: {
-    link_membercenter() {
-      this.$router.push("/membercenter");
+    link_membercenter () {
+      this.$router.push('/membercenter')
     },
-    getRefreshCodeInfo() {
-      this.isLoading = true;
+    getRefreshCodeInfo () {
+      this.isLoading = true
       axios
         .get(`${this.$store.state.apiUrl}/account/xima/getInfo`, {
           headers: {
-            "X-Auth-Token": this.$store.state.token
+            'X-Auth-Token': this.$store.state.token
           }
         })
         .then(res => {
-          this.isLoading = false;
-          console.log(res.data);
-          this.refreshcode = Array.from(res.data.result);
-        });
+          this.isLoading = false
+          console.log(res.data)
+          this.refreshcode = Array.from(res.data.result)
+        })
     },
-    refreshCode() {
-      this.isLoading = true;
+    refreshCode () {
+      this.isLoading = true
       axios
         .post(
           `${this.$store.state.apiUrl}/account/xima/jiesuan`,
           qs.stringify({
-            platId: ""
+            platId: ''
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
-          this.isLoading = false;
-          console.log(res);
-          if (res.data.msg === "ok") {
-            this.hasAlert = true;
-            this.alertMessage = "成功";
-            this.getRefreshCodeInfo();
+          this.isLoading = false
+          console.log(res)
+          if (res.data.msg === 'ok') {
+            this.hasAlert = true
+            this.alertMessage = '成功'
+            this.getRefreshCodeInfo()
           } else {
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
+            this.hasAlert = true
+            this.alertMessage = res.data.msg
           }
-        });
+        })
     },
-    created() {
-      this.getRefreshCodeInfo();
+    created () {
+      this.getRefreshCodeInfo()
     }
   },
   computed: {
-    totalXimaMoney() {
-      let money = 0;
-      this.refreshcode.forEach(item => (money += item.xima_money));
-      return money;
+    totalXimaMoney () {
+      let money = 0
+      this.refreshcode.forEach(item => (money += item.xima_money))
+      return money
     }
   }
-};
+}
 </script>

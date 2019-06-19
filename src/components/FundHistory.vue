@@ -69,32 +69,32 @@
     </v-container>
   </div>
 </template>
-  
+
 <script>
-import axios from "axios";
-const qs = require("qs");
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "FundHistory",
-  data() {
+  name: 'FundHistory',
+  data () {
     return {
-      startDate: "",
-      endDate: "",
+      startDate: '',
+      endDate: '',
       records: [],
       rowsPerPageItems: [3, 4, 5],
       pagination: {
         rowsPerPage: 3
       },
-      errorMessage: "",
+      errorMessage: '',
       hasError: false
-    };
+    }
   },
   computed: {
-    dateRange: function() {
-      return `${this.startDate} - ${this.endDate}`;
+    dateRange: function () {
+      return `${this.startDate} - ${this.endDate}`
     }
   },
   methods: {
-    getRecords() {
+    getRecords () {
       axios
         .post(
           `${this.$store.state.apiUrl}/record/money`,
@@ -103,24 +103,24 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
-          console.log(res);
-          if (res.data.msg === "ok") {
-            this.records = res.data.result;
+          console.log(res)
+          if (res.data.msg === 'ok') {
+            this.records = res.data.result
           } else {
             // console.log(res.data);
-            this.hasError = true;
-            this.errorMessage = res.data.msg;
+            this.hasError = true
+            this.errorMessage = res.data.msg
           }
-        });
+        })
       // .catch(err => console.log(err));
     }
   }
-};
+}
 </script>
 <style scoped>
 .border_custo {

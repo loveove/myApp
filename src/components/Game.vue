@@ -13,21 +13,33 @@
           <v-toolbar-title>电子</v-toolbar-title>
         </v-toolbar>
         <!-- pagination -->
-        <div class="text-xs-center grey">
-          <v-pagination v-model="page" :length="10" :total-visible="6" circle @input="paging(page)"></v-pagination>
+        <div class="text-xs-center">
+          <v-pagination v-model="page" :length="10" circle @input="paging(page)"></v-pagination>
         </div>
         <!-- api content -->
         <v-container style="height: 100%">
           <v-layout row wrap justify-space-around>
             <v-flex v-for="game in games" :key="game.id" xs5>
               <v-img :src="game.img_path" height="150" contain class="grey darken-4 my-1"></v-img>
-              <v-btn block color="orange" v-if="isLogin" @click.native="goToGame(game.url)">进路游戏</v-btn>
+              <!-- <login v-if="$store.state.token==null"> -->
+              <v-btn
+                block
+                color="orange accent-4 white--text"
+                @click.native="goToGame(game.url)"
+                v-if="$store.state.token!=null"
+              >进路游戏</v-btn>
+              <v-btn
+                block
+                color="red accent-4 white--text"
+                @click.native="linkLogin"
+                v-if="$store.state.token==null"
+              >进路游戏</v-btn>
+
+              <!-- </login> -->
+
               <!-- <Login v-if="!isLogin" class="d-flex">
-                <v-btn block color="grey">进路游戏</v-btn>
+                <v-btn block color="grey">进</v-btn>
               </Login>-->
-              <!-- <a href="#" v-if="!isLogin">
-                <v-img :src="game.img_path" height="150" contain class="grey darken-4 my-1"></v-img>
-              </a>-->
             </v-flex>
           </v-layout>
         </v-container>
@@ -43,25 +55,22 @@
 </template>
 
 <script>
-import { apiMethods } from "@/main";
+import Login from "../views/Login.vue";
+
 import axios from "axios";
 const qs = require("qs");
-
-// import Login from "../views/Login.vue";
-// import TokenExpiredDialog from "../components/TokenExpiredDialog.vue";
-
 export default {
   name: "Game",
   components: {
-    // Login
+    Login
     // TokenExpiredDialog
   },
   data() {
     return {
-      dialog: true,
+      // page: 1,
       games: [],
       page: Number(this.$route.params.page),
-      showDialog: false
+      dialog: true
     };
   },
   computed: {
@@ -76,16 +85,20 @@ export default {
       }
     }
   },
+
   methods: {
-    linkClassification() {
-      this.$emit("confirmgame");
-    },
     paging(page) {
       this.$router.push({
         name: "games",
         params: { page: page }
       });
       this.getGames(page);
+    },
+    linkClassification() {
+      this.$router.push("/classification");
+    },
+    linkLogin() {
+      this.$router.push("/login");
     },
     getGames(page) {
       this.showDialog = true;
@@ -105,10 +118,6 @@ export default {
         .then(res => {
           // console.log(res);
           this.games = res.data.result.list;
-          this.showDialog = false;
-          if (this.$store.state.isLogin) {
-            this.getGameUrl(this.games);
-          }
         });
       // .catch(err => console.log(err));
     },
@@ -128,7 +137,10 @@ export default {
           )
           .then(res => {
             this.games[index].url = res.data.result.game_url;
-            this.showDialog = false;
+            // this.showDialog = false;
+            if (this.$store.state.isLogin) {
+              this.getGameUrl(this.games);
+            }
           });
         // .catch(err => console.log(err));
       });
@@ -150,8 +162,4 @@ export default {
 };
 </script>
 <style scoped>
-.henry-ml {
-  margin-left: 35%;
-}
 </style>
-

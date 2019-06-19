@@ -54,48 +54,48 @@
     </v-container>
   </div>
 </template>
-  <script>
-import ConfirmationDialog from "./ConfirmationDialog.vue";
-import axios from "axios";
-import qs from "qs";
+<script>
+import ConfirmationDialog from './ConfirmationDialog.vue'
+import axios from 'axios'
+import qs from 'qs'
 export default {
-  name: "BankCardList",
+  name: 'BankCardList',
   components: {
     ConfirmationDialog
   },
-  data() {
+  data () {
     return {
       rowsPerPageItems: [2, 4, 6],
       pagination: {
         rowsPerPage: 2
       }
-    };
+    }
   },
   computed: {
-    bankCards() {
-      return Array.from(this.$store.state.bankInfo);
+    bankCards () {
+      return Array.from(this.$store.state.bankInfo)
     }
   },
   methods: {
-    addBankCardList() {
-      this.$router.push("/addbankcardlist");
+    addBankCardList () {
+      this.$router.push('/addbankcardlist')
     },
-    getBankInfo() {
+    getBankInfo () {
       // this.isLoading = true;
       axios
         .get(`${this.$store.state.apiUrl}/user/bankCards`, {
           headers: {
-            "X-Auth-Token": this.$store.state.token
+            'X-Auth-Token': this.$store.state.token
           }
         })
         .then(res => {
-          this.$store.dispatch("setBankInfo", res.data.result);
+          this.$store.dispatch('setBankInfo', res.data.result)
           // this.isLoading = false;
-        });
+        })
       // .catch(err => console.log(err));
     },
-    deleteBank(bankId) {
-      this.isLoading = true;
+    deleteBank (bankId) {
+      this.isLoading = true
       axios
         .post(
           `${this.$store.state.apiUrl}/user/bankCard/del`,
@@ -104,35 +104,25 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(() => {
           // this.isLoading = false;
-          this.getBankInfo();
-          //return code 1 when only one bank card is left
-        });
+          this.getBankInfo()
+          // return code 1 when only one bank card is left
+        })
       // .catch(err => console.log(err));
     }
   },
-  created() {
-    this.getBankInfo();
+  created () {
+    this.getBankInfo()
   }
-};
+}
 </script>
     <style scope>
 .border_custo {
   border-radius: 10px;
 }
 </style>
-    
-    
-  
-    
-   
-       
-         
-                  
-
-

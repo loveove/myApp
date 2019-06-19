@@ -13,12 +13,12 @@
       <v-layout row wrap>
         <v-layout xs12 class="pt-4">
           <v-flex xs10>
-            <span class="px-4 ">平台推荐</span>
+            <span class="px-4">平台推荐</span>
             <span>精彩荟萃,激情无限</span>
           </v-flex>
           <v-flex xs2>
             <span @click="linkClassification" class="blue--text">更多</span>
-            <i class="fas fa-chevron-right"></i>
+            <i class="fas fa-chevron-right" style="color:#2962FF;"></i>
           </v-flex>
         </v-layout>
         <v-layout xs12 class="pt-4">
@@ -84,7 +84,7 @@
           </v-flex>
           <v-flex xs2>
             <span @click="linkClassification" class="blue--text">更多</span>
-            <i class="fas fa-chevron-right"></i>
+            <i class="fas fa-chevron-right" style="color:#2962FF;"></i>
           </v-flex>
         </v-layout>
       </v-layout>
@@ -106,45 +106,45 @@
 </template>
 
 <script>
-import axios from "axios";
-import HeaderComponent from "../components/HeaderComponent.vue";
+import axios from 'axios'
+import HeaderComponent from '../components/HeaderComponent.vue'
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HeaderComponent
   },
-  data() {
+  data () {
     return {
       page: 1,
       items: [
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558436265047捕鱼1.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558436265047捕鱼1.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1552732533284首页2453.png"
+          src: 'https://line.xwiht.cn/QUC/imgs/1552732533284首页2453.png'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558432826800末端.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558432826800末端.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/15584354210091234.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/15584354210091234.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558437245325猴子.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558437245325猴子.jpg'
         }
       ]
-    };
+    }
   },
   methods: {
-    linkClassification() {
-      this.$router.push("/classification");
-      this.dialog = false;
+    linkClassification () {
+      this.$router.push('/classification')
+      this.dialog = false
     }
     // linktodiscount() {
     //   this.$router.push("/discount");
@@ -161,6 +161,5 @@ export default {
   //     }
   //   }
   // }
-};
+}
 </script>
-

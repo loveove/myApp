@@ -111,53 +111,53 @@
   </div>
 </template>
 <script>
-import Logout from "../components/Logout.vue";
-import QueryBalance from "../components/QueryBalance.vue";
+import Logout from '../components/Logout.vue'
+// import QueryBalance from '../components/QueryBalance.vue'
 export default {
-  name: "MemberCenter",
-  data() {
+  name: 'MemberCenter',
+  data () {
     return {
       mainBalance: 0
-    };
+    }
   },
   components: {
-    Logout,
-    QueryBalance
+    Logout
+    // QueryBalance
   },
   methods: {
-    linkOverView() {
-      this.$router.push("/querybalance");
+    linkOverView () {
+      this.$router.push('/querybalance')
     },
-    linkWithdraw() {
-      this.$router.push("/withdrawarea");
+    linkWithdraw () {
+      this.$router.push('/withdrawarea')
     },
-    linkPlatformTransfer() {
-      this.$router.push("/platformtransfer");
+    linkPlatformTransfer () {
+      this.$router.push('/platformtransfer')
     },
-    linkDeposit() {
-      this.$router.push("/depositarea");
+    linkDeposit () {
+      this.$router.push('/depositarea')
     },
-    linkUserInfo() {
+    linkUserInfo () {
       // this.$store.dispatch("setUserInfoDefaultTab", 0);
-      this.$router.push("/userinfo");
+      this.$router.push('/userinfo')
     },
-    linkHistoryRecord() {
-      this.$router.push("/historyrecord");
+    linkHistoryRecord () {
+      this.$router.push('/historyrecord')
     },
-    linkMyAgent() {
-      this.$router.push("/myagent");
+    linkMyAgent () {
+      this.$router.push('/myagent')
     },
-    linkAutoRefresh() {
-      this.$router.push("/autorefresh");
+    linkAutoRefresh () {
+      this.$router.push('/autorefresh')
     },
-    toQueryBalance() {
-      this.$router.push("/querybalance");
+    toQueryBalance () {
+      this.$router.push('/querybalance')
     },
-    forgotpassword() {
-      alert("请联系在线客服");
+    forgotpassword () {
+      alert('请联系在线客服')
     }
   }
-};
+}
 </script>
 
 <style scope>
@@ -180,5 +180,3 @@ export default {
   margin-right: auto;
 }
 </style>
-
-

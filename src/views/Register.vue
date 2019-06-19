@@ -156,6 +156,7 @@ export default {
           // console.log(response);
           if (response.data.msg === "注册成功") {
             this.$store.dispatch("setToken", response.data.result.token);
+            this.$store.dispatch("isLoginTrue");
             this.$router.push("/");
           } else {
             this.hasError = true;

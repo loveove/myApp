@@ -34,7 +34,7 @@
     </v-layout>
   </div>
 </template>
-  
+
 <script>
 import axios from "axios";
 export default {
@@ -53,7 +53,8 @@ export default {
   computed: {},
   methods: {
     linkClassification() {
-      this.$emit("discount");
+      // this.$emit('discount')
+      this.$router.push("/classification");
     },
     getOffers() {
       axios

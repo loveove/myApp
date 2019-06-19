@@ -24,10 +24,10 @@
   </div>
 </template>
 <script>
-import EditInfo from "./EditInfo";
-import BankCardList from "./BankCardList";
-import EditLoginPassword from "./EditLoginPassword";
-import EditWithdrawPassword from "./EditWithdrawPassword";
+import EditInfo from './EditInfo'
+import BankCardList from './BankCardList'
+import EditLoginPassword from './EditLoginPassword'
+import EditWithdrawPassword from './EditWithdrawPassword'
 
 export default {
   components: {
@@ -36,41 +36,41 @@ export default {
     EditLoginPassword,
     EditWithdrawPassword
   },
-  data() {
+  data () {
     return {
-      active:null,
+      active: null,
       dialog: true,
       notifications: false,
       sound: true,
       widgets: false,
       tabs: [
         {
-          name: "基本资料",
+          name: '基本资料',
 
           content: `EditInfo`
         },
         {
-          name: "银行卡",
+          name: '银行卡',
 
           content: `BankCardList`
         },
         {
-          name: "登陆密码",
+          name: '登陆密码',
 
           content: `EditLoginPassword`
         },
         {
-          name: "取款密码",
+          name: '取款密码',
 
           content: `EditWithdrawPassword`
         }
       ]
-    };
+    }
   },
 
   methods: {
-    link_membercenter() {
-      this.$router.push("/membercenter");
+    link_membercenter () {
+      this.$router.push('/membercenter')
     }
   },
   computed: {
@@ -78,5 +78,5 @@ export default {
     //   return this.$store.state.userInfoDefaultTab;
     // }
   }
-};
+}
 </script>

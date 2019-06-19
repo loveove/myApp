@@ -85,49 +85,49 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-const qs = require("qs");
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "BetHistory",
-  data() {
+  name: 'BetHistory',
+  data () {
     return {
-      inputPlatforms: ["全部", "新锦江", "MG", "新锦江（新版）"],
-      gamePlatform: "全部",
-      startDate: "",
-      endDate: "",
+      inputPlatforms: ['全部', '新锦江', 'MG', '新锦江（新版）'],
+      gamePlatform: '全部',
+      startDate: '',
+      endDate: '',
       records: [],
       rowsPerPageItems: [3, 4, 5],
       pagination: {
         rowsPerPage: 3
       },
-      errorMessage: "",
+      errorMessage: '',
       hasError: false
-    };
+    }
   },
   computed: {
-    dateRange: function() {
-      return `${this.startDate} - ${this.endDate}`;
+    dateRange: function () {
+      return `${this.startDate} - ${this.endDate}`
     },
-    gamePlatformId: function() {
+    gamePlatformId: function () {
       switch (this.gamePlatform) {
-        case "全部":
-          return 0;
-        case "新锦江":
+        case '全部':
+          return 0
+        case '新锦江':
           // return Number(this.$store.state.config.plats[0].id);
-          return 32;
-        case "新锦江（新版）":
+          return 32
+        case '新锦江（新版）':
           // return Number(this.$store.state.config.plats[2].id);
-          return 35;
-        case "MG":
+          return 35
+        case 'MG':
           // return Number(this.$store.state.config.plats[1].id);
-          return 33;
+          return 33
         default:
-          return "";
+          return ''
       }
     }
   },
   methods: {
-    getRecords() {
+    getRecords () {
       axios
         .post(
           `${this.$store.state.apiUrl}/record/game`,
@@ -137,25 +137,25 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
           // console.log(res);
-          if (res.data.msg === "ok") {
-            this.records = res.data.result;
+          if (res.data.msg === 'ok') {
+            this.records = res.data.result
           } else {
             // console.log(res.data);
-            this.hasError = true;
-            this.errorMessage = res.data.msg;
+            this.hasError = true
+            this.errorMessage = res.data.msg
           }
-        });
+        })
       // .catch(err => console.log(err));
     }
   },
-  created() {}
-};
+  created () {}
+}
 </script>
 <style scoped>
 .border_custo {

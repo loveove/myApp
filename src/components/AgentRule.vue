@@ -16,45 +16,45 @@
     </v-flex>
   </v-container>
 </template>
-  
+
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  name: "AgentRule",
-  data() {
+  name: 'AgentRule',
+  data () {
     return {
       ruleOne: true,
       ruleTwo: false,
-      content: "",
-      ruleContent: ""
-    };
+      content: '',
+      ruleContent: ''
+    }
   },
   computed: {},
   methods: {
-    displayRuleOne() {
-      this.ruleOne = true;
-      this.ruleTwo = false;
+    displayRuleOne () {
+      this.ruleOne = true
+      this.ruleTwo = false
     },
-    displayRuleTwo() {
-      this.ruleTwo = true;
-      this.ruleOne = false;
+    displayRuleTwo () {
+      this.ruleTwo = true
+      this.ruleOne = false
     },
-    getData() {
+    getData () {
       axios
         .get(`${this.$store.state.apiUrl}/message/agentRule`, {
           headers: {
-            "X-Auth-Token": this.$store.state.token
+            'X-Auth-Token': this.$store.state.token
           }
         })
         .then(res => {
-          this.content = res.data.result.content;
-          this.ruleContent = res.data.result.rule_content;
-        });
+          this.content = res.data.result.content
+          this.ruleContent = res.data.result.rule_content
+        })
       // .catch(err => console.log(err));
     }
   },
-  created() {
-    this.getData();
+  created () {
+    this.getData()
   }
-};
+}
 </script>

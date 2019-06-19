@@ -2,7 +2,7 @@
   <div>
     <ConfirmationDialog @confirm="logout">
       <div class="pl-3">
-        <i class="fas fa-power-off  fa-lg" style="color:brown;"></i>
+        <i class="fas fa-power-off fa-lg" style="color:brown;"></i>
       </div>
       <div>退出账户</div>
     </ConfirmationDialog>
@@ -22,8 +22,9 @@ export default {
   methods: {
     logout() {
       axios.get(`${this.$store.state.apiUrl}/logout`).then(response => {
-        this.$store.dispatch("setToken",null);
+        this.$store.dispatch("setToken", null);
         localStorage.removeItem("token");
+        this.$store.dispatch("isLoginFalse");
         this.$router.push("/");
       });
     }
