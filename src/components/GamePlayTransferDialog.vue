@@ -1,17 +1,26 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-btn icon dark @click="dialog = false">
-        <v-icon>close</v-icon>
-      </v-btn>
+      <v-layout xs12 row wrap>
+        <v-flex xs10>
+          <v-card-title>
+            <span class="white--text">财务互转</span>
+          </v-card-title>
+        </v-flex>
+        <v-flex xs2>
+          <v-btn icon dark @click="toClassification" class="context-center">
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-flex>
+      </v-layout>
       <!-- <template v-slot:activator="{ on }"> -->
       <!-- <v-btn round small color="red darken-4 mt-4" class="mr-5" dark v-on="on">开始游戏</v-btn> -->
       <!-- </template> -->
       <v-card>
-        <v-card-title>
-          <span class="headline">财务互转</span>
-        </v-card-title>
         <v-card-text>
+          <v-flex xs12>
+            <span class="green--text" @click="toDeposit">先去存款</span>
+          </v-flex>
           <v-form ref="form" v-model="valid" class="px-4">
             <v-flex>
               <v-select
@@ -41,24 +50,38 @@
               required
             ></v-text-field>
 
-            <v-layout row wrap>
-              <v-flex xs12>
-                <!-- <v-btn
+            <!-- <v-layout row wrap>
+            <v-flex xs12>-->
+            <!-- <v-btn
                   :disabled="isDisabled"
                   color="red darken-4 white--text"
                   :loading="isLoading"
                   block
                   @click.native="transferBalance"
-                >确定转账</v-btn> -->
-              </v-flex>
-            </v-layout>
+            >确定转账</v-btn>-->
+            <!-- </v-flex>
+            </v-layout>-->
           </v-form>
         </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click="transferBalance">确定转账</v-btn>
-          <v-btn color="blue darken-1" flat @gameplaytransfer="toLiveGame">直接游戏</v-btn>
-        </v-card-actions>
+        <v-layout xs12 row wrap>
+          <!-- <v-card-actions>
+          <v-spacer></v-spacer>-->
+          <v-flex xs6 class="pl-5">
+            <v-btn color="red darken-4 white--text" small @click.native="transferBalance">确定转账</v-btn>
+          </v-flex>
+          <v-flex xs6>
+            <v-btn color="red darken-4 white--text" small :href="urlXJJ">直接游戏</v-btn>
+          </v-flex>
+          <!-- </v-card-actions> -->
+          <v-alert
+            v-model="hasAlert"
+            :value="true"
+            type="info"
+            icon="warning"
+            outline
+            dismissible
+          >{{alertMessage}}</v-alert>
+        </v-layout>
       </v-card>
     </v-dialog>
   </v-layout>
@@ -69,6 +92,8 @@ const qs = require("qs");
 export default {
   name: "GamePlayTransferDialog",
   data: () => ({
+    alertMessage: "",
+    hasAlert: false,
     dialog: true,
     notifications: false,
     sound: true,
@@ -81,7 +106,10 @@ export default {
     amountRules: [v => !!v || "amount is required"],
     outgoing: "",
 
-    incoming: ""
+    incoming: "",
+    urlXJJ: "",
+    urlNJJ: "",
+    isLoading: false
   }),
   computed: {
     isDisabled() {
@@ -131,11 +159,24 @@ export default {
       this.incomingItems = this.outgoingItems.filter(item => item != newValue);
     }
   },
+  computed: {
+    isLogin: function() {
+      return this.$store.state.isLogin;
+    }
+  },
+  watch: {
+    isLogin: function(toGet) {
+      if (toGet) {
+        this.getGameUrl("XJJ");
+      }
+    }
+  },
   methods: {
-     toLiveGame() {
-      // this.$router.push("/gameplaytransferdialog");
-      this.$emit("gameplaytransfer");
-
+    toDeposit() {
+      this.$router.push("/depositarea");
+    },
+    toClassification() {
+      this.$router.push("/classification");
     },
     link_membercenter() {
       this.$router.push("/membercenter");
@@ -167,6 +208,41 @@ export default {
           }
         });
       // .catch(err => console.log(err));
+    },
+
+    getGameUrl(gamePlatformId, gameId = 0) {
+      this.isLoading = true;
+      axios
+        .get(
+          `${
+            this.$store.state.apiUrl
+          }/game/launchLottery?gamePlatformId=${gamePlatformId}&gameId=${gameId}`,
+          {
+            headers: {
+              "X-Auth-Token": this.$store.state.token
+            }
+          }
+        )
+        .then(res => {
+          if (gamePlatformId === "XJJ") {
+            this.urlXJJ = res.data.result.game_url;
+            // console.log(res.data)
+          }
+          if (gamePlatformId === "NJJ") {
+            this.urlNJJ = res.data.result.game_url;
+            // console.log(res.data)
+          }
+          if (gamePlatformId === "MG") {
+            // console.log(res.data);
+          }
+          this.isLoading = false;
+        });
+      // .catch(err => console.log(err));
+    }
+  },
+  mounted() {
+    if (this.isLogin) {
+      this.getGameUrl("XJJ");
     }
   }
 };

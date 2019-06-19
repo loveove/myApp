@@ -47,17 +47,23 @@
           :disabled="isLoading"
         >开始游戏</v-btn>-->
         <!-- <Login v-if="!isLogin"> -->
-        <v-btn
+        <!-- <v-btn
           color="orange accent-4 white--text"
           v-if="$store.state.token!=null"
-          @gameplaytransfer="getGameUrl"
+          @gameplaytransfer:href="urlXJJ"
           round
           small
-        >
-          <!-- <GamePlayTransferDialog/> -->
-          进路游戏
-        </v-btn>
-        <!-- <v-btn block color="red" :href="urlXJJ" round small v-if="$store.state.token!=null">进路游戏</v-btn> -->
+        >-->
+        <!-- <GamePlayTransferDialog/> -->
+        <!-- 进路游戏
+        </v-btn>-->
+        <v-btn
+          color="orange accent-4 white--text"
+          @click="gamePlayTransfer"
+          round
+          small
+          v-if="$store.state.token!=null"
+        >进路游戏</v-btn>
         <v-btn
           color="red darken-4 white--text"
           @click.native="linkLogin"
@@ -120,61 +126,20 @@ export default {
       ]
     };
   },
-  computed: {
-    isLogin: function() {
-      return this.$store.state.isLogin;
-    }
-  },
-  watch: {
-    isLogin: function(toGet) {
-      if (toGet) {
-        this.getGameUrl("XJJ");
-      }
-    }
-  },
   methods: {
     // linkClassification() {
     //   this.$emit("livegame");
     // },
+    gamePlayTransfer() {
+      this.$router.push("/gameplaytransferdialog");
+    },
     linkLogin() {
       this.$router.push("/login");
     },
 
-    getGameUrl(gamePlatformId, gameId = 0) {
-      this.isLoading = true;
-      axios
-        .get(
-          `${
-            this.$store.state.apiUrl
-          }/game/launchLottery?gamePlatformId=${gamePlatformId}&gameId=${gameId}`,
-          {
-            headers: {
-              "X-Auth-Token": this.$store.state.token
-            }
-          }
-        )
-        .then(res => {
-          if (gamePlatformId === "XJJ") {
-            this.urlXJJ = res.data.result.game_url;
-            // console.log(res.data)
-          }
-          if (gamePlatformId === "NJJ") {
-            this.urlNJJ = res.data.result.game_url;
-            // console.log(res.data)
-          }
-          if (gamePlatformId === "MG") {
-            // console.log(res.data);
-          }
-          this.isLoading = false;
-        });
-      // .catch(err => console.log(err));
-    }
+  
   },
-  mounted() {
-    if (this.isLogin) {
-      this.getGameUrl("XJJ");
-    }
-  }
+
 };
 </script>
 <style scoped>
