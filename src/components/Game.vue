@@ -55,14 +55,14 @@
 </template>
 
 <script>
-import Login from '../views/Login.vue'
+// import Login from '../views/Login.vue'
 
 import axios from 'axios'
 const qs = require('qs')
 export default {
   name: 'Game',
   components: {
-    Login
+    // Login
     // TokenExpiredDialog
   },
   data () {
