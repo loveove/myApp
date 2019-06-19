@@ -96,7 +96,7 @@ export default {
       this.$router.push('/register')
       this.dialog = false
     },
-    login() {
+    login () {
       axios
         .post(
           `${this.$store.state.apiUrl}/login`,
@@ -109,7 +109,7 @@ export default {
           // console.log(this)
           if (response.data.result.token != undefined) {
             this.$store.dispatch('setToken', response.data.result.token)
-            this.$store.dispatch("isLoginTrue");
+            this.$store.dispatch('isLoginTrue')
             this.$router.push('/')
           } else {
             this.hasError = true

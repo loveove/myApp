@@ -85,13 +85,13 @@
   </v-layout>
 </template>
 <script>
-import axios from "axios";
-import qs from "qs";
+import axios from 'axios'
+import qs from 'qs'
 export default {
-  name: "Register",
-  data() {
+  name: 'Register',
+  data () {
     return {
-      errorMessage: "",
+      errorMessage: '',
       hasError: false,
       dialog: true,
       valid: true,
@@ -100,50 +100,50 @@ export default {
       widgets: false,
       show: false,
       timestampt: new Date().valueOf(),
-      name: "",
+      name: '',
       nameRules: [
-        v => !!v || "请加入名称",
+        v => !!v || '请加入名称',
         v =>
           (v && v.toString().length >= 5 && v.toString().length <= 10) ||
-          "请输入5-10位字母或数字"
+          '请输入5-10位字母或数字'
       ],
-      pass: "",
+      pass: '',
       passwordRules: [
-        v => !!v || "请加入密码",
+        v => !!v || '请加入密码',
         v =>
           (v && v.toString().length >= 6 && v.toString().length <= 12) ||
-          "必请输入6-12位数字或字母"
+          '必请输入6-12位数字或字母'
       ],
-      email: "",
+      email: '',
       emailRules: [
-        v => !!v || "请加入邮件",
-        v => /.+@.+/.test(v) || "邮件必须有效"
+        v => !!v || '请加入邮件',
+        v => /.+@.+/.test(v) || '邮件必须有效'
       ],
-      phone: "",
+      phone: '',
       phoneRules: [
-        v => !!v || "请加入电话号码",
-        v => (v && v.toString().length === 11) || "必须是11个号码"
+        v => !!v || '请加入电话号码',
+        v => (v && v.toString().length === 11) || '必须是11个号码'
       ],
-      code: "",
+      code: '',
       codeRules: [
-        v => !!v || "请加入验证码",
-        v => (v && v.length == 4) || "验证码必须是4个字"
+        v => !!v || '请加入验证码',
+        v => (v && v.length == 4) || '验证码必须是4个字'
       ]
-    };
+    }
   },
   methods: {
-    close() {
-      this.$router.push("/");
-      this.dialog = false;
+    close () {
+      this.$router.push('/')
+      this.dialog = false
     },
-    changeImageCode() {
-      this.timestampt = new Date().valueOf();
+    changeImageCode () {
+      this.timestampt = new Date().valueOf()
     },
-    userRegisteration() {
+    userRegisteration () {
       axios({
-        method: "post",
-        url: "http://47.90.100.229:20000/api/user/register",
-        headers: { "content-type": "application/x-www-form-urlencoded" },
+        method: 'post',
+        url: 'http://47.90.100.229:20000/api/user/register',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
         data: qs.stringify({
           username: this.name,
           password: this.pass,
@@ -154,28 +154,28 @@ export default {
       })
         .then(response => {
           // console.log(response);
-          if (response.data.msg === "注册成功") {
-            this.$store.dispatch("setToken", response.data.result.token);
-            this.$store.dispatch("isLoginTrue");
-            this.$router.push("/");
+          if (response.data.msg === '注册成功') {
+            this.$store.dispatch('setToken', response.data.result.token)
+            this.$store.dispatch('isLoginTrue')
+            this.$router.push('/')
           } else {
-            this.hasError = true;
-            this.errorMessage = response.data.msg;
+            this.hasError = true
+            this.errorMessage = response.data.msg
           }
         })
-        .catch(function(error) {
-          console.log(error);
-        });
+        .catch(function (error) {
+          console.log(error)
+        })
     }
   },
   computed: {
-    imageSource: function() {
+    imageSource: function () {
       return (
         `${this.$store.state.apiUrl}/validateCode?timesp` + this.timestampt
-      );
+      )
     }
   }
-};
+}
 </script>
 <style scoped>
 .border_custo {

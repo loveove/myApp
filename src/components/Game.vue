@@ -55,74 +55,74 @@
 </template>
 
 <script>
-import Login from "../views/Login.vue";
+import Login from '../views/Login.vue'
 
-import axios from "axios";
-const qs = require("qs");
+import axios from 'axios'
+const qs = require('qs')
 export default {
-  name: "Game",
+  name: 'Game',
   components: {
     Login
     // TokenExpiredDialog
   },
-  data() {
+  data () {
     return {
       // page: 1,
       games: [],
       page: Number(this.$route.params.page),
       dialog: true
-    };
+    }
   },
   computed: {
-    isLogin: function() {
-      return this.$store.state.isLogin;
+    isLogin: function () {
+      return this.$store.state.isLogin
     }
   },
   watch: {
-    isLogin: function(toGet) {
+    isLogin: function (toGet) {
       if (toGet) {
-        this.getGames(this.$route.params.page);
+        this.getGames(this.$route.params.page)
       }
     }
   },
 
   methods: {
-    paging(page) {
+    paging (page) {
       this.$router.push({
-        name: "games",
+        name: 'games',
         params: { page: page }
-      });
-      this.getGames(page);
+      })
+      this.getGames(page)
     },
-    linkClassification() {
-      this.$router.push("/classification");
+    linkClassification () {
+      this.$router.push('/classification')
     },
-    linkLogin() {
-      this.$router.push("/login");
+    linkLogin () {
+      this.$router.push('/login')
     },
-    getGames(page) {
-      this.showDialog = true;
+    getGames (page) {
+      this.showDialog = true
       axios
         .post(
           `${this.$store.state.apiGameUrl}/game/getList`,
           qs.stringify({
-            cid: "all",
+            cid: 'all',
             page: page
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
           // console.log(res);
-          this.games = res.data.result.list;
-        });
+          this.games = res.data.result.list
+        })
       // .catch(err => console.log(err));
     },
-    getGameUrl(games) {
-      this.showDialog = true;
+    getGameUrl (games) {
+      this.showDialog = true
       games.forEach((game, index) => {
         axios
           .get(
@@ -131,35 +131,35 @@ export default {
             }/game/launchLottery?gamePlatformId='MG'&gameId=${game.id}`,
             {
               headers: {
-                "X-Auth-Token": this.$store.state.token
+                'X-Auth-Token': this.$store.state.token
               }
             }
           )
           .then(res => {
-            this.games[index].url = res.data.result.game_url;
+            this.games[index].url = res.data.result.game_url
             // this.showDialog = false;
             if (this.$store.state.isLogin) {
-              this.getGameUrl(this.games);
+              this.getGameUrl(this.games)
             }
-          });
+          })
         // .catch(err => console.log(err));
-      });
+      })
     },
-    goToGame(url) {
-      window.open(url);
+    goToGame (url) {
+      window.open(url)
     }
   },
-  mounted() {
-    this.getGames(this.$route.params.page);
-    if (localStorage.getItem("token") != null) {
-      if (localStorage.getItem("token").length > 10) {
-        this.$store.dispatch("setToken", localStorage.getItem("token"));
-        //check login status api should be applied here
+  mounted () {
+    this.getGames(this.$route.params.page)
+    if (localStorage.getItem('token') != null) {
+      if (localStorage.getItem('token').length > 10) {
+        this.$store.dispatch('setToken', localStorage.getItem('token'))
+        // check login status api should be applied here
         // apiMethods.checkToken();
       }
     }
   }
-};
+}
 </script>
 <style scoped>
 </style>

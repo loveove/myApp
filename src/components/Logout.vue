@@ -9,25 +9,25 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import ConfirmationDialog from "./ConfirmationDialog.vue";
+import axios from 'axios'
+import ConfirmationDialog from './ConfirmationDialog.vue'
 export default {
-  name: "Logout",
+  name: 'Logout',
   components: {
     ConfirmationDialog
   },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {
-    logout() {
+    logout () {
       axios.get(`${this.$store.state.apiUrl}/logout`).then(response => {
-        this.$store.dispatch("setToken", null);
-        localStorage.removeItem("token");
-        this.$store.dispatch("isLoginFalse");
-        this.$router.push("/");
-      });
+        this.$store.dispatch('setToken', null)
+        localStorage.removeItem('token')
+        this.$store.dispatch('isLoginFalse')
+        this.$router.push('/')
+      })
     }
   }
-};
+}
 </script>

@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  name: "Discount",
-  data() {
+  name: 'Discount',
+  data () {
     return {
       dialog: true,
       notifications: false,
@@ -47,34 +47,34 @@ export default {
       widgets: false,
       offers: [],
       redirectingUrl:
-        "http://47.90.100.229:20001/coloum/discount_detail.html?id="
-    };
+        'http://47.90.100.229:20001/coloum/discount_detail.html?id='
+    }
   },
   computed: {},
   methods: {
-    linkClassification() {
+    linkClassification () {
       // this.$emit('discount')
-      this.$router.push("/classification");
+      this.$router.push('/classification')
     },
-    getOffers() {
+    getOffers () {
       axios
         .get(`${this.$store.state.apiUrl}/activity/list`, {
           headers: {
-            "X-Auth-Token": this.$store.state.token
+            'X-Auth-Token': this.$store.state.token
           }
         })
         .then(res => {
-          this.offers = res.data.result;
-        });
+          this.offers = res.data.result
+        })
     },
-    redirect(url) {
-      window.open(this.redirectingUrl + url, "_blank");
+    redirect (url) {
+      window.open(this.redirectingUrl + url, '_blank')
     }
   },
-  created() {
-    this.getOffers();
+  created () {
+    this.getOffers()
   }
-};
+}
 </script>
 <style>
 .api-text {
