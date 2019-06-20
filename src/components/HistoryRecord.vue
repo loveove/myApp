@@ -24,14 +24,18 @@
   </div>
 </template>
 <script>
-import DepositHistory from './DepositHistory'
-import WithdrawHistory from './WithdrawHistory'
-import TransferHistory from './TransferHistory'
-import BetHistory from './BetHistory'
-import FundHistory from './FundHistory'
+import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
+
+import DepositHistory from "./DepositHistory";
+import WithdrawHistory from "./WithdrawHistory";
+import TransferHistory from "./TransferHistory";
+import BetHistory from "./BetHistory";
+import FundHistory from "./FundHistory";
 
 export default {
-  name: 'HistoryRecord',
+  mixins: [ApiCheckTokenMixin],
+
+  name: "HistoryRecord",
   components: {
     DepositHistory,
     FundHistory,
@@ -39,7 +43,7 @@ export default {
     BetHistory,
     WithdrawHistory
   },
-  data () {
+  data() {
     return {
       active: null,
       dialog: true,
@@ -48,40 +52,43 @@ export default {
       widgets: false,
       items: [
         {
-          name: '存款记录',
+          name: "存款记录",
 
           content: `DepositHistory`
         },
         {
-          name: '提款记录',
+          name: "提款记录",
 
           content: `WithdrawHistory`
         },
         {
-          name: '转账记录',
+          name: "转账记录",
 
           content: `TransferHistory`
         },
         {
-          name: '投注记录',
+          name: "投注记录",
 
           content: `BetHistory`
         },
         {
-          name: '资金记录',
+          name: "资金记录",
 
           content: `FundHistory`
         }
       ]
-    }
+    };
   },
 
   methods: {
-    link_membercenter () {
-      this.$router.push('/membercenter')
+    link_membercenter() {
+      this.$router.push("/membercenter");
     }
+  },
+  created() {
+    this.checkToken();
   }
-}
+};
 </script>
 <style scope>
 .custo_font {

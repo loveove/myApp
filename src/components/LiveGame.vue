@@ -95,9 +95,9 @@ export default {
   },
   data () {
     return {
-      urlXJJ: '',
-      urlNJJ: '',
-      isLoading: false,
+      // urlXJJ: '',
+      // urlNJJ: '',
+      // isLoading: false,
       //   dialog: true,
       items: [
         {

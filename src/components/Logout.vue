@@ -9,9 +9,12 @@
   </div>
 </template>
 <script>
+// import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
+
 import axios from 'axios'
 import ConfirmationDialog from './ConfirmationDialog.vue'
 export default {
+    // mixins: [ApiCheckTokenMixin],
   name: 'Logout',
   components: {
     ConfirmationDialog
@@ -25,6 +28,7 @@ export default {
         this.$store.dispatch('setToken', null)
         localStorage.removeItem('token')
         this.$store.dispatch('isLoginFalse')
+   
         this.$router.push('/')
       })
     }

@@ -178,7 +178,8 @@ export default {
     this.phone = this.$store.state.userInfo.mobile
     this.wechat = this.$store.state.userInfo.wechat
     this.qq = this.$store.state.userInfo.qq
-  }
+  },
+  
 }
 </script>
 <style scoped>

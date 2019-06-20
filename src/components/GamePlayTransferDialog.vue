@@ -70,7 +70,8 @@
             <v-btn color="red darken-4 white--text" small @click.native="transferBalance">确定转账</v-btn>
           </v-flex>
           <v-flex xs6>
-            <v-btn color="red darken-4 white--text" small :href="urlXJJ">直接游戏</v-btn>
+            <!-- <v-btn color="red darken-4 white--text" small :href="urlXJJ">直接游戏</v-btn> -->
+            <a href="urlXJJ" color="red darken-4 white--text" target="_blank">Link</a>
           </v-flex>
           <!-- </v-card-actions> -->
           <v-alert
@@ -87,101 +88,103 @@
   </v-layout>
 </template>
 <script>
-import axios from 'axios'
-const qs = require('qs')
+import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
+import axios from "axios";
+const qs = require("qs");
 export default {
-  name: 'GamePlayTransferDialog',
+  mixins: [ApiCheckTokenMixin],
+  name: "GamePlayTransferDialog",
   data: () => ({
-    alertMessage: '',
+    alertMessage: "",
     hasAlert: false,
     dialog: true,
     notifications: false,
     sound: true,
     widgets: false,
-    outgoingItems: ['主账户', '新锦江', 'MG', '新锦江（新版）'],
+    outgoingItems: ["主账户", "新锦江", "MG", "新锦江（新版）"],
     incomingItems: [],
     isLoading: false,
     valid: false,
-    amount: '',
-    amountRules: [v => !!v || 'amount is required'],
-    outgoing: '',
+    amount: "",
+    amountRules: [v => !!v || "amount is required"],
+    outgoing: "",
 
-    incoming: '',
-    urlXJJ: '',
-    urlNJJ: '',
+    incoming: "",
+    urlXJJ: "",
+    urlNJJ: "",
     isLoading: false
   }),
   computed: {
-    isDisabled () {
+    isDisabled() {
       if (this.valid === false || this.isLoading === true) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
     },
-    outgoingId () {
+    outgoingId() {
       switch (this.outgoing) {
-        case '主账户':
-          return 0
-        case '新锦江':
+        case "主账户":
+          return 0;
+        case "新锦江":
           // return Number(this.$store.state.config.plats[0].id);
-          return 32
-        case '新锦江（新版）':
+          return 32;
+        case "新锦江（新版）":
           // return Number(this.$store.state.config.plats[2].id);
-          return 35
-        case 'MG':
+          return 35;
+        case "MG":
           // return Number(this.$store.state.config.plats[1].id);
-          return 33
+          return 33;
         default:
-          return ''
+          return "";
       }
     },
-    incomingId () {
+    incomingId() {
       switch (this.incoming) {
-        case '主账户':
-          return 0
-        case '新锦江':
+        case "主账户":
+          return 0;
+        case "新锦江":
           // return Number(this.$store.state.config.plats[0].id);
-          return 32
-        case '新锦江（新版）':
+          return 32;
+        case "新锦江（新版）":
           // return Number(this.$store.state.config.plats[2].id);
-          return 35
-        case 'MG':
+          return 35;
+        case "MG":
           // return Number(this.$store.state.config.plats[1].id);
-          return 33
+          return 33;
         default:
-          return ''
+          return "";
       }
     }
   },
   watch: {
-    outgoing (newValue) {
-      this.incomingItems = this.outgoingItems.filter(item => item != newValue)
+    outgoing(newValue) {
+      this.incomingItems = this.outgoingItems.filter(item => item != newValue);
     }
   },
   computed: {
-    isLogin: function () {
-      return this.$store.state.isLogin
+    isLogin: function() {
+      return this.$store.state.isLogin;
     }
   },
   watch: {
-    isLogin: function (toGet) {
+    isLogin: function(toGet) {
       if (toGet) {
-        this.getGameUrl('XJJ')
+        this.getGameUrl("XJJ");
       }
     }
   },
   methods: {
-    toDeposit () {
-      this.$router.push('/depositarea')
+    toDeposit() {
+      this.$router.push("/depositarea");
     },
-    toClassification () {
-      this.$router.push('/classification')
+    toClassification() {
+      this.$router.push("/classification");
     },
-    link_membercenter () {
-      this.$router.push('/membercenter')
+    link_membercenter() {
+      this.$router.push("/membercenter");
     },
-    transferBalance () {
+    transferBalance() {
       axios
         .post(
           `${this.$store.state.apiUrl}/order/transfer`,
@@ -192,26 +195,26 @@ export default {
           }),
           {
             headers: {
-              'X-Auth-Token': this.$store.state.token
+              "X-Auth-Token": this.$store.state.token
             }
           }
         )
         .then(res => {
           // console.log(res);
-          if (res.data.msg === 'ok') {
-            this.hasAlert = true
-            this.alertMessage = '成功'
+          if (res.data.msg === "ok") {
+            this.hasAlert = true;
+            this.alertMessage = "成功";
             // console.log(res.data);
           } else {
-            this.hasAlert = true
-            this.alertMessage = res.data.msg
+            this.hasAlert = true;
+            this.alertMessage = res.data.msg;
           }
-        })
+        });
       // .catch(err => console.log(err));
     },
 
-    getGameUrl (gamePlatformId, gameId = 0) {
-      this.isLoading = true
+    getGameUrl(gamePlatformId, gameId = 0) {
+      this.isLoading = true;
       axios
         .get(
           `${
@@ -219,31 +222,35 @@ export default {
           }/game/launchLottery?gamePlatformId=${gamePlatformId}&gameId=${gameId}`,
           {
             headers: {
-              'X-Auth-Token': this.$store.state.token
+              "X-Auth-Token": this.$store.state.token
             }
           }
         )
         .then(res => {
-          if (gamePlatformId === 'XJJ') {
-            this.urlXJJ = res.data.result.game_url
+          if (gamePlatformId === "XJJ") {
+            this.urlXJJ = res.data.result.game_url;
+            console.log(res.data);
+            // console.log(this.urlXJJ)
+          }
+          if (gamePlatformId === "NJJ") {
+            this.urlNJJ = res.data.result.game_url;
             // console.log(res.data)
           }
-          if (gamePlatformId === 'NJJ') {
-            this.urlNJJ = res.data.result.game_url
-            // console.log(res.data)
-          }
-          if (gamePlatformId === 'MG') {
+          if (gamePlatformId === "MG") {
             // console.log(res.data);
           }
-          this.isLoading = false
-        })
+          this.isLoading = false;
+        });
       // .catch(err => console.log(err));
     }
   },
-  mounted () {
+  mounted() {
     if (this.isLogin) {
-      this.getGameUrl('XJJ')
+      this.getGameUrl("XJJ");
     }
+  },
+  created() {
+    this.checkToken();
   }
-}
+};
 </script>

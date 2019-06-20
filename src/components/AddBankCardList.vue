@@ -74,7 +74,6 @@
 <script>
 import axios from 'axios'
 import { bus, apiMethods } from '@/main'
-
 const qs = require('qs')
 export default {
   name: 'AddBankCardList',
@@ -121,6 +120,7 @@ export default {
           {
             headers: {
               'X-Auth-Token': this.$store.state.token
+              
             }
           }
         )
@@ -133,7 +133,7 @@ export default {
             (this.bankName = ''),
             (this.bankBranch = '')
             bus.$emit('updateBankInfo')
-            apiMethods.getUserInfo()
+            // apiMethods.getUserInfo()
           } else {
             this.hasAlert = true
             this.alertMessage = res.data.msg
@@ -151,7 +151,6 @@ export default {
       }
     }
   },
-
   mounted () {
     bus.$on('doneSettingUserInfo', () => {
       this.name = this.$store.state.userInfo.real_name

@@ -24,19 +24,21 @@
   </div>
 </template>
 <script>
-import OfflineWinLose from './OfflineWinLose'
-import OfflineInfo from './OfflineInfo'
-import CommissionIssue from './CommissionIssue'
-import AgentRule from './AgentRule'
+import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
+import OfflineWinLose from "./OfflineWinLose";
+import OfflineInfo from "./OfflineInfo";
+import CommissionIssue from "./CommissionIssue";
+import AgentRule from "./AgentRule";
 export default {
-  name: 'MyAgent',
+  mixins: [ApiCheckTokenMixin],
+  name: "MyAgent",
   components: {
     OfflineWinLose,
     OfflineInfo,
     CommissionIssue,
     AgentRule
   },
-  data () {
+  data() {
     return {
       active: null,
       dialog: true,
@@ -46,30 +48,33 @@ export default {
 
       items: [
         {
-          name: '下线输赢',
+          name: "下线输赢",
           content: `OfflineWinLose`
         },
         {
-          name: '下线资料',
+          name: "下线资料",
           content: `OfflineInfo`
         },
         {
-          name: '佣金发放',
+          name: "佣金发放",
           content: `CommissionIssue`
         },
         {
-          name: '代理制度',
+          name: "代理制度",
           content: `AgentRule`
         }
       ]
-    }
+    };
   },
   methods: {
-    link_membercenter () {
-      this.$router.push('/membercenter')
+    link_membercenter() {
+      this.$router.push("/membercenter");
     }
+  },
+  created() {
+    this.checkToken();
   }
-}
+};
 </script>
 <style scoped>
 .custo_border {

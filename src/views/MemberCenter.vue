@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <QueryBalance v-if="$route.params.page === 'querybalance'"/> -->
     <v-container fluid class="red darken-4 pa-0">
       <v-layout wrap>
         <v-flex class="red darken-4" xs12 style="height:100px">
@@ -25,7 +24,7 @@
             </v-layout>
           </div>
         </v-flex>
-        <!-- <hr> -->
+     
       </v-layout>
     </v-container>
 
@@ -63,7 +62,7 @@
             <div>平台互转</div>
           </v-flex>
         </v-layout>
-        <!-- two -->
+       
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex xs-6 class="pl-4">
             <div class="pl-3" @click="linkMyAgent">
@@ -78,7 +77,7 @@
             <div>自助洗码</div>
           </v-flex>
         </v-layout>
-        <!-- three -->
+       
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex xs-6 class="pl-4">
             <div class="pl-3" @click="linkUserInfo">
@@ -93,13 +92,9 @@
             <div>历史记录</div>
           </v-flex>
         </v-layout>
-        <!-- four -->
+     
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex sx6 class="pl-4">
-            <!-- <div class="pl-3" @click="tosnackbar">
-              <i class="fas fa-lock fa-lg" style="color:darkblue;"></i>
-            </div>-->
-            <!-- <div>忘记密码?</div> -->
             <div class="pl-3" @click="snackbar = true">
               <i class="fas fa-lock fa-lg" style="color:darkblue;"></i>
             </div>
@@ -109,7 +104,7 @@
               <v-btn color="white" flat @click="snackbar = false">Close</v-btn>
             </v-snackbar>
           </v-flex>
-          <v-flex xs-6 class="pl-3">
+          <v-flex xs-6>
             <Logout/>
           </v-flex>
         </v-layout>
@@ -119,7 +114,6 @@
 </template>
 <script>
 import Logout from "../components/Logout.vue";
-// import QueryBalance from '../components/QueryBalance.vue'
 export default {
   name: "MemberCenter",
   data() {
@@ -133,7 +127,6 @@ export default {
   },
   components: {
     Logout
-    // QueryBalance
   },
   methods: {
     linkOverView() {
@@ -149,7 +142,6 @@ export default {
       this.$router.push("/depositarea");
     },
     linkUserInfo() {
-      // this.$store.dispatch("setUserInfoDefaultTab", 0);
       this.$router.push("/userinfo");
     },
     linkHistoryRecord() {
@@ -164,17 +156,6 @@ export default {
     toQueryBalance() {
       this.$router.push("/querybalance");
     }
-
-    // tosnackbar() {
-    //   this.$emit("snackbar");
-    // }
-    // tosnackbar(){
-    //   this.$router.push('/snackbar')
-
-    // }
-    // forgotpassword () {
-    //   alert('请联系在线客服')
-    // }
   }
 };
 </script>

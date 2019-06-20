@@ -57,7 +57,7 @@ export default {
   },
   data () {
     return {
-      page: Number(this.$route.params.page),
+      // page: Number(this.$route.params.page),
       menu: 'recent',
       current: '真人',
       items: [

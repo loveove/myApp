@@ -35,12 +35,7 @@
             ></v-text-field>
             <v-layout xs12 row wrap>
               <v-flex xs12>
-                <v-btn
-                  color="red darken-4 white--text"
-                  @click="login"
-                  :disabled="!valid"
-                  block
-                >登陆</v-btn>
+                <v-btn color="red darken-4 white--text" @click="login" :disabled="!valid" block>登陆</v-btn>
               </v-flex>
               <v-flex xs12>
                 <v-alert
@@ -56,7 +51,6 @@
             </v-layout>
           </v-form>
         </v-card>
-
         <div class="text-xs-right mt-4">
           <v-btn color="red white--text" @click="linkregister">快速注册</v-btn>
         </div>
@@ -65,19 +59,19 @@
   </v-dialog>
 </template>
 <script>
-import axios from 'axios'
-import qs from 'qs'
+import axios from "axios";
+import qs from "qs";
 export default {
-  name: 'Login',
-  data () {
+  name: "Login",
+  data() {
     return {
-      errorMessage: '',
+      errorMessage: "",
       hasError: false,
-      name: '',
-      nameRules: [v => !!v || '请填写用户名'],
-      password: '',
+      name: "",
+      nameRules: [v => !!v || "请填写用户名"],
+      password: "",
       rules: {
-        required: value => !!value || '请填写密码.'
+        required: value => !!value || "请填写密码."
       },
       show: false,
       valid: true,
@@ -85,18 +79,18 @@ export default {
       notifications: false,
       sound: true,
       widgets: false
-    }
+    };
   },
   methods: {
-    close () {
-      this.$router.push('/')
-      this.dialog = false
+    close() {
+      this.$router.push("/");
+      this.dialog = false;
     },
-    linkregister () {
-      this.$router.push('/register')
-      this.dialog = false
+    linkregister() {
+      this.$router.push("/register");
+      this.dialog = false;
     },
-    login () {
+    login() {
       axios
         .post(
           `${this.$store.state.apiUrl}/login`,
@@ -108,27 +102,28 @@ export default {
         .then(response => {
           // console.log(this)
           if (response.data.result.token != undefined) {
-            this.$store.dispatch('setToken', response.data.result.token)
-            this.$store.dispatch('isLoginTrue')
-            this.$router.push('/')
+            this.$store.dispatch("setToken", response.data.result.token);
+            this.$store.dispatch("isLoginTrue");
+            // this.checkToken();
+            this.$router.push("/");
           } else {
-            this.hasError = true
-            this.errorMessage = response.data.msg
+            this.hasError = true;
+            this.errorMessage = response.data.msg;
           }
-        })
+        });
     }
   },
   computed: {},
-  created () {
+  created() {
     // this.login();
   }
-}
+};
 </script>
 <style scoped>
 .fontsize {
   font-weight: bold;
 }
-.border_custo{
+.border_custo {
   border-radius: 10px;
 }
 </style>
