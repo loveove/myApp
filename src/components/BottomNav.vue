@@ -12,7 +12,7 @@
           <v-icon>select_all</v-icon>
         </v-btn>
 
-        <v-btn color="#FFB300" flat value="nearby" to="/register" v-show="$store.state.token==null">
+        <v-btn color="#FFB300" flat value="nearby" to="/register" v-show="$store.state.token==''">
           <span>注册</span>
           <v-icon>waves</v-icon>
         </v-btn>
@@ -20,7 +20,7 @@
           color="#FFB300"
           flat
           to="/depositarea"
-          v-show="$store.state.token!=null"
+          v-show="$store.state.token!=''"
           class="pr-4"
         >
           <span>存款</span>
@@ -31,7 +31,7 @@
           <span>客服</span>
           <v-icon>settings_phone</v-icon>
         </v-btn>
-        <v-btn color="#FFB300" flat to="/login" v-show="$store.state.token==null">
+        <v-btn color="#FFB300" flat to="/login" v-show="$store.state.token==''">
           <span>登录</span>
           <v-icon>account_circle</v-icon>
         </v-btn>
@@ -40,7 +40,7 @@
           color="#FFB300"
           flat
           to="/membercenter"
-          v-show="$store.state.token!=null"
+          v-show="$store.state.token!=''"
           class="pr-4"
         >
           <span>会员中心</span>
@@ -52,15 +52,15 @@
 </template>
 <script>
 export default {
-  name: 'BottomNav',
+  name: "BottomNav",
   components: {},
-  data () {
+  data() {
     return {
-      bottomNav: 'home'
-    }
+      bottomNav: "home"
+    };
   },
   methods: {}
-}
+};
 </script>
 <style scoped>
 .fa-id-badge {

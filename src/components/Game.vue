@@ -24,13 +24,13 @@
                 block
                 color="orange accent-4 white--text"
                 @click.native="goToGame(game.url)"
-                v-if="$store.state.token!=null"
+                v-if="$store.state.token!=''"
               >进路游戏</v-btn>
               <v-btn
                 block
                 color="red accent-4 white--text"
                 @click.native="linkLogin"
-                v-if="$store.state.token==null"
+                v-if="$store.state.token===''"
               >进路游戏</v-btn>
             </v-flex>
           </v-layout>

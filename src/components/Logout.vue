@@ -25,7 +25,7 @@ export default {
   methods: {
     logout () {
       axios.get(`${this.$store.state.apiUrl}/logout`).then(response => {
-        this.$store.dispatch('setToken', null)
+        this.$store.dispatch('setToken', '')
         localStorage.removeItem('token')
         this.$store.dispatch('isLoginFalse')
    

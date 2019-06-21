@@ -12,10 +12,14 @@ export const ApiCheckTokenMixin = {
                 .then(res => {
                     //login exipred
                     if (res.data.code === 101) {
-                        console.log(res.data.code)
-                        store.dispatch("setToken", "");
-                        localStorage.removeItem("token");
-                        store.dispatch("isLoginFalse");
+                        // console.log(res.data.code)
+                        // store.dispatch("setToken", "");
+                        // localStorage.removeItem("token");
+                        // store.dispatch("isLoginFalse");
+                        // alert("loginExpired")
+                        // this.$router.push("/expireddialog");
+                        this.expired();
+
                         // alert('登陆已过期，请重新登陆')
                         // store.dispatch('setExipredTrue');
                     }
@@ -27,9 +31,20 @@ export const ApiCheckTokenMixin = {
                         console.log(res.data.code)
                         store.dispatch("setToken", res.data.result.token);
                         store.dispatch("isLoginTrue");
+                        // alert("loginAgain")
+                        this.expired();
+
+                        // this.$router.push("/");
+
+
                     }
                 })
             // .catch(err => console.log(err));
+        },
+        expired() {
+            this.$router.push("/expireddialog");
         }
+
     }
+
 }

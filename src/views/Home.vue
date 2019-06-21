@@ -45,22 +45,6 @@
             <img :src="secondGameList.image" class="custo_coin ml-3" @click="linkClassification">
             <p class="pl-3 pb-3">{{secondGameList.name}}</p>
           </v-flex>
-          <!-- <v-flex xs3>
-            <img src="@/assets/coin4.jpg" class="custo_coin">
-            <p class="pl-3 pb-3">Game</p>
-          </v-flex>
-          <v-flex xs3>
-            <img src="@/assets/coin5.jpg" class="custo_coin">
-            <p class="pl-3 pb-3">Game</p>
-          </v-flex>
-          <v-flex xs3>
-            <img src="@/assets/coin6.jpg" class="custo_coin">
-            <p class="pl-3 pb-3">Game</p>
-          </v-flex>
-          <v-flex xs3>
-            <img src="@/assets/coin7.jpg" class="custo_coin">
-            <p class="pl-3 pb-3">Game</p>
-          </v-flex>-->
         </v-layout>
       </v-layout>
     </v-card>

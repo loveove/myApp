@@ -16,7 +16,7 @@
         </div>
 
         <v-card class="border_custo">
-          <v-form ref="form" v-model="valid" class="px-4">
+          <v-form ref="form" v-model="valid" class="px-4 py-4">
             <v-text-field
               label="用户名"
               prepend-icon="person"

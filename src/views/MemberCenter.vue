@@ -24,7 +24,6 @@
             </v-layout>
           </div>
         </v-flex>
-     
       </v-layout>
     </v-container>
 
@@ -62,7 +61,7 @@
             <div>平台互转</div>
           </v-flex>
         </v-layout>
-       
+
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex xs-6 class="pl-4">
             <div class="pl-3" @click="linkMyAgent">
@@ -77,7 +76,7 @@
             <div>自助洗码</div>
           </v-flex>
         </v-layout>
-       
+
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex xs-6 class="pl-4">
             <div class="pl-3" @click="linkUserInfo">
@@ -92,16 +91,16 @@
             <div>历史记录</div>
           </v-flex>
         </v-layout>
-     
+
         <v-layout xs-12 class="pl-3 pt-3 mt-3">
           <v-flex sx6 class="pl-4">
             <div class="pl-3" @click="snackbar = true">
               <i class="fas fa-lock fa-lg" style="color:darkblue;"></i>
             </div>
             <div>忘记密码?</div>
-            <v-snackbar v-model="snackbar" :top="y === 'top'">
+            <v-snackbar v-model="snackbar" :top="y === 'top'" :timeout="timeout" color="info">
               {{ text }}
-              <v-btn color="white" flat @click="snackbar = false">Close</v-btn>
+              <v-btn color="white" flat @click="snackbar = false">ok</v-btn>
             </v-snackbar>
           </v-flex>
           <v-flex xs-6>

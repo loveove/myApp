@@ -13,9 +13,6 @@
           </v-btn>
         </v-flex>
       </v-layout>
-      <!-- <template v-slot:activator="{ on }"> -->
-      <!-- <v-btn round small color="red darken-4 mt-4" class="mr-5" dark v-on="on">开始游戏</v-btn> -->
-      <!-- </template> -->
       <v-card>
         <v-card-text>
           <v-flex xs12>
@@ -49,23 +46,9 @@
               type="number"
               required
             ></v-text-field>
-
-            <!-- <v-layout row wrap>
-            <v-flex xs12>-->
-            <!-- <v-btn
-                  :disabled="isDisabled"
-                  color="red darken-4 white--text"
-                  :loading="isLoading"
-                  block
-                  @click.native="transferBalance"
-            >确定转账</v-btn>-->
-            <!-- </v-flex>
-            </v-layout>-->
           </v-form>
         </v-card-text>
         <v-layout xs12 row wrap class="pb-3">
-          <!-- <v-card-actions>
-          <v-spacer></v-spacer>-->
           <v-flex xs6 class="pl-5">
             <v-btn color="red darken-4 white--text" small @click.native="transferBalance">确定转账</v-btn>
           </v-flex>
@@ -88,11 +71,11 @@
   </v-layout>
 </template>
 <script>
-import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
+// import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
 import axios from "axios";
 const qs = require("qs");
 export default {
-  mixins: [ApiCheckTokenMixin],
+  // mixins: [ApiCheckTokenMixin],
   name: "GamePlayTransferDialog",
   data: () => ({
     alertMessage: "",
@@ -248,9 +231,9 @@ export default {
     if (this.isLogin) {
       this.getGameUrl("XJJ");
     }
-  },
-  created() {
-    this.checkToken();
   }
+  // created() {
+  //   this.checkToken();
+  // }
 };
 </script>

@@ -120,7 +120,7 @@ export default {
           {
             headers: {
               'X-Auth-Token': this.$store.state.token
-              
+
             }
           }
         )
@@ -133,7 +133,7 @@ export default {
             (this.bankName = ''),
             (this.bankBranch = '')
             bus.$emit('updateBankInfo')
-            // apiMethods.getUserInfo()
+            apiMethods.getUserInfo()
           } else {
             this.hasAlert = true
             this.alertMessage = res.data.msg

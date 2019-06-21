@@ -9,7 +9,7 @@ export default new Vuex.Store({
     apiUrl: 'http://47.90.100.229:20000/api',
     apiGameUrl: 'https://new.xjj3.com/api',
     bankInfo: '',
-    token: null,
+    token: '',
     userInfo: '',
     isLogin: false,
     isExipired: false,

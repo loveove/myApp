@@ -30,19 +30,19 @@ export default new Router({
     {
       path: '/contact',
       name: 'contact',
-      component: () => import(/* webpackChunkName: "about" */ './views/Contact.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/Contact.vue')//
 
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import(/* webpackChunkName: "about" */ './views/Register.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/Register.vue')//
 
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')//
 
     },
     {
@@ -54,43 +54,43 @@ export default new Router({
     {
       path: '/querybalance',
       name: 'querybalance',
-      component: () => import(/* webpackChunkName: "about" */ './components/QueryBalance.vue')
+      component: () => import(/* webpackChunkName: "about" */ './components/QueryBalance.vue')//
 
     },
     {
       path: '/withdrawarea',
       name: 'withdrawarea',
-      component: () => import(/* webpackChunkName: "about" */ './components/WithdrawArea.vue')
+      component: () => import(/* webpackChunkName: "about" */ './components/WithdrawArea.vue')//
 
     },
     {
       path: '/platformtransfer',
       name: 'platformtransfer',
-      component: () => import(/* webpackChunkName: "about" */ './components/PlatformTransfer.vue')
+      component: () => import(/* webpackChunkName: "about" */ './components/PlatformTransfer.vue')//
 
     },
     {
       path: '/depositarea',
       name: 'depositarea',
-      component: () => import(/* webpackChunkName: "about" */ './components/DepositArea.vue')
+      component: () => import(/* webpackChunkName: "about" */ './components/DepositArea.vue')//
 
     },
     {
       path: '/userinfo',
       name: 'userinfo',
-      component: () => import(/* webpackChunkName: "about" */ './components/UserInfo.vue')
+      component: () => import(/* webpackChunkName: "about" */ './components/UserInfo.vue')//
 
     },
     {
       path: '/historyrecord',
       name: 'historyrecord',
-      component: () => import(/* webpackChunkName: "about" */ './components/HistoryRecord.vue')
+      component: () => import(/* webpackChunkName: "about" */ './components/HistoryRecord.vue')//
 
     },
     {
       path: '/myagent',
       name: 'myagent',
-      component: () => import(/* webpackChunkName: "about" */ './components/MyAgent.vue')
+      component: () => import(/* webpackChunkName: "about" */ './components/MyAgent.vue')//
 
     },
     {
@@ -127,6 +127,12 @@ export default new Router({
       path: '/gameplaytransferdialog',
       name: 'gameplaytransferdialog',
       component: () => import(/* webpackChunkName: "about" */ './components/GamePlayTransferDialog.vue')
+
+    },
+    {
+      path: '/expireddialog',
+      name: 'expireddialog',
+      component: () => import(/* webpackChunkName: "about" */ './components/ExpiredDialog.vue')
 
     }
 
