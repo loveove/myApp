@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <v-card class="border_custo">
+      <v-card class="border_custo pt-2">
         <v-form>
           <v-container>
             <v-layout row wrap>
@@ -40,7 +40,7 @@
       >
         <template v-slot:item="props">
           <v-container fluid grid-list-md>
-            <v-flex xs12 sm12 md4 lg3>
+            <v-flex xs12>
               <v-card>
                 <v-list dense>
                   <v-list-tile>

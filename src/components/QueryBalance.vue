@@ -13,7 +13,7 @@
             <v-toolbar-title>资产总览</v-toolbar-title>
           </v-toolbar>
           <v-container>
-            <v-card class="border-custo">
+            <v-card class="border-custo py-2 px-2">
               <v-layout xs12 row class>
                 <v-flex xs6 class="pt-2">
                   <h3 class="pl-2">我的资产</h3>
@@ -75,7 +75,7 @@
               </v-layout>
             </v-card>
 
-            <v-card class="mt-1 border-custo">
+            <v-card class="mt-1 border-custo py-2 py-2">
               <h3 class="pl-2 pt-2">资产分布</h3>
               <v-layout xs12 row wrap>
                 <v-flex xs6 class="pt-2">
@@ -146,7 +146,7 @@
                   </v-flex>
                   <v-card-actions>&nbsp;</v-card-actions>
                 </v-flex>
-                <v-container>
+                <!-- <v-container> -->
                   <v-flex xs12>
                     <v-alert
                       v-model="hasError"
@@ -158,7 +158,7 @@
                       error
                     >{{errorMessage}}</v-alert>
                   </v-flex>
-                </v-container>
+                <!-- </v-container> -->
               </v-layout>
             </v-card>
           </v-container>

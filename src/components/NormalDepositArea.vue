@@ -64,7 +64,7 @@
           >完成存款，下一步</v-btn>-->
         </template>
       </div>
-      <v-container>
+     
         <v-flex xs12>
           <v-alert
             v-model="hasAlert"
@@ -75,19 +75,17 @@
             dismissible
           >{{alertMessage}}</v-alert>
         </v-flex>
-      </v-container>
+      
     </v-card>
   </v-container>
 </template>
 <script>
-// import ConfirmationDialog from "./ConfirmationDialog.vue";
 import axios from 'axios'
 import { constants } from 'crypto'
 const qs = require('qs')
 export default {
   name: 'NormalDepositArea',
   components: {
-    // ConfirmationDialog
   },
   data: () => ({
     alertMessage: '',
@@ -179,62 +177,6 @@ export default {
         })
       // .catch(err => console.log(err));
     }
-    // cancelDeposite() {
-    //   this.showForm = true;
-    //   this.showTable = false;
-    //   this.isLoading = true;
-    //   axios
-    //     .post(
-    //       `${this.$store.state.apiUrl}/account/deposit/fast/cancel`,
-    //       qs.stringify({
-    //         id: this.orderId
-    //       }),
-    //       {
-    //         headers: {
-    //           "X-Auth-Token": this.$store.state.token
-    //         }
-    //       }
-    //     )
-    //     .then(res => {
-    //       this.isLoading = false;
-    //       if (res.data.msg === "ok") {
-    //         // console.log(res.data.msg);
-    //         this.getUserInfo();
-    //       } else {
-    //         this.hasAlert = true;
-    //         this.alertMessage = res.data.msg;
-    //       }
-    //     });
-    //   // .catch(err => console.log(err));
-    // },
-    // submitDeposite() {
-    //   this.showForm = true;
-    //   this.showTable = false;
-    //   this.isLoading = true;
-    //   axios
-    //     .post(
-    //       `${this.$store.state.apiUrl}/account/deposit/fast/success`,
-    //       qs.stringify({
-    //         id: this.orderId
-    //       }),
-    //       {
-    //         headers: {
-    //           "X-Auth-Token": this.$store.state.token
-    //         }
-    //       }
-    //     )
-    //     .then(res => {
-    //       this.isLoading = false;
-    //       if (res.data.msg === "ok") {
-    //         this.selectAmount = "";
-    //         this.username = "";
-    //       } else {
-    //         this.hasAlert = true;
-    //         this.alertMessage = res.data.msg;
-    //       }
-    //     });
-    //   // .catch(err => console.log(err));
-    // }
   },
   created () {}
 }

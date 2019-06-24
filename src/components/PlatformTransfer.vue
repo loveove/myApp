@@ -13,7 +13,7 @@
             <v-toolbar-title>平台互转</v-toolbar-title>
           </v-toolbar>
           <v-container>
-            <v-card class="custo_border">
+            <v-card class="custo_border py-2">
               <v-form ref="form" v-model="valid" class="px-4">
                 <v-flex>
                   <v-select

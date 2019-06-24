@@ -21,11 +21,15 @@
             <v-flex v-for="game in games" :key="game.id" xs5>
               <v-img :src="game.img_path" height="150" contain class="grey darken-4 my-1"></v-img>
               <v-btn
+                tag="a"
                 block
                 color="orange accent-4 white--text"
                 @click.native="goToGame(game.url)"
+                target="_blank"
                 v-if="$store.state.token!=''"
               >进路游戏</v-btn>
+              <!-- <v-btn tag="a" :href="urlXJJ" small color="red darken-4 white--text" target="_blank">直接游戏</v-btn> -->
+
               <v-btn
                 block
                 color="red accent-4 white--text"
@@ -83,7 +87,6 @@ export default {
       this.$router.push("/login");
     },
     getGames(page) {
-      this.showDialog = true;
       axios
         .post(
           `${this.$store.state.apiGameUrl}/game/getList`,
@@ -99,10 +102,11 @@ export default {
         )
         .then(res => {
           this.games = res.data.result.list;
+
+          this.getGameUrl(this.games);
         });
     },
     getGameUrl(games) {
-      this.showDialog = true;
       games.forEach((game, index) => {
         axios
           .get(
@@ -116,10 +120,8 @@ export default {
             }
           )
           .then(res => {
+            // console.log(res);
             this.games[index].url = res.data.result.game_url;
-            if (this.$store.state.isLogin) {
-              this.getGameUrl(this.games);
-            }
           });
       });
     },
@@ -129,11 +131,8 @@ export default {
   },
   mounted() {
     this.getGames(this.$route.params.page);
-    if (localStorage.getItem("token") != null) {
+    if (localStorage.getItem("token") != "") {
       this.checkToken();
-      if (localStorage.getItem("token").length > 10) {
-        this.$store.dispatch("setToken", localStorage.getItem("token"));
-      }
     }
   }
 };

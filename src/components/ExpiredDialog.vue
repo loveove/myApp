@@ -5,12 +5,12 @@
       <v-layout row wrap>
         <v-flex xs12>
           <v-card>
-            <v-card-text class="px-0">login Expired</v-card-text>
+            <v-card-text class="px-0">登陆已过期</v-card-text>
           </v-card>
         </v-flex>
         <v-flex xs12>
           <v-card>
-            <v-btn flat @click="closeExpired">close</v-btn>
+            <v-btn flat @click="closeExpired">ok</v-btn>
           </v-card>
         </v-flex>
       </v-layout>
@@ -29,7 +29,6 @@ export default {
   methods: {
     closeExpired() {
       this.$router.push("/");
-      
     }
   }
 };

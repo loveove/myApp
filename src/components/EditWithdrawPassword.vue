@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <v-card class="border_custo">
+      <v-card class="border_custo py-2">
         <v-form ref="form" v-model="valid" class="pa-2">
           <v-text-field
             v-model="bankOldPassword"

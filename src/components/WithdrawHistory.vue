@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <v-card class="border_custo">
+      <v-card class="border_custo pt-2">
         <v-form>
           <v-container>
             <v-layout row wrap>

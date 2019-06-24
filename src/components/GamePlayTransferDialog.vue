@@ -54,7 +54,9 @@
           </v-flex>
           <v-flex xs6>
             <!-- <v-btn color="red darken-4 white--text" small :href="urlXJJ">直接游戏</v-btn> -->
-            <a href="urlXJJ" color="red darken-4 white--text" target="_blank">Link</a>
+
+            <!-- <a :href="urlXJJ" color="red darken-4 white--text" target="_blank">直接游戏</a> -->
+            <v-btn tag="a" :href="urlXJJ" small color="red darken-4 white--text" target="_blank">直接游戏</v-btn>
           </v-flex>
           <!-- </v-card-actions> -->
           <v-alert
@@ -212,7 +214,7 @@ export default {
         .then(res => {
           if (gamePlatformId === "XJJ") {
             this.urlXJJ = res.data.result.game_url;
-            console.log(res.data);
+            // console.log(res.data);
             // console.log(this.urlXJJ)
           }
           if (gamePlatformId === "NJJ") {
@@ -232,8 +234,7 @@ export default {
       this.getGameUrl("XJJ");
     }
   }
-  // created() {
-  //   this.checkToken();
-  // }
 };
 </script>
+
+

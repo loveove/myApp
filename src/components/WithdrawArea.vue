@@ -13,7 +13,7 @@
             <v-toolbar-title class="color_custo">提款专区</v-toolbar-title>
           </v-toolbar>
           <v-container>
-            <v-card class="border_rounded">
+            <v-card class="border_rounded py-2">
               <!-- <v-alert :value="$store.state.userInfo.real_name === null" type="info">
               提款金额需要真实姓名
               <v-btn block @click="redirectEditUserInfo">返回到设置真实姓名</v-btn>
