@@ -13,7 +13,7 @@
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-container>
-          <v-card class="border_custo">
+          <v-card class="border_custo py-2 px-2">
             <v-form ref="form" class="pa-2" v-model="valid" lazy-validation>
               <!-- <v-text-field :counter="10" label="用户名" prepend-icon="person" required></v-text-field> -->
               <v-text-field

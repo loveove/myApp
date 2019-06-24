@@ -1,17 +1,13 @@
 <template>
-  <v-dialog max-width="600px" v-model="show">
+  <v-dialog max-width="600px" v-model="show" persistent>
     <!-- <slot slot="activator">activator</slot> -->
-    <v-container grid-list-md text-xs-center :value="show">
+    <v-container text-xs-center :value="show" class="red darken-4">
       <v-layout row wrap>
         <v-flex xs12>
-          <v-card>
-            <v-card-text class="px-0">登陆已过期</v-card-text>
-          </v-card>
+          <v-card-text class="px-0 white--text red darken-4" large>登陆已过期</v-card-text>
         </v-flex>
         <v-flex xs12>
-          <v-card>
-            <v-btn flat @click="closeExpired">ok</v-btn>
-          </v-card>
+          <v-btn flat @click="closeExpired" class="white--text orange darken-4" small>ok</v-btn>
         </v-flex>
       </v-layout>
     </v-container>

@@ -53,10 +53,13 @@
             <v-btn color="red darken-4 white--text" small @click.native="transferBalance">确定转账</v-btn>
           </v-flex>
           <v-flex xs6>
-            <!-- <v-btn color="red darken-4 white--text" small :href="urlXJJ">直接游戏</v-btn> -->
-
-            <!-- <a :href="urlXJJ" color="red darken-4 white--text" target="_blank">直接游戏</a> -->
-            <v-btn tag="a" :href="urlXJJ" small color="red darken-4 white--text" target="_blank">直接游戏</v-btn>
+            <v-btn
+              tag="a"
+              :href="urlXJJ"
+              small
+              color="red darken-4 white--text"
+              target="_blank"
+            >直接游戏</v-btn>
           </v-flex>
           <!-- </v-card-actions> -->
           <v-alert
@@ -145,20 +148,20 @@ export default {
   watch: {
     outgoing(newValue) {
       this.incomingItems = this.outgoingItems.filter(item => item != newValue);
-    }
+    },
   },
   computed: {
     isLogin: function() {
       return this.$store.state.isLogin;
     }
   },
-  watch: {
-    isLogin: function(toGet) {
-      if (toGet) {
-        this.getGameUrl("XJJ");
-      }
-    }
-  },
+  // watch: {
+  //   isLogin: function(toGet) {
+  //     if (toGet) {
+  //       this.getGameUrl("XJJ");
+  //     }
+  //   }
+  // },
   methods: {
     toDeposit() {
       this.$router.push("/depositarea");

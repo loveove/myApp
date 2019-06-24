@@ -10,16 +10,28 @@
 </template>
 
 <script>
-import BottomNav from './components/BottomNav.vue'
-import axios from 'axios'
-const qs = require('qs')
+import { ApiCheckTokenMixin } from "./mixins/ApiCheckTokenMixin";
+import BottomNav from "./components/BottomNav.vue";
+import axios from "axios";
+const qs = require("qs");
 export default {
-  name: 'App',
+  mixins: [ApiCheckTokenMixin],
+  name: "App",
   components: {
     BottomNav
   },
-  data () {
-    return {}
+  data() {
+    return {};
   },
-}
+
+  mounted() {
+    //   if (this.$store.state.token != "") {
+    //   this.checkToken();
+    // }
+    if (localStorage.getItem("token") != "") {
+      this.$store.dispatch("setToken", localStorage.getItem("token"));
+    }
+  }
+ 
+};
 </script>

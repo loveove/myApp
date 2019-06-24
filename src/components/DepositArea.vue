@@ -24,6 +24,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
 import AlipayDepositArea from "./AlipayDepositArea.vue";
 import NormalDepositArea from "./NormalDepositArea.vue";
@@ -44,12 +45,12 @@ export default {
     active: null,
     items: [
       {
-        name: "NormalPay",
+        name: "快速索取卡号",
 
         content: `NormalDepositArea`
       },
       {
-        name: "Alipay",
+        name: "支付宝扫码",
 
         content: `AlipayDepositArea`
       }
@@ -68,10 +69,25 @@ export default {
     },
     link_membercenter() {
       this.$router.push("/membercenter");
+    },
+    getDepositeInfo() {
+      axios
+        .get(`${this.$store.state.apiUrl}/account/deposit/paytypes`, {
+          headers: {
+            "X-Auth-Token": this.$store.state.token
+          }
+        })
+        .then(res => {
+          console.log(res.data);
+          this.$store.dispatch("setDepositeInfo", res.data.result);
+        });
+      // .catch(err => console.log(err));
     }
   },
   created() {
+    this.getDepositeInfo();
     this.checkToken();
+    
   }
 };
 </script>

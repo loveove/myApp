@@ -132,26 +132,26 @@ export default {
                 (this.bankName = ""),
                 (this.bankBranch = "");
               bus.$emit("updateBankInfo");
-              this.getUserInfo();
+              apiMethods.getUserInfo();
             } else {
               this.hasAlert = true;
               this.alertMessage = res.data.msg;
             }
           });
       // .catch(err => console.log(err));
-    },
-    getUserInfo() {
-      axios
-        .get(`${store.state.apiUrl}/account/getUserInfo`, {
-          headers: {
-            "X-Auth-Token": store.state.token
-          }
-        })
-        .then(res => {
-          store.dispatch("setUserInfo", res.data.result);
-        });
-      // .catch(err => console.log(err));
     }
+    // getUserInfo() {
+    //   axios
+    //     .get(`${this.$store.state.apiUrl}/account/getUserInfo`, {
+    //       headers: {
+    //         "X-Auth-Token": store.state.token
+    //       }
+    //     })
+    //     .then(res => {
+    //       store.dispatch("setUserInfo", res.data.result);
+    //     });
+    //   // .catch(err => console.log(err));
+    // }
   },
   computed: {
     isDisabled() {

@@ -25,16 +25,13 @@
 </template>
 <script>
 import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
-
 import DepositHistory from "./DepositHistory";
 import WithdrawHistory from "./WithdrawHistory";
 import TransferHistory from "./TransferHistory";
 import BetHistory from "./BetHistory";
 import FundHistory from "./FundHistory";
-
 export default {
   mixins: [ApiCheckTokenMixin],
-
   name: "HistoryRecord",
   components: {
     DepositHistory,

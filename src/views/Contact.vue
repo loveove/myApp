@@ -70,7 +70,9 @@ export default {
     }
   },
   created() {
-    if (this.$store.state.token != "") this.checkToken();
+    if (this.$store.state.token != ""){
+      this.checkToken();
+    } 
   }
 };
 </script>
@@ -97,6 +99,6 @@ h2 {
   font-weight: bold;
 }
 .custo_border{
-  border-radius: 15px;
+  border-radius: 10px;
 }
 </style>

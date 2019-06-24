@@ -1,22 +1,19 @@
 <template>
-  <v-dialog max-width="600px" v-model="show">
+  <v-dialog v-model="show" persistent>
     <slot slot="activator">activator</slot>
-    <v-container grid-list-md text-xs-center :value="show">
-      <v-layout row wrap>
+       <!-- <template v-slot:activator="{ on }">
+        <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+      </template> -->
+    <v-container text-xs-center :value="show" class="red darken-4">
+      <v-layout xs12 row wrap>
         <v-flex xs12>
-          <v-card>
-            <v-card-text class="px-0">确定吗 ?</v-card-text>
-          </v-card>
+          <v-card-text class="white--text red darken-4">退出账户?</v-card-text>
         </v-flex>
         <v-flex xs6>
-          <v-card>
-            <v-btn flat @click.native="show=false">否</v-btn>
-          </v-card>
+          <v-btn flat @click.native="show=false" class="white--text orange darken-4">否</v-btn>
         </v-flex>
         <v-flex xs6>
-          <v-card>
-            <v-btn flat @click.native="confirm">是</v-btn>
-          </v-card>
+          <v-btn flat @click.native="confirm" class="white--text orange darken-4">是</v-btn>
         </v-flex>
       </v-layout>
     </v-container>
@@ -24,18 +21,18 @@
 </template>
 <script>
 export default {
-  name: 'ConfirmationDialog',
+  name: "ConfirmationDialog",
   components: {},
-  data () {
+  data() {
     return {
       show: false
-    }
+    };
   },
   methods: {
-    confirm () {
-      this.$emit('confirm')
-      this.show = false
+    confirm() {
+      this.$emit("confirm");
+      this.show = false;
     }
   }
-}
+};
 </script>

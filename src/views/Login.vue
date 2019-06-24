@@ -31,6 +31,7 @@
               :append-icon="show ? 'visibility' : 'visibility_off'"
               :rules="[rules.required]"
               :type="show ? 'text' : 'password'"
+              @click:append="show = !show"
               required
             ></v-text-field>
             <v-layout xs12 row wrap>

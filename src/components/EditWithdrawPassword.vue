@@ -2,8 +2,8 @@
   <div>
     <v-container>
       <v-card class="border_custo py-2">
-        <v-form ref="form" v-model="valid" class="pa-2">
-          <v-text-field
+        <v-form ref="form" class="pa-2">
+          <v-text-field v-show="$store.state.userInfo.money_password === 'yes'"
             v-model="bankOldPassword"
             :append-icon="showOldPassword ? 'visibility' : 'visibility_off'"
             :rules="oldPasswordRules"
@@ -37,7 +37,6 @@
             color="red darken-4 white--text"
             block
             @click.native="updateWithdrawPassword"
-            :disabled="isDisabled"
           >立即提交</v-btn>
           <v-alert
             v-model="hasAlert"
@@ -46,6 +45,7 @@
             outline
             dismissible
             type="info"
+            d-flex
           >{{alertMessage}}</v-alert>
         </v-form>
       </v-card>
@@ -62,7 +62,7 @@ export default {
     isLoading: false,
     alertMessage: '',
     hasAlert: false,
-    valid: true,
+    // valid: true,
     showPassword: false,
     showConfirmPassword: false,
     showOldPassword: false,
@@ -77,13 +77,13 @@ export default {
     comfirmPasswordRules: [v => !!v || '请确认新取款密码']
   }),
   computed: {
-    isDisabled () {
-      if (this.valid === false || this.isLoading === true) {
-        return true
-      } else {
-        return false
-      }
-    },
+    // isDisabled () {
+    //   if (this.valid === false || this.isLoading === true) {
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // },
     newPasswordRules () {
       return [
         v => !!v || '请输入新取款密码',

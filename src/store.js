@@ -14,8 +14,8 @@ export default new Vuex.Store({
     isLogin: false,
     isExipired: false,
     depositeInfo: [
-      { 'balanceEnd': 2000000, 'balanceStart': 100, 'code': 'OFFLINE_BANK', 'name': '快速入款', 'gift_rate': 1, 'gift_max': 388 },
-      { 'balanceEnd': 2999, 'balanceStart': 1, 'code': 'ONLINE_ALIPAY', 'name': '支付宝扫码', 'gift_rate': 1, 'gift_max': 388 }
+      { 'balanceEnd': 2000000, 'balanceStart': 100, 'code': 'OFFLINE_BANK', 'gift_rate': 1, 'gift_max': 388 },
+      { 'balanceEnd': 2999, 'balanceStart': 1, 'code': 'ONLINE_ALIPAY', 'gift_rate': 1, 'gift_max': 388 }
     ],
     qrHtml: '',
     agentInfo: {}
@@ -49,6 +49,9 @@ export default new Vuex.Store({
     setExipredFail: (state) => {
       state.isExipired = false
     },
+    setDepositeInfo: (state, payload) => {
+      state.depositeInfo = payload
+    },
 
   },
   actions: {
@@ -75,6 +78,9 @@ export default new Vuex.Store({
     },
     setExipredFail: (context) => {
       context.commit('setExipredFail')
+    },
+    setDepositeInfo: (context, payload) => {
+      context.commit('setDepositeInfo', payload)
     },
 
   }

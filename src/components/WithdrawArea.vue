@@ -10,25 +10,39 @@
             <v-btn icon dark @click="link_membercenter">
               <i class="fas fa-arrow-left"></i>
             </v-btn>
-            <v-toolbar-title class="color_custo">提款专区</v-toolbar-title>
+            <v-toolbar-title class="white--text">提款专区</v-toolbar-title>
           </v-toolbar>
           <v-container>
-            <v-card class="border_rounded py-2">
-              <!-- <v-alert :value="$store.state.userInfo.real_name === null" type="info">
-              提款金额需要真实姓名
-              <v-btn block @click="redirectEditUserInfo">返回到设置真实姓名</v-btn>
-            </v-alert>
-            <v-alert :value="$store.state.userInfo.money_password === 'no'" type="info">
-              提款金额需要提款密码
-              <v-btn block @click="redirectEditWithdrawPassword">返回到设置提款密码</v-btn>
-            </v-alert>
-            <v-alert :value="withdrawInfo.bankCardList.length < 1" type="info">
-              提款金额需要银行卡
-              <v-btn block @click="redirectAddBankCard">返回到添加银行卡</v-btn>
-            </v-alert>
-            <v-alert :value="withdrawInfo.need_xima != 0" type="info">剩余打码量需要为 0</v-alert>
-              <v-alert :value="withdrawInfo.has_drawing != 0" type="info">提款在审核中，请通过后再次申请提款</v-alert>-->
-              <v-form ref="form" v-model="valid" class="px-4">
+            <v-card class="border_rounded py-1 px-1">
+              <v-container>
+                <v-alert :value="$store.state.userInfo.real_name === null" type="info" class="custo_border">
+                  提款金额需要真实姓名
+                  <v-btn
+                    block
+                    @click="redirectEditUserInfo"
+                    class="blue lighten-4 custo_border"
+                  >返回到设置真实姓名</v-btn>
+                </v-alert>
+                <v-alert :value="$store.state.userInfo.money_password === 'no'" type="info" class="custo_border">
+                  提款金额需要提款密码
+                  <v-btn
+                    block
+                    @click="redirectEditWithdrawPassword"
+                    class="blue lighten-4 custo_border"
+                  >返回到设置提款密码</v-btn>
+                </v-alert>
+                <v-alert :value="withdrawInfo.bankCardList.length < 1" type="info" class="custo_border">
+                  提款金额需要银行卡
+                  <v-btn
+                    block
+                    @click="redirectAddBankCard"
+                    class="blue lighten-1 white--text custo_border"
+                  >返回到添加银行卡</v-btn>
+                </v-alert>
+                <v-alert :value="withdrawInfo.need_xima != 0" type="info">剩余打码量需要为 0</v-alert>
+                <v-alert :value="withdrawInfo.has_drawing != 0" type="info">提款在审核中，请通过后再次申请提款</v-alert>
+              </v-container>
+              <v-form ref="form" v-model="valid" class="px-4 pb-2">
                 <v-flex>
                   <v-select
                     v-model="bankId"
@@ -155,6 +169,16 @@ export default {
     addBankCardList() {
       this.$router.push("/addbankcardlist");
     },
+    redirectEditUserInfo() {
+      this.$router.push("/userinfo");
+    },
+    redirectEditWithdrawPassword() {
+      this.$router.push("/userinfo");
+    },
+    redirectAddBankCard() {
+      this.$router.push("/addbankcardlist");
+    },
+
     withdraw() {
       axios
         .post(
@@ -225,11 +249,11 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .border_rounded {
   border-radius: 10px;
 }
-.color_custo {
-  color: white;
+.custo_border {
+  border-radius: 10px;
 }
 </style>
