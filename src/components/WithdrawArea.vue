@@ -109,34 +109,34 @@
   </div>
 </template>
 <script>
-import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
-import axios from "axios";
-const qs = require("qs");
+import { ApiCheckTokenMixin } from '../mixins/ApiCheckTokenMixin'
+import axios from 'axios'
+const qs = require('qs')
 export default {
   mixins: [ApiCheckTokenMixin],
-  name: "WithdrawArea",
-  data() {
+  name: 'WithdrawArea',
+  data () {
     return {
       dialog: true,
       notifications: false,
       sound: true,
       widgets: false,
       valid: false,
-      alertMessage: "",
+      alertMessage: '',
       hasAlert: false,
-      bankId: "",
+      bankId: '',
       show: false,
-      amount: "",
-      amountRules: [v => !!v || "请输入提款金额"],
-      mainbankNumber: "",
-      bankRules: [v => !!v || "请选择收款银行卡"],
-      password: "",
+      amount: '',
+      amountRules: [v => !!v || '请输入提款金额'],
+      mainbankNumber: '',
+      bankRules: [v => !!v || '请选择收款银行卡'],
+      password: '',
       rules: {
-        required: value => !!value || "请输入取款密码"
+        required: value => !!value || '请输入取款密码'
       },
       withdrawInfo: {
         balance: 0,
-        name: "",
+        name: '',
         accountPassword: false,
         bankCardList: [],
         balanceDay: 2000000,
@@ -147,39 +147,39 @@ export default {
         fee: 0,
         need_xima: 0
       }
-    };
+    }
   },
   methods: {
-    getWithdrawInfo(token) {
+    getWithdrawInfo (token) {
       axios
         .get(`${this.$store.state.apiUrl}/account/withdraw/init`, {
           headers: {
-            "X-Auth-Token": token
+            'X-Auth-Token': token
           }
         })
         .then(res => {
           // console.log(res);
-          this.withdrawInfo = res.data.result;
-        });
+          this.withdrawInfo = res.data.result
+        })
       // .catch(err => console.log(err));
     },
-    link_membercenter() {
-      this.$router.push("/membercenter");
+    link_membercenter () {
+      this.$router.push('/membercenter')
     },
-    addBankCardList() {
-      this.$router.push("/addbankcardlist");
+    addBankCardList () {
+      this.$router.push('/addbankcardlist')
     },
-    redirectEditUserInfo() {
-      this.$router.push("/userinfo");
+    redirectEditUserInfo () {
+      this.$router.push('/userinfo')
     },
-    redirectEditWithdrawPassword() {
-      this.$router.push("/userinfo");
+    redirectEditWithdrawPassword () {
+      this.$router.push('/userinfo')
     },
-    redirectAddBankCard() {
-      this.$router.push("/addbankcardlist");
+    redirectAddBankCard () {
+      this.$router.push('/addbankcardlist')
     },
 
-    withdraw() {
+    withdraw () {
       axios
         .post(
           `${this.$store.state.apiUrl}/account/withdraw/`,
@@ -190,64 +190,64 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
           // console.log(res);
-          if (res.data.msg === "ok") {
-            this.hasAlert = true;
-            this.alertMessage = "成功";
+          if (res.data.msg === 'ok') {
+            this.hasAlert = true
+            this.alertMessage = '成功'
             // console.log(res.data);
           } else {
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
+            this.hasAlert = true
+            this.alertMessage = res.data.msg
           }
-        });
+        })
       // .catch(err => console.log(err));
     }
   },
   computed: {
-    isDisabled() {
+    isDisabled () {
       if (this.valid === false || this.isLoading === true) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     },
-    token() {
-      return this.$store.state.token;
+    token () {
+      return this.$store.state.token
     },
-    showForm() {
+    showForm () {
       if (
         // this.$store.state.userInfo.real_name != null &&
-        this.$store.state.userInfo.money_password === "yes" &&
+        this.$store.state.userInfo.money_password === 'yes' &&
         this.withdrawInfo.bankCardList.length > 0 &&
         this.withdrawInfo.need_xima == 0 &&
         this.withdrawInfo.has_drawing == 0
       ) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
   },
   watch: {
-    token(data) {
-      this.getWithdrawInfo(data);
+    token (data) {
+      this.getWithdrawInfo(data)
     }
   },
-  mounted() {
+  mounted () {
     if (this.$store.state.token.length > 10) {
-      this.getWithdrawInfo(this.$store.state.token);
+      this.getWithdrawInfo(this.$store.state.token)
       // console.log(this.$store.state.token)
     }
   },
-  created() {
-    this.checkToken();
+  created () {
+    this.checkToken()
   }
-};
+}
 </script>
 <style scoped>
 .border_rounded {

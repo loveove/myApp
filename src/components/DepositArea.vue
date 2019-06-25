@@ -24,13 +24,13 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
-import AlipayDepositArea from "./AlipayDepositArea.vue";
-import NormalDepositArea from "./NormalDepositArea.vue";
+import axios from 'axios'
+import { ApiCheckTokenMixin } from '../mixins/ApiCheckTokenMixin'
+import AlipayDepositArea from './AlipayDepositArea.vue'
+import NormalDepositArea from './NormalDepositArea.vue'
 export default {
   mixins: [ApiCheckTokenMixin],
-  name: "DepositArea",
+  name: 'DepositArea',
   components: {
     AlipayDepositArea,
     NormalDepositArea
@@ -45,49 +45,48 @@ export default {
     active: null,
     items: [
       {
-        name: "快速索取卡号",
+        name: '快速索取卡号',
 
         content: `NormalDepositArea`
       },
       {
-        name: "支付宝扫码",
+        name: '支付宝扫码',
 
         content: `AlipayDepositArea`
       }
     ]
   }),
   methods: {
-    displayNormalPay() {
-      this.showNormalPay = true;
-      this.showAliPay = false;
+    displayNormalPay () {
+      this.showNormalPay = true
+      this.showAliPay = false
       // this.showTable = false;
     },
-    displayAliPay() {
-      this.showAliPay = true;
-      this.showNormalPay = false;
+    displayAliPay () {
+      this.showAliPay = true
+      this.showNormalPay = false
       // this.showTable = false;
     },
-    link_membercenter() {
-      this.$router.push("/membercenter");
+    link_membercenter () {
+      this.$router.push('/membercenter')
     },
-    getDepositeInfo() {
+    getDepositeInfo () {
       axios
         .get(`${this.$store.state.apiUrl}/account/deposit/paytypes`, {
           headers: {
-            "X-Auth-Token": this.$store.state.token
+            'X-Auth-Token': this.$store.state.token
           }
         })
         .then(res => {
-          console.log(res.data);
-          this.$store.dispatch("setDepositeInfo", res.data.result);
-        });
+          console.log(res.data)
+          this.$store.dispatch('setDepositeInfo', res.data.result)
+        })
       // .catch(err => console.log(err));
     }
   },
-  created() {
-    this.getDepositeInfo();
-    this.checkToken();
-    
+  created () {
+    this.getDepositeInfo()
+    this.checkToken()
   }
-};
+}
 </script>

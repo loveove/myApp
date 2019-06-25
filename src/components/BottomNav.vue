@@ -52,15 +52,15 @@
 </template>
 <script>
 export default {
-  name: "BottomNav",
+  name: 'BottomNav',
   components: {},
-  data() {
+  data () {
     return {
-      bottomNav: "home"
-    };
+      bottomNav: 'home'
+    }
   },
   methods: {}
-};
+}
 </script>
 <style scoped>
 .fa-id-badge {

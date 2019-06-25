@@ -44,69 +44,69 @@
   </div>
 </template>
 <script>
-import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
-import axios from "axios";
-const qs = require("qs");
+import { ApiCheckTokenMixin } from '../mixins/ApiCheckTokenMixin'
+import axios from 'axios'
+const qs = require('qs')
 export default {
   mixins: [ApiCheckTokenMixin],
-  name: "Game",
+  name: 'Game',
   components: {},
-  data() {
+  data () {
     return {
       // page: 1,
       games: [],
       page: Number(this.$route.params.page),
       dialog: true
-    };
+    }
   },
   computed: {
-    isLogin: function() {
-      return this.$store.state.isLogin;
+    isLogin: function () {
+      return this.$store.state.isLogin
     }
   },
   watch: {
-    isLogin: function(toGet) {
+    isLogin: function (toGet) {
       if (toGet) {
-        this.getGames(this.$route.params.page);
+        this.getGames(this.$route.params.page)
       }
     }
   },
 
   methods: {
-    paging(page) {
+    paging (page) {
       this.$router.push({
-        name: "games",
+        name: 'games',
         params: { page: page }
-      });
-      this.getGames(page);
+      })
+      this.getGames(page)
     },
-    linkClassification() {
-      this.$router.push("/classification");
+    linkClassification () {
+      this.$router.push('/classification')
     },
-    linkLogin() {
-      this.$router.push("/login");
+    linkLogin () {
+      this.$router.push('/login')
     },
-    getGames(page) {
+    getGames (page) {
       axios
         .post(
           `${this.$store.state.apiGameUrl}/game/getList`,
           qs.stringify({
-            cid: "all",
+            cid: 'all',
             page: page
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
-          this.games = res.data.result.list;
+          this.games = res.data.result.list
 
-          this.getGameUrl(this.games);
-        });
+          this.getGameUrl(this.games)
+        })
     },
-    getGameUrl(games) {
+    getGameUrl (games) {
       games.forEach((game, index) => {
         axios
           .get(
@@ -115,27 +115,27 @@ export default {
             }/game/launchLottery?gamePlatformId='MG'&gameId=${game.id}`,
             {
               headers: {
-                "X-Auth-Token": this.$store.state.token
+                'X-Auth-Token': this.$store.state.token
               }
             }
           )
           .then(res => {
             // console.log(res);
-            this.games[index].url = res.data.result.game_url;
-          });
-      });
+            this.games[index].url = res.data.result.game_url
+          })
+      })
     },
-    goToGame(url) {
-      window.open(url);
+    goToGame (url) {
+      window.open(url)
     }
   },
-  mounted() {
-    this.getGames(this.$route.params.page);
-    if (localStorage.getItem("token") != "") {
-      this.checkToken();
+  mounted () {
+    this.getGames(this.$route.params.page)
+    if (localStorage.getItem('token') != '') {
+      this.checkToken()
     }
   }
-};
+}
 </script>
 <style scoped>
 </style>

@@ -119,31 +119,31 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import Logout from "../components/Logout.vue";
+import axios from 'axios'
+import Logout from '../components/Logout.vue'
 export default {
-  name: "MemberCenter",
-  data() {
+  name: 'MemberCenter',
+  data () {
     return {
       mainBalance: 0,
-      y: "top",
+      y: 'top',
       snackbar: false,
       timeout: 6000,
-      text: "请联系在线客服"
-    };
+      text: '请联系在线客服'
+    }
   },
   components: {
     Logout
   },
   computed: {
-    totalBalance() {
-      let total;
+    totalBalance () {
+      let total
       total =
-        this.mainBalance + this.xjjBalance + this.njjBalance + this.mgBalance;
+        this.mainBalance + this.xjjBalance + this.njjBalance + this.mgBalance
       if (total === 0) {
-        return 1;
+        return 1
       } else {
-        return total;
+        return total
       }
     }
     // mainAccountPercentage() {
@@ -165,36 +165,36 @@ export default {
     // }
   },
   methods: {
-    linkOverView() {
-      this.$router.push("/querybalance");
+    linkOverView () {
+      this.$router.push('/querybalance')
     },
-    linkWithdraw() {
-      this.$router.push("/withdrawarea");
+    linkWithdraw () {
+      this.$router.push('/withdrawarea')
     },
-    linkPlatformTransfer() {
-      this.$router.push("/platformtransfer");
+    linkPlatformTransfer () {
+      this.$router.push('/platformtransfer')
     },
-    linkDeposit() {
-      this.$router.push("/depositarea");
+    linkDeposit () {
+      this.$router.push('/depositarea')
     },
-    linkUserInfo() {
-      this.$router.push("/userinfo");
+    linkUserInfo () {
+      this.$router.push('/userinfo')
     },
-    linkHistoryRecord() {
-      this.$router.push("/historyrecord");
+    linkHistoryRecord () {
+      this.$router.push('/historyrecord')
     },
-    linkMyAgent() {
-      this.$router.push("/myagent");
+    linkMyAgent () {
+      this.$router.push('/myagent')
     },
-    linkAutoRefresh() {
-      this.$router.push("/autorefresh");
+    linkAutoRefresh () {
+      this.$router.push('/autorefresh')
     },
-    toQueryBalance() {
-      this.$router.push("/querybalance");
+    toQueryBalance () {
+      this.$router.push('/querybalance')
     },
 
-    getPlatformBalance(id) {
-      this.isLoading = true;
+    getPlatformBalance (id) {
+      this.isLoading = true
       axios
         .get(
           `${
@@ -205,43 +205,43 @@ export default {
           // }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
-          this.isLoading = false;
+          this.isLoading = false
           // console.log(res.data);
-          if (res.data.msg === "ok") {
+          if (res.data.msg === 'ok') {
             if (id === 0) {
               // console.log("main");
-              this.mainBalance = res.data.result.balance;
+              this.mainBalance = res.data.result.balance
             }
             if (id === 32) {
               // console.log("xjj");
-              this.xjjBalance = res.data.result.balance;
+              this.xjjBalance = res.data.result.balance
             }
             if (id === 33) {
               // console.log("mg");
-              this.mgBalance = res.data.result.balance;
+              this.mgBalance = res.data.result.balance
             }
             if (id === 35) {
               // console.log("njj");
-              this.njjBalance = res.data.result.balance;
+              this.njjBalance = res.data.result.balance
             }
           } else {
-            this.hasError = true;
-            this.errorMessage = res.data.msg;
+            this.hasError = true
+            this.errorMessage = res.data.msg
           }
-        });
+        })
       // .catch(err => console.log(err));
     },
-    refreshAllBalance() {
-      this.timestampt = "";
-      this.getPlatformBalance(0);
-      this.getPlatformBalance(32);
-      this.getPlatformBalance(33);
-      this.getPlatformBalance(35);
+    refreshAllBalance () {
+      this.timestampt = ''
+      this.getPlatformBalance(0)
+      this.getPlatformBalance(32)
+      this.getPlatformBalance(33)
+      this.getPlatformBalance(35)
       // let date = new Date();
       // this.timestampt += date.getFullYear();
       // this.timestampt += `/${date.getMonth()}`;
@@ -251,10 +251,10 @@ export default {
       // this.timestampt += `:${date.getSeconds()}`;
     }
   },
-  created() {
-    this.refreshAllBalance();
+  created () {
+    this.refreshAllBalance()
   }
-};
+}
 </script>
 
 <style scope>

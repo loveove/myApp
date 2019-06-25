@@ -14,7 +14,7 @@
 import axios from 'axios'
 import ConfirmationDialog from './ConfirmationDialog.vue'
 export default {
-    // mixins: [ApiCheckTokenMixin],
+  // mixins: [ApiCheckTokenMixin],
   name: 'Logout',
   components: {
     ConfirmationDialog
@@ -28,7 +28,7 @@ export default {
         this.$store.dispatch('setToken', '')
         localStorage.removeItem('token')
         this.$store.dispatch('isLoginFalse')
-   
+
         this.$router.push('/')
       })
     }

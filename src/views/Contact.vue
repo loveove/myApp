@@ -53,28 +53,28 @@
   </v-layout>
 </template>
 <script>
-import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
+import { ApiCheckTokenMixin } from '../mixins/ApiCheckTokenMixin'
 
 export default {
   mixins: [ApiCheckTokenMixin],
-  name: "Contact",
-  data() {
+  name: 'Contact',
+  data () {
     return {
       dialog: true
-    };
-  },
-  methods: {
-    close() {
-      this.$router.push("/");
-      this.dialog = false;
     }
   },
-  created() {
-    if (this.$store.state.token != ""){
-      this.checkToken();
-    } 
+  methods: {
+    close () {
+      this.$router.push('/')
+      this.dialog = false
+    }
+  },
+  created () {
+    if (this.$store.state.token != '') {
+      this.checkToken()
+    }
   }
-};
+}
 </script>
 <style scoped>
 .qq {

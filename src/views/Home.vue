@@ -79,56 +79,56 @@
 </template>
 
 <script>
-import axios from "axios";
-import HeaderComponent from "../components/HeaderComponent.vue";
+import axios from 'axios'
+import HeaderComponent from '../components/HeaderComponent.vue'
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HeaderComponent
   },
-  data() {
+  data () {
     return {
       items: [
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558436265047捕鱼1.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558436265047捕鱼1.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1552732533284首页2453.png"
+          src: 'https://line.xwiht.cn/QUC/imgs/1552732533284首页2453.png'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558440285885daixm.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558432826800末端.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558432826800末端.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/15584354210091234.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/15584354210091234.jpg'
         },
         {
-          src: "https://line.xwiht.cn/QUC/imgs/1558437245325猴子.jpg"
+          src: 'https://line.xwiht.cn/QUC/imgs/1558437245325猴子.jpg'
         }
       ],
       firstGameLists: [
-        { image: require("@/assets/coin8.jpg"), name: "GameOne" },
-        { image: require("@/assets/coin3.png"), name: "GameTwo" },
-        { image: require("@/assets/coin7.jpg"), name: "GameThree" },
-        { image: require("@/assets/coin4.jpg"), name: "GameFour" }
+        { image: require('@/assets/coin8.jpg'), name: 'GameOne' },
+        { image: require('@/assets/coin3.png'), name: 'GameTwo' },
+        { image: require('@/assets/coin7.jpg'), name: 'GameThree' },
+        { image: require('@/assets/coin4.jpg'), name: 'GameFour' }
       ],
       secondGameLists: [
-        { image: require("@/assets/coin5.jpg"), name: "GameFive" },
-        { image: require("@/assets/coin3.png"), name: "GameSix" },
-        { image: require("@/assets/coin6.jpg"), name: "GameSeven" },
-        { image: require("@/assets/coin7.jpg"), name: "GameEight" }
+        { image: require('@/assets/coin5.jpg'), name: 'GameFive' },
+        { image: require('@/assets/coin3.png'), name: 'GameSix' },
+        { image: require('@/assets/coin6.jpg'), name: 'GameSeven' },
+        { image: require('@/assets/coin7.jpg'), name: 'GameEight' }
       ]
-    };
+    }
   },
   methods: {
-    linkClassification() {
-      this.$router.push("/classification");
-      this.dialog = false;
+    linkClassification () {
+      this.$router.push('/classification')
+      this.dialog = false
     }
     // linktodiscount() {
     //   this.$router.push("/discount");
@@ -145,7 +145,7 @@ export default {
   //     }
   //   }
   // }
-};
+}
 </script>
 <style scoped>
 .custo_coin {
@@ -154,4 +154,3 @@ export default {
   border-radius: 100%;
 }
 </style>
-

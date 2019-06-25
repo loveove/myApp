@@ -15,17 +15,17 @@
 </template>
 <script>
 export default {
-  name: "ExpiredDialog",
+  name: 'ExpiredDialog',
   components: {},
-  data() {
+  data () {
     return {
       show: true
-    };
+    }
   },
   methods: {
-    closeExpired() {
-      this.$router.push("/");
+    closeExpired () {
+      this.$router.push('/')
     }
   }
-};
+}
 </script>

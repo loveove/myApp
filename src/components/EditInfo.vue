@@ -66,38 +66,38 @@
   </v-container>
 </template>
 <script>
-import axios from "axios";
-import { bus } from "@/main";
-const qs = require("qs");
+import axios from 'axios'
+import { bus } from '@/main'
+const qs = require('qs')
 export default {
-  name: "EditInfo",
+  name: 'EditInfo',
   components: {},
   data: () => ({
-    alertMessage: "",
+    alertMessage: '',
     hasAlert: false,
     isLoading: false,
     valid: true,
-    name: "",
+    name: '',
     nameRules: [
       // v => !!v || "请加入名称",
       // v => (v && v.length <= 20) || "名称必须少于20个字符"
     ],
-    email: "",
+    email: '',
     emailRules: [
-      v => !!v || "请加入邮件",
-      v => /.+@.+/.test(v) || "邮件必须有效"
+      v => !!v || '请加入邮件',
+      v => /.+@.+/.test(v) || '邮件必须有效'
     ],
-    phone: "",
+    phone: '',
     phoneRules: [
-      v => !!v || "请加入电话号码",
-      v => (v && v.toString().length == 11) || "必须是11个号码"
+      v => !!v || '请加入电话号码',
+      v => (v && v.toString().length == 11) || '必须是11个号码'
     ],
-    wechat: "",
+    wechat: '',
     wechatRules: [
       // v => !!v || "Wechat is required",
       // v => (v && v.length <= 20) || "Wechat must be less than 20 characters"
     ],
-    qq: "",
+    qq: '',
     qqRules: [
       // v => !!v || "QQ is required",
       // v => (v && v.length <= 20) || "QQ must be less than 20 characters"
@@ -106,17 +106,17 @@ export default {
     timestampt: new Date().valueOf()
   }),
   computed: {
-    isDisabled() {
+    isDisabled () {
       if (this.valid === false || this.isLoading === true) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
   },
   methods: {
-    updateUserInfo() {
-      this.isLoading = true;
+    updateUserInfo () {
+      this.isLoading = true
       axios
         .post(
           `${this.$store.state.apiUrl}/user/update/`,
@@ -130,54 +130,54 @@ export default {
           }),
           {
             headers: {
-              "X-Auth-Token": this.$store.state.token
+              'X-Auth-Token': this.$store.state.token
             }
           }
         )
         .then(res => {
           // console.log(res);
-          if (res.data.msg === "ok") {
+          if (res.data.msg === 'ok') {
             // console.log(res.data.msg);
-            this.hasAlert = true;
-            this.alertMessage = "信息更新成功";
-            this.getUserInfo();
-            this.isLoading = false;
+            this.hasAlert = true
+            this.alertMessage = '信息更新成功'
+            this.getUserInfo()
+            this.isLoading = false
           } else {
-            this.hasAlert = true;
-            this.alertMessage = res.data.msg;
+            this.hasAlert = true
+            this.alertMessage = res.data.msg
           }
-        });
+        })
       // .catch(err => console.log(err));
     },
-    getUserInfo() {
+    getUserInfo () {
       axios
         .get(`${this.$store.state.apiUrl}/account/getUserInfo`, {
           headers: {
-            "X-Auth-Token": this.$store.state.token
+            'X-Auth-Token': this.$store.state.token
           }
         })
         .then(res => {
-          this.$store.dispatch("setUserInfo", res.data.result);
+          this.$store.dispatch('setUserInfo', res.data.result);
           (this.name = res.data.result.real_name),
-            (this.mobile = res.data.result.mobile),
-            (this.email = res.data.result.email);
-        });
+          (this.mobile = res.data.result.mobile),
+          (this.email = res.data.result.email)
+        })
       // .catch(err => console.log(err));
     }
   },
-  mounted() {
-    bus.$on("doneSettingUserInfo", () => {
-      this.name = this.$store.state.userInfo.real_name;
-      this.email = this.$store.state.userInfo.email;
-      this.phone = this.$store.state.userInfo.mobile;
-      this.wechat = this.$store.state.userInfo.wechat;
-      this.qq = this.$store.state.userInfo.qq;
-    });
+  mounted () {
+    bus.$on('doneSettingUserInfo', () => {
+      this.name = this.$store.state.userInfo.real_name
+      this.email = this.$store.state.userInfo.email
+      this.phone = this.$store.state.userInfo.mobile
+      this.wechat = this.$store.state.userInfo.wechat
+      this.qq = this.$store.state.userInfo.qq
+    })
   },
-  created() {
-    this.getUserInfo();
+  created () {
+    this.getUserInfo()
   }
-};
+}
 </script>
 <style scoped>
 .border_custo {

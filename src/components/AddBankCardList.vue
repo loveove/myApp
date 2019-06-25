@@ -72,72 +72,72 @@
   </v-layout>
 </template>
 <script>
-import axios from "axios";
-import { bus, apiMethods } from "@/main";
-const qs = require("qs");
+import axios from 'axios'
+import { bus, apiMethods } from '@/main'
+const qs = require('qs')
 export default {
-  name: "AddBankCardList",
+  name: 'AddBankCardList',
   components: {},
   data: () => ({
     valid: false,
-    alertMessage: "",
+    alertMessage: '',
     hasAlert: false,
     isLoading: false,
     dialog: true,
     notifications: false,
     sound: true,
     widgets: false,
-    name: "",
-    nameRules: [v => !!v || "请输入开户名"],
-    bankNumber: "",
+    name: '',
+    nameRules: [v => !!v || '请输入开户名'],
+    bankNumber: '',
     bankRules: [
-      v => !!v || "请输入银行卡号",
+      v => !!v || '请输入银行卡号',
       v =>
         (v && v.toString().length > 15 && v.toString().length < 21) ||
-        "银行编号必须介于16到20之间"
+        '银行编号必须介于16到20之间'
     ],
-    bankName: "",
-    bankNameRules: [v => !!v || "请输入开户银行"],
-    bankBranch: "",
-    bankBranchRules: [v => !!v || "请输入支行名称"]
+    bankName: '',
+    bankNameRules: [v => !!v || '请输入开户银行'],
+    bankBranch: '',
+    bankBranchRules: [v => !!v || '请输入支行名称']
   }),
   methods: {
-    link_membercenter() {
-      this.$router.push("/membercenter");
+    link_membercenter () {
+      this.$router.push('/membercenter')
     },
 
-    addBankCard() {
+    addBankCard () {
       (this.isLoading = true),
-        axios
-          .post(
-            `${this.$store.state.apiUrl}/user/bankCard/add`,
-            qs.stringify({
-              account: this.name,
-              bank_no: this.bankNumber,
-              bank_name: this.bankName,
-              bank_branch: this.bankBranch
-            }),
-            {
-              headers: {
-                "X-Auth-Token": this.$store.state.token
-              }
+      axios
+        .post(
+          `${this.$store.state.apiUrl}/user/bankCard/add`,
+          qs.stringify({
+            account: this.name,
+            bank_no: this.bankNumber,
+            bank_name: this.bankName,
+            bank_branch: this.bankBranch
+          }),
+          {
+            headers: {
+              'X-Auth-Token': this.$store.state.token
             }
-          )
-          .then(res => {
-            // console.log(res);
-            (this.isLoading = false), (this.hasAlert = true);
-            this.alertMessage = "添加银行卡成功";
-            if (res.data.msg === "ok") {
-              (this.bankNumber = ""),
-                (this.bankName = ""),
-                (this.bankBranch = "");
-              bus.$emit("updateBankInfo");
-              apiMethods.getUserInfo();
-            } else {
-              this.hasAlert = true;
-              this.alertMessage = res.data.msg;
-            }
-          });
+          }
+        )
+        .then(res => {
+          // console.log(res);
+          (this.isLoading = false), (this.hasAlert = true)
+          this.alertMessage = '添加银行卡成功'
+          if (res.data.msg === 'ok') {
+            (this.bankNumber = ''),
+            (this.bankName = ''),
+            (this.bankBranch = '')
+            bus.$emit('updateBankInfo')
+            apiMethods.getUserInfo()
+          } else {
+            this.hasAlert = true
+            this.alertMessage = res.data.msg
+          }
+        })
       // .catch(err => console.log(err));
     }
     // getUserInfo() {
@@ -154,21 +154,21 @@ export default {
     // }
   },
   computed: {
-    isDisabled() {
+    isDisabled () {
       if (this.valid === false || this.isLoading === true) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
   },
-  mounted() {
-    bus.$on("doneSettingUserInfo", () => {
-      this.name = this.$store.state.userInfo.real_name;
-    });
-    this.name = this.$store.state.userInfo.real_name;
+  mounted () {
+    bus.$on('doneSettingUserInfo', () => {
+      this.name = this.$store.state.userInfo.real_name
+    })
+    this.name = this.$store.state.userInfo.real_name
   }
-};
+}
 </script>
 <style scoped>
 .border_custo {

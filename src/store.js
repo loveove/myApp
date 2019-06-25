@@ -51,7 +51,7 @@ export default new Vuex.Store({
     },
     setDepositeInfo: (state, payload) => {
       state.depositeInfo = payload
-    },
+    }
 
   },
   actions: {
@@ -81,7 +81,7 @@ export default new Vuex.Store({
     },
     setDepositeInfo: (context, payload) => {
       context.commit('setDepositeInfo', payload)
-    },
+    }
 
   }
 })
