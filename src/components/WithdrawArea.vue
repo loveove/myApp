@@ -15,7 +15,7 @@
           <v-container>
             <v-card class="border_rounded py-1 px-1">
               <v-container>
-                <v-alert :value="$store.state.userInfo.real_name === null" type="info" class="custo_border">
+                <v-alert :value="$store.state.userInfo.real_name === null" type="info">
                   提款金额需要真实姓名
                   <v-btn
                     block
@@ -23,7 +23,7 @@
                     class="blue lighten-4 custo_border"
                   >返回到设置真实姓名</v-btn>
                 </v-alert>
-                <v-alert :value="$store.state.userInfo.money_password === 'no'" type="info" class="custo_border">
+                <v-alert :value="$store.state.userInfo.money_password === 'no'" type="info">
                   提款金额需要提款密码
                   <v-btn
                     block
@@ -31,12 +31,12 @@
                     class="blue lighten-4 custo_border"
                   >返回到设置提款密码</v-btn>
                 </v-alert>
-                <v-alert :value="withdrawInfo.bankCardList.length < 1" type="info" class="custo_border">
+                <v-alert :value="withdrawInfo.bankCardList.length < 1" type="info">
                   提款金额需要银行卡
                   <v-btn
                     block
                     @click="redirectAddBankCard"
-                    class="blue lighten-1 white--text custo_border"
+                    class="blue lighten-1 white--text"
                   >返回到添加银行卡</v-btn>
                 </v-alert>
                 <v-alert :value="withdrawInfo.need_xima != 0" type="info">剩余打码量需要为 0</v-alert>
@@ -251,9 +251,6 @@ export default {
 </script>
 <style scoped>
 .border_rounded {
-  border-radius: 10px;
-}
-.custo_border {
   border-radius: 10px;
 }
 </style>

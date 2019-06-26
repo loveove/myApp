@@ -11,23 +11,20 @@ export const ApiCheckTokenMixin = {
         })
         .then(res => {
           // login exipred
-          console.log(res)
+          // console.log(res)
           if (res.data.msg === '登陆过期') {
             // console.log(res.data.code)
             store.dispatch('setToken', '')
             localStorage.removeItem('token')
             // console.log('expired')
             this.expired()
-
-            // alert('登陆已过期，请重新登陆')
-            // store.dispatch('setExipredTrue');
           }
           if (res.data.msg === 'ok') {
-            console.log(res.data.code)
+            // console.log(res.data.code)
             store.dispatch('isLoginTrue')
           }
           if (res.data.msg === 'refresh') {
-            console.log(res.data.code)
+            // console.log(res.data.code)
             store.dispatch('setToken', res.data.result.token)
             store.dispatch('isLoginTrue')
           }

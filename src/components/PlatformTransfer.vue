@@ -73,116 +73,149 @@
   </div>
 </template>
 <script>
-import { ApiCheckTokenMixin } from '../mixins/ApiCheckTokenMixin'
-import axios from 'axios'
-const qs = require('qs')
+import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
+import axios from "axios";
+const qs = require("qs");
 export default {
   mixins: [ApiCheckTokenMixin],
-  name: 'PlatformTransfer',
-  data () {
+  name: "PlatformTransfer",
+  data() {
     return {
-      alertMessage: '',
+      alertMessage: "",
       hasAlert: false,
       dialog: true,
       notifications: false,
       sound: true,
       widgets: false,
-      outgoingItems: ['主账户', '新锦江', 'MG', '新锦江（新版）'],
+      outgoingItems: [],
       incomingItems: [],
       isLoading: false,
       valid: false,
-      amount: '',
-      amountRules: [v => !!v || 'amount is required'],
-      outgoing: '',
-
-      incoming: ''
-    }
+      amount: "",
+      amountRules: [v => !!v || "amount is required"],
+      outgoing: "",
+      incoming: ""
+    };
   },
   computed: {
-    isDisabled () {
+    isDisabled() {
       if (this.valid === false || this.isLoading === true) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
     },
-    outgoingId () {
+    outgoingId() {
       switch (this.outgoing) {
-        case '主账户':
-          return 0
-        case '新锦江':
+        case this.outgoingItems[0]:
+          return 0;
+        case this.outgoingItems[1]:
           // return Number(this.$store.state.config.plats[0].id);
-          return 32
-        case '新锦江（新版）':
+          return 35;
+        case this.outgoingItems[2]:
           // return Number(this.$store.state.config.plats[2].id);
-          return 35
-        case 'MG':
+          return 33;
+        case this.outgoingItems[3]:
           // return Number(this.$store.state.config.plats[1].id);
-          return 33
+          return 32;
         default:
-          return ''
+          return "";
       }
     },
-    incomingId () {
-      switch (this.incoming) {
-        case '主账户':
-          return 0
-        case '新锦江':
-          // return Number(this.$store.state.config.plats[0].id);
-          return 32
-        case '新锦江（新版）':
-          // return Number(this.$store.state.config.plats[2].id);
-          return 35
-        case 'MG':
-          // return Number(this.$store.state.config.plats[1].id);
-          return 33
-        default:
-          return ''
+    incomingId() {
+      if (this.incoming.includes("主账户")) {
+        return 0;
+      }
+      if (this.incoming.includes("新版")) {
+        return 35;
+      }
+      if (this.incoming.includes("新锦江")) {
+        return 32;
+      }
+      if (this.incoming.includes("MG")) {
+        return 33;
+      } else {
+        return "";
       }
     }
   },
   watch: {
-    outgoing (newValue) {
-      this.incomingItems = this.outgoingItems.filter(item => item != newValue)
+    outgoing(newValue) {
+      this.incomingItems = this.outgoingItems.filter(item => item != newValue);
     }
   },
   methods: {
-    link_membercenter () {
-      this.$router.push('/membercenter')
+    link_membercenter() {
+      this.$router.push("/membercenter");
     },
-    transferBalance () {
+    transferBalance() {
       axios
         .post(
           `${this.$store.state.apiUrl}/order/transfer`,
           qs.stringify({
-            inId: this.incomingId,
             outId: this.outgoingId,
+            inId: this.incomingId,
             amount: this.amount
           }),
           {
             headers: {
-              'X-Auth-Token': this.$store.state.token
+              "X-Auth-Token": this.$store.state.token
             }
           }
         )
         .then(res => {
           // console.log(res);
-          if (res.data.msg === 'ok') {
-            this.hasAlert = true
-            this.alertMessage = '成功'
-            // console.log(res.data);
+          if (res.data.msg === "ok") {
+            this.hasAlert = true;
+            this.alertMessage = "成功";
+            location.reload();
           } else {
-            this.hasAlert = true
-            this.alertMessage = res.data.msg
+            this.hasAlert = true;
+            this.alertMessage = res.data.msg;
           }
-        })
-      // .catch(err => console.log(err));
+        });
+    },
+
+    getPlatformBalance(id) {
+      this.isLoading = true;
+      axios
+        .get(
+          `${
+            this.$store.state.apiUrl
+          }/account/getPlatformBalance?platformId=${id}`,
+          // qs.stringify({
+          //   platformId: id
+          // }),
+          {
+            headers: {
+              "X-Auth-Token": this.$store.state.token
+            }
+          }
+        )
+        .then(res => {
+          this.outgoingItems.push(
+            `${res.data.result.title} (${res.data.result.balance}元)`
+          );
+
+          this.isLoading = false;
+          // console.log(res);
+          if (res.data.msg === "ok") {
+          } else {
+            this.hasError = true;
+            this.errorMessage = res.data.msg;
+          }
+        });
     }
   },
-  created () {
-    this.checkToken()
+
+  created() {
+    this.checkToken();
+    this.getPlatformBalance(0);
+    this.getPlatformBalance(32);
+    this.getPlatformBalance(35);
+    this.getPlatformBalance(33);
   }
-}
+};
 </script>
 <style scope>
 .custo_border {

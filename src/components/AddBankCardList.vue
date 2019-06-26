@@ -4,7 +4,7 @@
       <template v-slot:activator="{ on }"></template>
       <v-card color="yellow darken-4">
         <v-toolbar dark color="yellow darken-4">
-          <v-btn icon dark @click="link_membercenter">
+          <v-btn icon dark @click="linkUserInfo">
             <i class="fas fa-arrow-left"></i>
           </v-btn>
           <v-toolbar-title>添加银行卡</v-toolbar-title>
@@ -102,8 +102,8 @@ export default {
     bankBranchRules: [v => !!v || '请输入支行名称']
   }),
   methods: {
-    link_membercenter () {
-      this.$router.push('/membercenter')
+    linkUserInfo () {
+      this.$router.push('/userinfo')
     },
 
     addBankCard () {

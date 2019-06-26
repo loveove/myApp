@@ -4,7 +4,7 @@
       <v-layout xs12 row wrap>
         <v-flex xs10>
           <v-card-title>
-            <span class="white--text">财务互转</span>
+            <span class="white--text">额度转换</span>
           </v-card-title>
         </v-flex>
         <v-flex xs2>
@@ -34,15 +34,15 @@
                 prepend-icon="account_circle"
                 :items="incomingItems"
                 label="转入"
-                required:items="items"
+                required
               ></v-select>
             </v-flex>
 
             <v-text-field
               v-model="amount"
+              prepend-icon="fas fa-coins"
               :rules="amountRules"
               label="金额 "
-              prepend-icon="fas fa-coins"
               type="number"
               required
             ></v-text-field>
@@ -61,7 +61,7 @@
               target="_blank"
             >直接游戏</v-btn>
           </v-flex>
-          <!-- </v-card-actions> -->
+
           <v-alert
             v-model="hasAlert"
             :value="true"
@@ -76,85 +76,90 @@
   </v-layout>
 </template>
 <script>
-// import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
-import axios from 'axios'
-const qs = require('qs')
+import { apiMethods } from "@/main";
+import axios from "axios";
+const qs = require("qs");
 export default {
-  // mixins: [ApiCheckTokenMixin],
-  name: 'GamePlayTransferDialog',
+  name: "GamePlayTransferDialog",
   data: () => ({
-    alertMessage: '',
+    alertMessage: "",
     hasAlert: false,
     dialog: true,
     notifications: false,
     sound: true,
     widgets: false,
-    outgoingItems: ['主账户', '新锦江', 'MG', '新锦江（新版）'],
+    outgoingItems: [],
     incomingItems: [],
     isLoading: false,
     valid: false,
-    amount: '',
-    amountRules: [v => !!v || 'amount is required'],
-    outgoing: '',
-
-    incoming: '',
-    urlXJJ: '',
-    urlNJJ: '',
-    isLoading: false
+    amount: "",
+    amountRules: [v => !!v || "amount is required"],
+    // amountRules: [v => v <= 0 || "转账金额不能大于0"],
+    // amountRules: [
+    //   v => !!v || "请加入金额",
+    //   v => (v => v <= 0) || "转账金额不能大于0"
+    // ],
+    outgoing: "",
+    incoming: "",
+    urlXJJ: "",
+    urlNJJ: ""
   }),
   computed: {
-    isDisabled () {
+    isDisabled() {
       if (this.valid === false || this.isLoading === true) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
     },
-    outgoingId () {
+    isLogin: function() {
+      return this.$store.state.isLogin;
+    },
+    outgoingId() {
       switch (this.outgoing) {
-        case '主账户':
-          return 0
-        case '新锦江':
+        case this.outgoingItems[0]:
+          return 0;
+        case this.outgoingItems[1]:
           // return Number(this.$store.state.config.plats[0].id);
-          return 32
-        case '新锦江（新版）':
+          return 35;
+        case this.outgoingItems[2]:
           // return Number(this.$store.state.config.plats[2].id);
-          return 35
-        case 'MG':
+          return 33;
+        case this.outgoingItems[3]:
           // return Number(this.$store.state.config.plats[1].id);
-          return 33
+          return 32;
         default:
-          return ''
+          return "";
       }
     },
-    incomingId () {
-      switch (this.incoming) {
-        case '主账户':
-          return 0
-        case '新锦江':
-          // return Number(this.$store.state.config.plats[0].id);
-          return 32
-        case '新锦江（新版）':
-          // return Number(this.$store.state.config.plats[2].id);
-          return 35
-        case 'MG':
-          // return Number(this.$store.state.config.plats[1].id);
-          return 33
-        default:
-          return ''
+    incomingId() {
+      if (this.incoming.includes("主账户")) {
+        return 0;
+      }
+      if (this.incoming.includes("新版")) {
+        return 35;
+      }
+      if (this.incoming.includes("新锦江")) {
+        return 32;
+      }
+      if (this.incoming.includes("MG")) {
+        return 33;
+      } else {
+        return "";
       }
     }
   },
   watch: {
-    outgoing (newValue) {
-      this.incomingItems = this.outgoingItems.filter(item => item != newValue)
+    outgoing(newValue) {
+      this.incomingItems = this.outgoingItems.filter(item => item != newValue);
+    },
+    isLogin: function(toGet) {
+      if (toGet) {
+        this.getGameUrl("XJJ");
+      }
     }
   },
-  computed: {
-    isLogin: function () {
-      return this.$store.state.isLogin
-    }
-  },
+
   // watch: {
   //   isLogin: function(toGet) {
   //     if (toGet) {
@@ -163,16 +168,16 @@ export default {
   //   }
   // },
   methods: {
-    toDeposit () {
-      this.$router.push('/depositarea')
+    toDeposit() {
+      this.$router.push("/depositarea");
     },
-    toClassification () {
-      this.$router.push('/classification')
+    toClassification() {
+      this.$router.push("/classification");
     },
-    link_membercenter () {
-      this.$router.push('/membercenter')
+    link_membercenter() {
+      this.$router.push("/membercenter");
     },
-    transferBalance () {
+    transferBalance() {
       axios
         .post(
           `${this.$store.state.apiUrl}/order/transfer`,
@@ -183,26 +188,51 @@ export default {
           }),
           {
             headers: {
-              'X-Auth-Token': this.$store.state.token
+              "X-Auth-Token": this.$store.state.token
             }
           }
         )
         .then(res => {
-          // console.log(res);
-          if (res.data.msg === 'ok') {
-            this.hasAlert = true
-            this.alertMessage = '成功'
-            // console.log(res.data);
+          if (res.data.msg === "ok") {
+            this.hasAlert = true;
+            this.alertMessage = "成功";
           } else {
-            this.hasAlert = true
-            this.alertMessage = res.data.msg
+            this.hasAlert = true;
+            this.alertMessage = res.data.msg;
           }
-        })
-      // .catch(err => console.log(err));
+        });
+    },
+    getPlatformBalance(id) {
+      this.isLoading = true;
+      axios
+        .get(
+          `${
+            this.$store.state.apiUrl
+          }/account/getPlatformBalance?platformId=${id}`,
+          // qs.stringify({
+          //   platformId: id
+          // }),
+          {
+            headers: {
+              "X-Auth-Token": this.$store.state.token
+            }
+          }
+        )
+        .then(res => {
+          this.outgoingItems.push(
+            `${res.data.result.title} (${res.data.result.balance}元)`
+          );
+          this.isLoading = false;
+          if (res.data.msg === "ok") {
+          } else {
+            this.hasError = true;
+            this.errorMessage = res.data.msg;
+          }
+        });
     },
 
-    getGameUrl (gamePlatformId, gameId = 0) {
-      this.isLoading = true
+    getGameUrl(gamePlatformId, gameId = 0) {
+      this.isLoading = true;
       axios
         .get(
           `${
@@ -210,32 +240,34 @@ export default {
           }/game/launchLottery?gamePlatformId=${gamePlatformId}&gameId=${gameId}`,
           {
             headers: {
-              'X-Auth-Token': this.$store.state.token
+              "X-Auth-Token": this.$store.state.token
             }
           }
         )
         .then(res => {
-          if (gamePlatformId === 'XJJ') {
-            this.urlXJJ = res.data.result.game_url
-            // console.log(res.data);
-            // console.log(this.urlXJJ)
+          if (gamePlatformId === "XJJ") {
+            this.urlXJJ = res.data.result.game_url;
           }
-          if (gamePlatformId === 'NJJ') {
-            this.urlNJJ = res.data.result.game_url
-            // console.log(res.data)
+          if (gamePlatformId === "NJJ") {
+            this.urlNJJ = res.data.result.game_url;
           }
-          if (gamePlatformId === 'MG') {
-            // console.log(res.data);
+          if (gamePlatformId === "MG") {
           }
-          this.isLoading = false
-        })
-      // .catch(err => console.log(err));
+          this.isLoading = false;
+        });
     }
   },
-  mounted () {
+  mounted() {
     if (this.isLogin) {
-      this.getGameUrl('XJJ')
+      this.getGameUrl("XJJ");
     }
+  },
+  created() {
+    // this.transferBalance();
+    this.getPlatformBalance(0);
+    this.getPlatformBalance(32);
+    this.getPlatformBalance(35);
+    this.getPlatformBalance(33);
   }
-}
+};
 </script>

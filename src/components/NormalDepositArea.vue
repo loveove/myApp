@@ -80,7 +80,6 @@
 </template>
 <script>
 import axios from 'axios'
-import { constants } from 'crypto'
 const qs = require('qs')
 export default {
   name: 'NormalDepositArea',
@@ -89,9 +88,9 @@ export default {
     alertMessage: '',
     hasAlert: false,
     dataInfo: [
-      { name: '订单编号', result: '' },
-      { name: '存款金额', result: '' },
-      { name: '银行', result: '' },
+      { name: '订单编号', result: ' ' },
+      { name: '存款金额', result: ' ' },
+      { name: '银行', result: ' ' },
       { name: '账号', result: ' ' },
       { name: '开户名', result: '' },
       { name: '分行名称', result: '' }
@@ -153,7 +152,7 @@ export default {
         )
         .then(res => {
           this.isLoading = false
-          // console.log(res);
+          console.log(res)
           if (res.data.msg === 'ok') {
             // this.hasAlert = true;
             // this.alertMessage = "成功";
@@ -176,8 +175,7 @@ export default {
         })
       // .catch(err => console.log(err));
     }
-  },
-  created () {}
+  }
 }
 </script>
 <style scoped>

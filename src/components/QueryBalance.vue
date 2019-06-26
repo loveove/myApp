@@ -147,17 +147,17 @@
                   <v-card-actions>&nbsp;</v-card-actions>
                 </v-flex>
                 <!-- <v-container> -->
-                  <v-flex xs12>
-                    <v-alert
-                      v-model="hasError"
-                      :value="true"
-                      color="error"
-                      icon="warning"
-                      outline
-                      dismissible
-                      error
-                    >{{errorMessage}}</v-alert>
-                  </v-flex>
+                <v-flex xs12>
+                  <v-alert
+                    v-model="hasError"
+                    :value="true"
+                    color="error"
+                    icon="warning"
+                    outline
+                    dismissible
+                    error
+                  >{{errorMessage}}</v-alert>
+                </v-flex>
                 <!-- </v-container> -->
               </v-layout>
             </v-card>
@@ -168,68 +168,68 @@
   </div>
 </template>
 <script>
-import { ApiCheckTokenMixin } from '../mixins/ApiCheckTokenMixin'
-import axios from 'axios'
+import { ApiCheckTokenMixin } from "../mixins/ApiCheckTokenMixin";
+import axios from "axios";
 export default {
   mixins: [ApiCheckTokenMixin],
-  name: 'QueryBalance',
+  name: "QueryBalance",
   components: {},
 
-  data () {
+  data() {
     return {
       dialog: true,
       notifications: false,
       sound: true,
       widgets: false,
-      errorMessage: '',
+      errorMessage: "",
       hasError: false,
       showBalance: true,
       mainBalance: 0,
-      timestampt: '',
+      timestampt: "",
       isLoading: false,
       xjjBalance: 0,
       mgBalance: 0,
       njjBalance: 0
-    }
+    };
   },
   computed: {
-    icon: function () {
-      return this.showBalance ? 'visibility' : 'visibility_off'
+    icon: function() {
+      return this.showBalance ? "visibility" : "visibility_off";
     },
-    totalBalance () {
-      let total
+    totalBalance() {
+      let total;
       total =
-        this.mainBalance + this.xjjBalance + this.njjBalance + this.mgBalance
+        this.mainBalance + this.xjjBalance + this.njjBalance + this.mgBalance;
       if (total === 0) {
-        return 1
+        return 1;
       } else {
-        return total
+        return total;
       }
     },
-    mainAccountPercentage () {
-      let percentage
-      percentage = (this.mainBalance / this.totalBalance) * 100
-      return Math.round(percentage)
+    mainAccountPercentage() {
+      let percentage;
+      percentage = (this.mainBalance / this.totalBalance) * 100;
+      return Math.round(percentage);
     },
-    xjjPercentage () {
-      let percentage = (this.xjjBalance / this.totalBalance) * 100
-      return Math.round(percentage)
+    xjjPercentage() {
+      let percentage = (this.xjjBalance / this.totalBalance) * 100;
+      return Math.round(percentage);
     },
-    mgPercentage () {
-      let percentage = (this.mgBalance / this.totalBalance) * 100
-      return Math.round(percentage)
+    mgPercentage() {
+      let percentage = (this.mgBalance / this.totalBalance) * 100;
+      return Math.round(percentage);
     },
-    njjPercentage () {
-      let percentage = (this.njjBalance / this.totalBalance) * 100
-      return Math.round(percentage)
+    njjPercentage() {
+      let percentage = (this.njjBalance / this.totalBalance) * 100;
+      return Math.round(percentage);
     }
   },
   methods: {
-    link_membercenter () {
-      this.$router.push('/membercenter')
+    link_membercenter() {
+      this.$router.push("/membercenter");
     },
-    getPlatformBalance (id) {
-      this.isLoading = true
+    getPlatformBalance(id) {
+      this.isLoading = true;
       axios
         .get(
           `${
@@ -240,63 +240,63 @@ export default {
           // }),
           {
             headers: {
-              'X-Auth-Token': this.$store.state.token
+              "X-Auth-Token": this.$store.state.token
             }
           }
         )
         .then(res => {
-          this.isLoading = false
+          this.isLoading = false;
 
-          if (res.data.msg === 'ok') {
+          if (res.data.msg === "ok") {
             if (id === 0) {
               // console.log("main");
-              this.mainBalance = res.data.result.balance
+              this.mainBalance = res.data.result.balance;
             }
             if (id === 32) {
               // console.log("xjj");
-              this.xjjBalance = res.data.result.balance
+              this.xjjBalance = res.data.result.balance;
             }
             if (id === 33) {
               // console.log("mg");
-              this.mgBalance = res.data.result.balance
+              this.mgBalance = res.data.result.balance;
             }
             if (id === 35) {
               // console.log("njj");
-              this.njjBalance = res.data.result.balance
+              this.njjBalance = res.data.result.balance;
             }
           } else {
-            this.hasError = true
-            this.errorMessage = res.data.msg
+            this.hasError = true;
+            this.errorMessage = res.data.msg;
           }
-        })
+        });
       // .catch(err => console.log(err));
     },
-    linkDepositeArea () {
-      this.$router.push('/depositarea')
+    linkDepositeArea() {
+      this.$router.push("/depositarea");
     },
-    linkWithdrawArea () {
-      this.$router.push('/withdrawarea')
+    linkWithdrawArea() {
+      this.$router.push("/withdrawarea");
     },
-    refreshAllBalance () {
-      this.timestampt = ''
-      this.getPlatformBalance(0)
-      this.getPlatformBalance(32)
-      this.getPlatformBalance(33)
-      this.getPlatformBalance(35)
-      let date = new Date()
-      this.timestampt += date.getFullYear()
-      this.timestampt += `/${date.getMonth()}`
-      this.timestampt += `/${date.getDate()}`
-      this.timestampt += ` ${date.getHours()}`
-      this.timestampt += `:${date.getMinutes()}`
-      this.timestampt += `:${date.getSeconds()}`
+    refreshAllBalance() {
+      this.timestampt = "";
+      this.getPlatformBalance(0);
+      this.getPlatformBalance(32);
+      this.getPlatformBalance(33);
+      this.getPlatformBalance(35);
+      let date = new Date();
+      this.timestampt += date.getFullYear();
+      this.timestampt += `/${date.getMonth()}`;
+      this.timestampt += `/${date.getDate()}`;
+      this.timestampt += ` ${date.getHours()}`;
+      this.timestampt += `:${date.getMinutes()}`;
+      this.timestampt += `:${date.getSeconds()}`;
     }
   },
-  created () {
-    this.refreshAllBalance()
-    this.checkToken()
+  created() {
+    this.refreshAllBalance();
+    this.checkToken();
   }
-}
+};
 </script>
 
 <style scoped>
